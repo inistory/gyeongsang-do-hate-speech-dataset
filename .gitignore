@@ -1,14 +1,15 @@
 *.json
-!non-hatespeech_pairs.json
-!hatespeech_pairs.json
+!non-hs_pairs.json
+!hs_pairs.json
 train_preprocess
 train_preprocess2
 valid_preprocess
 valid_preprocess2
-!hatespeech_pairs_human_annotate.json
-!hatespeech_pairs_augmented.json
-!hatespeech_pairs_augmented_100.json
+!hs_pairs_human_annotate.json
+!hs_pairs_augmented.json
+!hs_pairs_augmented_100.json
 Training
+Validation
 *.txt
 *tar.gz
 *zip
@@ -23,3 +24,4 @@ Training
 !kold_v1.json
 !unmatched_tokens_preprocessed.json
 !unmatched_tokens.json
+!all_pairs.json
