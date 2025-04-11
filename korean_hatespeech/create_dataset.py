@@ -50,6 +50,8 @@ extracted_data = []
 for item in data:
     standard = item.get("comment", "")
     OFF = item.get("OFF", None)
+    TGT = item.get("TGT", None)
+    OFF_span = item.get("OFF_span", None)
 
     # 표준어 문장을 사투리 문장으로 변환
     dialect = convert_to_dialect(standard, translation_dict)
@@ -59,7 +61,9 @@ for item in data:
         extracted_data.append({
             "standard": standard,
             "dialect": dialect,
-            "OFF": OFF
+            "OFF": OFF,
+            "TGT": TGT,
+            "OFF_span": OFF_span
         })
 
 ###############3. 중복 제거
@@ -74,11 +78,6 @@ with open(output_file, "w", encoding="utf-8") as f:
     json.dump(extracted_data, f, ensure_ascii=False, indent=4)
 
 print(f"변환된 데이터가 {output_file}에 저장되었습니다.")
-
-
-# 중복 제거
-unique_data = {json.dumps(item, ensure_ascii=False): item for item in extracted_data}.values()
-extracted_data = list(unique_data)
 
 # standard의 길이가 짧은 순으로 정렬
 extracted_data.sort(key=lambda x: len(x["standard"]))
