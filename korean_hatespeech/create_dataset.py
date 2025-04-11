@@ -54,13 +54,15 @@ for item in data:
     # 표준어 문장을 사투리 문장으로 변환
     dialect = convert_to_dialect(standard, translation_dict)
 
-    extracted_data.append({
-        "standard": standard,
-        "dialect": dialect,
-        "OFF": OFF
-    })
+    # 2. standard와 dialect가 동일하지 않은 경우만 추가
+    if standard != dialect:
+        extracted_data.append({
+            "standard": standard,
+            "dialect": dialect,
+            "OFF": OFF
+        })
 
-###############2. 중복 제거
+###############3. 중복 제거
 unique_data = {json.dumps(item, ensure_ascii=False): item for item in extracted_data}.values()
 extracted_data = list(unique_data)
 
@@ -73,27 +75,13 @@ with open(output_file, "w", encoding="utf-8") as f:
 
 print(f"변환된 데이터가 {output_file}에 저장되었습니다.")
 
-################3. standard랑 dialect가 동일한 데이터 제거
-# 데이터 변환
-extracted_data = []
-for item in data:
-    standard = item.get("comment", "")
-    OFF = item.get("OFF", None)
-
-    # 표준어 문장을 사투리 문장으로 변환
-    dialect = convert_to_dialect(standard, translation_dict)
-
-    # standard와 dialect가 동일하지 않은 경우만 추가
-    if standard != dialect:
-        extracted_data.append({
-            "standard": standard,
-            "dialect": dialect,
-            "OFF": OFF
-        })
 
 # 중복 제거
 unique_data = {json.dumps(item, ensure_ascii=False): item for item in extracted_data}.values()
 extracted_data = list(unique_data)
+
+# standard의 길이가 짧은 순으로 정렬
+extracted_data.sort(key=lambda x: len(x["standard"]))
 
 # 변환된 데이터의 총 개수 출력
 print(f"최종 변환된 데이터 개수: {len(extracted_data)}")
