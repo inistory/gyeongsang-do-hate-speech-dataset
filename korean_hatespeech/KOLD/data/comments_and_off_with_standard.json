@@ -1,0 +1,8590 @@
+[
+    {
+        "standard": "가",
+        "dialect": "가"
+    },
+    {
+        "standard": "가가",
+        "dialect": "가가"
+    },
+    {
+        "standard": "가게",
+        "dialect": "가게"
+    },
+    {
+        "standard": "가겠다.",
+        "dialect": "가겠다."
+    },
+    {
+        "standard": "가고",
+        "dialect": "가고"
+    },
+    {
+        "standard": "가깝다",
+        "dialect": "가깝다"
+    },
+    {
+        "standard": "가나",
+        "dialect": "가나"
+    },
+    {
+        "standard": "가는",
+        "dialect": "가는"
+    },
+    {
+        "standard": "가는겨?",
+        "dialect": "가는겨?"
+    },
+    {
+        "standard": "가능하나",
+        "dialect": "가능하나"
+    },
+    {
+        "standard": "가능하다",
+        "dialect": "가능하다"
+    },
+    {
+        "standard": "가니까",
+        "dialect": "가니까"
+    },
+    {
+        "standard": "가다",
+        "dialect": "가다"
+    },
+    {
+        "standard": "가도",
+        "dialect": "가도"
+    },
+    {
+        "standard": "가든가",
+        "dialect": "가든가"
+    },
+    {
+        "standard": "가라고",
+        "dialect": "가라고"
+    },
+    {
+        "standard": "가려고",
+        "dialect": "가려고"
+    },
+    {
+        "standard": "가령",
+        "dialect": "가령"
+    },
+    {
+        "standard": "가르킬",
+        "dialect": "가르킬"
+    },
+    {
+        "standard": "가리지",
+        "dialect": "가리지"
+    },
+    {
+        "standard": "가리켜",
+        "dialect": "가리켜"
+    },
+    {
+        "standard": "가리키는",
+        "dialect": "가리키는"
+    },
+    {
+        "standard": "가릴려고",
+        "dialect": "가릴려고"
+    },
+    {
+        "standard": "가만",
+        "dialect": "가만"
+    },
+    {
+        "standard": "가만이",
+        "dialect": "가만이"
+    },
+    {
+        "standard": "가면",
+        "dialect": "가면"
+    },
+    {
+        "standard": "가서",
+        "dialect": "가서"
+    },
+    {
+        "standard": "가시나들",
+        "dialect": "가시나들"
+    },
+    {
+        "standard": "가야된다",
+        "dialect": "가야된다"
+    },
+    {
+        "standard": "가요",
+        "dialect": "가요"
+    },
+    {
+        "standard": "가져가",
+        "dialect": "가져가"
+    },
+    {
+        "standard": "가져간다",
+        "dialect": "가져간다"
+    },
+    {
+        "standard": "가족이다",
+        "dialect": "가족이다"
+    },
+    {
+        "standard": "가지가",
+        "dialect": "가지가"
+    },
+    {
+        "standard": "가지고",
+        "dialect": "가지고"
+    },
+    {
+        "standard": "가질려고",
+        "dialect": "가질려고"
+    },
+    {
+        "standard": "가하고",
+        "dialect": "가하고"
+    },
+    {
+        "standard": "간",
+        "dialect": "간"
+    },
+    {
+        "standard": "간다",
+        "dialect": "간다"
+    },
+    {
+        "standard": "간잽이",
+        "dialect": "간잽이"
+    },
+    {
+        "standard": "갈",
+        "dialect": "갈"
+    },
+    {
+        "standard": "갈꼬",
+        "dialect": "갈꼬"
+    },
+    {
+        "standard": "갈라",
+        "dialect": "갈라"
+    },
+    {
+        "standard": "갈려고",
+        "dialect": "갈려고"
+    },
+    {
+        "standard": "갈려면",
+        "dialect": "갈려면"
+    },
+    {
+        "standard": "감",
+        "dialect": "감"
+    },
+    {
+        "standard": "감.",
+        "dialect": "감."
+    },
+    {
+        "standard": "갔나",
+        "dialect": "갔나"
+    },
+    {
+        "standard": "갔다",
+        "dialect": "갔다"
+    },
+    {
+        "standard": "갔다.",
+        "dialect": "갔다."
+    },
+    {
+        "standard": "갔었는디",
+        "dialect": "갔었는디"
+    },
+    {
+        "standard": "강",
+        "dialect": "강"
+    },
+    {
+        "standard": "강하다",
+        "dialect": "강하다"
+    },
+    {
+        "standard": "갖고",
+        "dialect": "갖고"
+    },
+    {
+        "standard": "갖다",
+        "dialect": "갖다"
+    },
+    {
+        "standard": "갖춰져",
+        "dialect": "갖춰져"
+    },
+    {
+        "standard": "같나.",
+        "dialect": "같나."
+    },
+    {
+        "standard": "같나?",
+        "dialect": "같나?"
+    },
+    {
+        "standard": "같노",
+        "dialect": "같노"
+    },
+    {
+        "standard": "같다",
+        "dialect": "같다"
+    },
+    {
+        "standard": "같다.",
+        "dialect": "같다."
+    },
+    {
+        "standard": "같더라",
+        "dialect": "같더라"
+    },
+    {
+        "standard": "같어",
+        "dialect": "같어"
+    },
+    {
+        "standard": "같은거라",
+        "dialect": "같은거라"
+    },
+    {
+        "standard": "같음",
+        "dialect": "같음"
+    },
+    {
+        "standard": "같음.",
+        "dialect": "같음."
+    },
+    {
+        "standard": "개",
+        "dialect": "개"
+    },
+    {
+        "standard": "개가",
+        "dialect": "개가"
+    },
+    {
+        "standard": "개같은",
+        "dialect": "개넘의 시끼같은"
+    },
+    {
+        "standard": "개고",
+        "dialect": "개고"
+    },
+    {
+        "standard": "갱상도",
+        "dialect": "갱상도"
+    },
+    {
+        "standard": "갸들이",
+        "dialect": "갸들이"
+    },
+    {
+        "standard": "걍",
+        "dialect": "걍"
+    },
+    {
+        "standard": "걔",
+        "dialect": "걔"
+    },
+    {
+        "standard": "걔들이",
+        "dialect": "걔들이"
+    },
+    {
+        "standard": "거",
+        "dialect": "거"
+    },
+    {
+        "standard": "거.",
+        "dialect": "거."
+    },
+    {
+        "standard": "거게",
+        "dialect": "거게"
+    },
+    {
+        "standard": "거고",
+        "dialect": "거고"
+    },
+    {
+        "standard": "거고.",
+        "dialect": "거고."
+    },
+    {
+        "standard": "거기",
+        "dialect": "거기"
+    },
+    {
+        "standard": "거기다",
+        "dialect": "거기다"
+    },
+    {
+        "standard": "거기서는",
+        "dialect": "거기서는"
+    },
+    {
+        "standard": "거길",
+        "dialect": "거길"
+    },
+    {
+        "standard": "거나",
+        "dialect": "거나"
+    },
+    {
+        "standard": "거는",
+        "dialect": "거는"
+    },
+    {
+        "standard": "거니?",
+        "dialect": "거니?"
+    },
+    {
+        "standard": "거다",
+        "dialect": "거다"
+    },
+    {
+        "standard": "거다.",
+        "dialect": "거다."
+    },
+    {
+        "standard": "거라",
+        "dialect": "거라"
+    },
+    {
+        "standard": "거른다",
+        "dialect": "거른다"
+    },
+    {
+        "standard": "거를",
+        "dialect": "거를"
+    },
+    {
+        "standard": "거만",
+        "dialect": "거만"
+    },
+    {
+        "standard": "거면",
+        "dialect": "거면"
+    },
+    {
+        "standard": "거부터",
+        "dialect": "거부터"
+    },
+    {
+        "standard": "거시기",
+        "dialect": "거시기"
+    },
+    {
+        "standard": "거에",
+        "dialect": "거에"
+    },
+    {
+        "standard": "거임",
+        "dialect": "거임"
+    },
+    {
+        "standard": "거임.",
+        "dialect": "거임."
+    },
+    {
+        "standard": "거즘",
+        "dialect": "거즘"
+    },
+    {
+        "standard": "거지",
+        "dialect": "거지"
+    },
+    {
+        "standard": "거진",
+        "dialect": "거진"
+    },
+    {
+        "standard": "걱정이네",
+        "dialect": "걱정이네"
+    },
+    {
+        "standard": "건",
+        "dialect": "건"
+    },
+    {
+        "standard": "건다",
+        "dialect": "건다"
+    },
+    {
+        "standard": "건데",
+        "dialect": "건데"
+    },
+    {
+        "standard": "건지",
+        "dialect": "건지"
+    },
+    {
+        "standard": "걸",
+        "dialect": "걸"
+    },
+    {
+        "standard": "걸로",
+        "dialect": "걸로"
+    },
+    {
+        "standard": "걸로는",
+        "dialect": "걸로는"
+    },
+    {
+        "standard": "걸린다",
+        "dialect": "걸린다"
+    },
+    {
+        "standard": "검",
+        "dialect": "검"
+    },
+    {
+        "standard": "검도",
+        "dialect": "검도"
+    },
+    {
+        "standard": "겁나",
+        "dialect": "겁나"
+    },
+    {
+        "standard": "겁나게",
+        "dialect": "겁나게"
+    },
+    {
+        "standard": "겁난다",
+        "dialect": "겁난다"
+    },
+    {
+        "standard": "것",
+        "dialect": "것"
+    },
+    {
+        "standard": "것도",
+        "dialect": "것도"
+    },
+    {
+        "standard": "것이다",
+        "dialect": "것이다"
+    },
+    {
+        "standard": "것이여",
+        "dialect": "것이여"
+    },
+    {
+        "standard": "겉은",
+        "dialect": "겉은"
+    },
+    {
+        "standard": "게",
+        "dialect": "게"
+    },
+    {
+        "standard": "겨",
+        "dialect": "겨"
+    },
+    {
+        "standard": "계시나",
+        "dialect": "계시나"
+    },
+    {
+        "standard": "고",
+        "dialect": "고"
+    },
+    {
+        "standard": "고기",
+        "dialect": "고기"
+    },
+    {
+        "standard": "고기는",
+        "dialect": "고기는"
+    },
+    {
+        "standard": "고기에",
+        "dialect": "고기에"
+    },
+    {
+        "standard": "고냥",
+        "dialect": "고냥"
+    },
+    {
+        "standard": "고딩이",
+        "dialect": "고딩이"
+    },
+    {
+        "standard": "고로",
+        "dialect": "고로"
+    },
+    {
+        "standard": "고마",
+        "dialect": "고마"
+    },
+    {
+        "standard": "고마해라",
+        "dialect": "고마해라"
+    },
+    {
+        "standard": "고마해라.",
+        "dialect": "고마해라."
+    },
+    {
+        "standard": "고만",
+        "dialect": "고만"
+    },
+    {
+        "standard": "고만해라",
+        "dialect": "고만해라"
+    },
+    {
+        "standard": "고맙다",
+        "dialect": "고맙다"
+    },
+    {
+        "standard": "고아는",
+        "dialect": "고아는"
+    },
+    {
+        "standard": "골로",
+        "dialect": "골로"
+    },
+    {
+        "standard": "과자",
+        "dialect": "과자"
+    },
+    {
+        "standard": "괜찮다",
+        "dialect": "괜찮다"
+    },
+    {
+        "standard": "교회다",
+        "dialect": "교회다"
+    },
+    {
+        "standard": "구워",
+        "dialect": "구워"
+    },
+    {
+        "standard": "구지",
+        "dialect": "구지"
+    },
+    {
+        "standard": "궁금하다",
+        "dialect": "궁금하다"
+    },
+    {
+        "standard": "궁금하다.",
+        "dialect": "궁금하다."
+    },
+    {
+        "standard": "궁금함",
+        "dialect": "궁금함"
+    },
+    {
+        "standard": "궁디",
+        "dialect": "궁디"
+    },
+    {
+        "standard": "귀도리",
+        "dialect": "귀도리"
+    },
+    {
+        "standard": "귀엽다",
+        "dialect": "귀엽다"
+    },
+    {
+        "standard": "그",
+        "dialect": "그"
+    },
+    {
+        "standard": "그가",
+        "dialect": "그가"
+    },
+    {
+        "standard": "그거",
+        "dialect": "그거"
+    },
+    {
+        "standard": "그거는",
+        "dialect": "그거는"
+    },
+    {
+        "standard": "그거도",
+        "dialect": "그거도"
+    },
+    {
+        "standard": "그걸",
+        "dialect": "그걸"
+    },
+    {
+        "standard": "그걸로",
+        "dialect": "그걸로"
+    },
+    {
+        "standard": "그게",
+        "dialect": "그게"
+    },
+    {
+        "standard": "그기",
+        "dialect": "그기"
+    },
+    {
+        "standard": "그기에",
+        "dialect": "그기에"
+    },
+    {
+        "standard": "그길",
+        "dialect": "그길"
+    },
+    {
+        "standard": "그낭",
+        "dialect": "그낭"
+    },
+    {
+        "standard": "그냥",
+        "dialect": "그냥"
+    },
+    {
+        "standard": "그놈",
+        "dialect": "글마"
+    },
+    {
+        "standard": "그놈들",
+        "dialect": "금마들"
+    },
+    {
+        "standard": "그놈들이",
+        "dialect": "그놈아덜이"
+    },
+    {
+        "standard": "그놈이",
+        "dialect": "금마가"
+    },
+    {
+        "standard": "그는",
+        "dialect": "그는"
+    },
+    {
+        "standard": "그니까",
+        "dialect": "그니까"
+    },
+    {
+        "standard": "그니까요",
+        "dialect": "그니까요"
+    },
+    {
+        "standard": "그니깐요",
+        "dialect": "그니깐요"
+    },
+    {
+        "standard": "그닥",
+        "dialect": "그닥"
+    },
+    {
+        "standard": "그도",
+        "dialect": "그도"
+    },
+    {
+        "standard": "그따구로",
+        "dialect": "그따구로"
+    },
+    {
+        "standard": "그딴",
+        "dialect": "그딴"
+    },
+    {
+        "standard": "그란데",
+        "dialect": "그란데"
+    },
+    {
+        "standard": "그랗게",
+        "dialect": "그랗게"
+    },
+    {
+        "standard": "그래",
+        "dialect": "그래"
+    },
+    {
+        "standard": "그래가지고",
+        "dialect": "그래가지고"
+    },
+    {
+        "standard": "그래두",
+        "dialect": "그래두"
+    },
+    {
+        "standard": "그래서",
+        "dialect": "그래서"
+    },
+    {
+        "standard": "그랬나",
+        "dialect": "그랬나"
+    },
+    {
+        "standard": "그랬다",
+        "dialect": "그랬다"
+    },
+    {
+        "standard": "그랬음.",
+        "dialect": "그랬음."
+    },
+    {
+        "standard": "그러",
+        "dialect": "그러"
+    },
+    {
+        "standard": "그러게",
+        "dialect": "그러게"
+    },
+    {
+        "standard": "그러고",
+        "dialect": "그러고"
+    },
+    {
+        "standard": "그러고는",
+        "dialect": "그러고는"
+    },
+    {
+        "standard": "그러고도",
+        "dialect": "그러고도"
+    },
+    {
+        "standard": "그러나",
+        "dialect": "그러나"
+    },
+    {
+        "standard": "그러나?",
+        "dialect": "그러나?"
+    },
+    {
+        "standard": "그러니깐",
+        "dialect": "그러니깐"
+    },
+    {
+        "standard": "그러먼",
+        "dialect": "그러먼"
+    },
+    {
+        "standard": "그러면",
+        "dialect": "그러면"
+    },
+    {
+        "standard": "그러지",
+        "dialect": "그러지"
+    },
+    {
+        "standard": "그러치",
+        "dialect": "그러치"
+    },
+    {
+        "standard": "그런가",
+        "dialect": "그런가"
+    },
+    {
+        "standard": "그런갑다",
+        "dialect": "그런갑다"
+    },
+    {
+        "standard": "그런게",
+        "dialect": "그런게"
+    },
+    {
+        "standard": "그런다",
+        "dialect": "그런다"
+    },
+    {
+        "standard": "그럴라고",
+        "dialect": "그럴라고"
+    },
+    {
+        "standard": "그럴려고",
+        "dialect": "그럴려고"
+    },
+    {
+        "standard": "그럴려면",
+        "dialect": "그럴려면"
+    },
+    {
+        "standard": "그럼",
+        "dialect": "그럼"
+    },
+    {
+        "standard": "그럼.",
+        "dialect": "그럼."
+    },
+    {
+        "standard": "그렇게",
+        "dialect": "그렇게"
+    },
+    {
+        "standard": "그렇고",
+        "dialect": "그렇고"
+    },
+    {
+        "standard": "그렇기",
+        "dialect": "그렇기"
+    },
+    {
+        "standard": "그렇다",
+        "dialect": "그렇다"
+    },
+    {
+        "standard": "그렇치",
+        "dialect": "그렇치"
+    },
+    {
+        "standard": "그려",
+        "dialect": "그려"
+    },
+    {
+        "standard": "그려.",
+        "dialect": "그려."
+    },
+    {
+        "standard": "그려도",
+        "dialect": "그려도"
+    },
+    {
+        "standard": "그로",
+        "dialect": "그로"
+    },
+    {
+        "standard": "그르게",
+        "dialect": "그르게"
+    },
+    {
+        "standard": "그른",
+        "dialect": "그른"
+    },
+    {
+        "standard": "그를",
+        "dialect": "그를"
+    },
+    {
+        "standard": "그리",
+        "dialect": "그리"
+    },
+    {
+        "standard": "그리고",
+        "dialect": "그리고"
+    },
+    {
+        "standard": "그리구",
+        "dialect": "그리구"
+    },
+    {
+        "standard": "그리되면",
+        "dialect": "그리되면"
+    },
+    {
+        "standard": "그리하면",
+        "dialect": "그리하면"
+    },
+    {
+        "standard": "그만",
+        "dialect": "그만"
+    },
+    {
+        "standard": "그의",
+        "dialect": "그의"
+    },
+    {
+        "standard": "그제",
+        "dialect": "그제"
+    },
+    {
+        "standard": "그져",
+        "dialect": "그져"
+    },
+    {
+        "standard": "그죠?",
+        "dialect": "그죠?"
+    },
+    {
+        "standard": "그지",
+        "dialect": "그지"
+    },
+    {
+        "standard": "그지?",
+        "dialect": "그지?"
+    },
+    {
+        "standard": "그지가",
+        "dialect": "그지가"
+    },
+    {
+        "standard": "그짝",
+        "dialect": "그짝"
+    },
+    {
+        "standard": "그쵸",
+        "dialect": "그쵸"
+    },
+    {
+        "standard": "그치",
+        "dialect": "그치"
+    },
+    {
+        "standard": "그치?",
+        "dialect": "그치?"
+    },
+    {
+        "standard": "그치만",
+        "dialect": "그치만"
+    },
+    {
+        "standard": "그케",
+        "dialect": "그케"
+    },
+    {
+        "standard": "근",
+        "dialect": "근"
+    },
+    {
+        "standard": "근데",
+        "dialect": "근데"
+    },
+    {
+        "standard": "근디",
+        "dialect": "근디"
+    },
+    {
+        "standard": "글",
+        "dialect": "글"
+    },
+    {
+        "standard": "글고",
+        "dialect": "글고"
+    },
+    {
+        "standard": "글구",
+        "dialect": "글구"
+    },
+    {
+        "standard": "글도",
+        "dialect": "글도"
+    },
+    {
+        "standard": "글로",
+        "dialect": "글로"
+    },
+    {
+        "standard": "글만",
+        "dialect": "글만"
+    },
+    {
+        "standard": "글을",
+        "dialect": "글을"
+    },
+    {
+        "standard": "글케",
+        "dialect": "글케"
+    },
+    {
+        "standard": "글쿤",
+        "dialect": "글쿤"
+    },
+    {
+        "standard": "금",
+        "dialect": "금"
+    },
+    {
+        "standard": "금서",
+        "dialect": "금서"
+    },
+    {
+        "standard": "금시",
+        "dialect": "금시"
+    },
+    {
+        "standard": "급하다",
+        "dialect": "급하다"
+    },
+    {
+        "standard": "긍까",
+        "dialect": "긍까"
+    },
+    {
+        "standard": "기",
+        "dialect": "기"
+    },
+    {
+        "standard": "기가",
+        "dialect": "기가"
+    },
+    {
+        "standard": "기고",
+        "dialect": "기고"
+    },
+    {
+        "standard": "기냥",
+        "dialect": "기냥"
+    },
+    {
+        "standard": "기대된다",
+        "dialect": "기대된다"
+    },
+    {
+        "standard": "기도",
+        "dialect": "기도"
+    },
+    {
+        "standard": "기똥차게",
+        "dialect": "기똥차게"
+    },
+    {
+        "standard": "기본",
+        "dialect": "기본"
+    },
+    {
+        "standard": "기사다",
+        "dialect": "기사다"
+    },
+    {
+        "standard": "기아가",
+        "dialect": "기아가"
+    },
+    {
+        "standard": "기억난다",
+        "dialect": "기억난다"
+    },
+    {
+        "standard": "기에는",
+        "dialect": "기에는"
+    },
+    {
+        "standard": "기여워",
+        "dialect": "기여워"
+    },
+    {
+        "standard": "기지",
+        "dialect": "기지"
+    },
+    {
+        "standard": "길다",
+        "dialect": "길다"
+    },
+    {
+        "standard": "까",
+        "dialect": "까"
+    },
+    {
+        "standard": "까내리는",
+        "dialect": "까내리는"
+    },
+    {
+        "standard": "까는",
+        "dialect": "까는"
+    },
+    {
+        "standard": "까면",
+        "dialect": "까면"
+    },
+    {
+        "standard": "까지",
+        "dialect": "까지"
+    },
+    {
+        "standard": "깐",
+        "dialect": "깐"
+    },
+    {
+        "standard": "깔라고",
+        "dialect": "깔라고"
+    },
+    {
+        "standard": "깔았나",
+        "dialect": "깔았나"
+    },
+    {
+        "standard": "깜방",
+        "dialect": "깜방"
+    },
+    {
+        "standard": "깜빵",
+        "dialect": "깜빵"
+    },
+    {
+        "standard": "깜빵에",
+        "dialect": "깜빵에"
+    },
+    {
+        "standard": "깝치고",
+        "dialect": "깝치고"
+    },
+    {
+        "standard": "깬다",
+        "dialect": "깬다"
+    },
+    {
+        "standard": "꺼",
+        "dialect": "꺼"
+    },
+    {
+        "standard": "꺼가",
+        "dialect": "꺼가"
+    },
+    {
+        "standard": "꺼꾸로",
+        "dialect": "꺼꾸로"
+    },
+    {
+        "standard": "꺼다.",
+        "dialect": "꺼다."
+    },
+    {
+        "standard": "꺼라",
+        "dialect": "꺼라"
+    },
+    {
+        "standard": "꺼리가",
+        "dialect": "꺼리가"
+    },
+    {
+        "standard": "꺼야.",
+        "dialect": "꺼야."
+    },
+    {
+        "standard": "꺼져라",
+        "dialect": "끄지라"
+    },
+    {
+        "standard": "꺼지라고",
+        "dialect": "꺼지그라"
+    },
+    {
+        "standard": "껄",
+        "dialect": "껄"
+    },
+    {
+        "standard": "껴서",
+        "dialect": "껴서"
+    },
+    {
+        "standard": "꼬라지",
+        "dialect": "꼬라지"
+    },
+    {
+        "standard": "꼬라지가",
+        "dialect": "꼬라지가"
+    },
+    {
+        "standard": "꼬라지를",
+        "dialect": "꼬라지를"
+    },
+    {
+        "standard": "꼬시다",
+        "dialect": "꼬시다"
+    },
+    {
+        "standard": "꼬우면",
+        "dialect": "꼬우면"
+    },
+    {
+        "standard": "꼬장",
+        "dialect": "꼬장"
+    },
+    {
+        "standard": "꼬추",
+        "dialect": "꼬추"
+    },
+    {
+        "standard": "꼴",
+        "dialect": "꼴"
+    },
+    {
+        "standard": "꼴랑",
+        "dialect": "꼴랑"
+    },
+    {
+        "standard": "꼽고",
+        "dialect": "꼽고"
+    },
+    {
+        "standard": "꼽는데",
+        "dialect": "꼽는데"
+    },
+    {
+        "standard": "꼽아",
+        "dialect": "꼽아"
+    },
+    {
+        "standard": "꽁짜로",
+        "dialect": "꽁짜로"
+    },
+    {
+        "standard": "꾀",
+        "dialect": "꾀"
+    },
+    {
+        "standard": "끝나고",
+        "dialect": "끝나고"
+    },
+    {
+        "standard": "끝나나?",
+        "dialect": "끝나나?"
+    },
+    {
+        "standard": "끝난다",
+        "dialect": "끝난다"
+    },
+    {
+        "standard": "끝났다",
+        "dialect": "끝났다"
+    },
+    {
+        "standard": "끝이다",
+        "dialect": "끝이다"
+    },
+    {
+        "standard": "끼고",
+        "dialect": "끼고"
+    },
+    {
+        "standard": "끼리",
+        "dialect": "끼리"
+    },
+    {
+        "standard": "끼어",
+        "dialect": "끼어"
+    },
+    {
+        "standard": "낄려고",
+        "dialect": "낄려고"
+    },
+    {
+        "standard": "나",
+        "dialect": "나"
+    },
+    {
+        "standard": "나?",
+        "dialect": "나?"
+    },
+    {
+        "standard": "나가",
+        "dialect": "나가"
+    },
+    {
+        "standard": "나가도",
+        "dialect": "나가도"
+    },
+    {
+        "standard": "나간다",
+        "dialect": "나간다"
+    },
+    {
+        "standard": "나갔나?",
+        "dialect": "나갔나?"
+    },
+    {
+        "standard": "나갔다",
+        "dialect": "나갔다"
+    },
+    {
+        "standard": "나게",
+        "dialect": "나게"
+    },
+    {
+        "standard": "나고",
+        "dialect": "나고"
+    },
+    {
+        "standard": "나나",
+        "dialect": "나나"
+    },
+    {
+        "standard": "나나가",
+        "dialect": "나나가"
+    },
+    {
+        "standard": "나눠",
+        "dialect": "나눠"
+    },
+    {
+        "standard": "나눠서",
+        "dialect": "나눠서"
+    },
+    {
+        "standard": "나눠져",
+        "dialect": "나눠져"
+    },
+    {
+        "standard": "나눠주는",
+        "dialect": "나눠주는"
+    },
+    {
+        "standard": "나눠줘야",
+        "dialect": "나눠줘야"
+    },
+    {
+        "standard": "나는",
+        "dialect": "나는"
+    },
+    {
+        "standard": "나두고",
+        "dialect": "나두고"
+    },
+    {
+        "standard": "나라다",
+        "dialect": "나라다"
+    },
+    {
+        "standard": "나라에",
+        "dialect": "나라에"
+    },
+    {
+        "standard": "나락",
+        "dialect": "나락"
+    },
+    {
+        "standard": "나란데",
+        "dialect": "나란데"
+    },
+    {
+        "standard": "나만",
+        "dialect": "나만"
+    },
+    {
+        "standard": "나면",
+        "dialect": "나면"
+    },
+    {
+        "standard": "나쁘다",
+        "dialect": "나쁘다"
+    },
+    {
+        "standard": "나쁘면",
+        "dialect": "나쁘면"
+    },
+    {
+        "standard": "나쁜놈",
+        "dialect": "나쁜노므시끼"
+    },
+    {
+        "standard": "나서",
+        "dialect": "나서"
+    },
+    {
+        "standard": "나아가",
+        "dialect": "나아가"
+    },
+    {
+        "standard": "나야",
+        "dialect": "나야"
+    },
+    {
+        "standard": "나오나",
+        "dialect": "나오나"
+    },
+    {
+        "standard": "나오나?",
+        "dialect": "나오나?"
+    },
+    {
+        "standard": "나온다",
+        "dialect": "나온다"
+    },
+    {
+        "standard": "나올려고",
+        "dialect": "나올려고"
+    },
+    {
+        "standard": "나옴",
+        "dialect": "나옴"
+    },
+    {
+        "standard": "나옴.",
+        "dialect": "나옴."
+    },
+    {
+        "standard": "나왔나?",
+        "dialect": "나왔나?"
+    },
+    {
+        "standard": "나왔노",
+        "dialect": "나왔노"
+    },
+    {
+        "standard": "나왔다",
+        "dialect": "나왔다"
+    },
+    {
+        "standard": "나은",
+        "dialect": "나은"
+    },
+    {
+        "standard": "나이가",
+        "dialect": "나이가"
+    },
+    {
+        "standard": "난",
+        "dialect": "난"
+    },
+    {
+        "standard": "난다",
+        "dialect": "난다"
+    },
+    {
+        "standard": "난다.",
+        "dialect": "난다."
+    },
+    {
+        "standard": "난리다",
+        "dialect": "난리다"
+    },
+    {
+        "standard": "난리다.",
+        "dialect": "난리다."
+    },
+    {
+        "standard": "날라간다",
+        "dialect": "날라간다"
+    },
+    {
+        "standard": "날라오면",
+        "dialect": "날라오면"
+    },
+    {
+        "standard": "날라와서",
+        "dialect": "날라와서"
+    },
+    {
+        "standard": "날아간다",
+        "dialect": "날아간다"
+    },
+    {
+        "standard": "남는다",
+        "dialect": "남는다"
+    },
+    {
+        "standard": "남았다",
+        "dialect": "남았다"
+    },
+    {
+        "standard": "남에",
+        "dialect": "남에"
+    },
+    {
+        "standard": "남자다",
+        "dialect": "남자다"
+    },
+    {
+        "standard": "남친",
+        "dialect": "남친"
+    },
+    {
+        "standard": "남친이",
+        "dialect": "남친이"
+    },
+    {
+        "standard": "남친이랑",
+        "dialect": "남친이랑"
+    },
+    {
+        "standard": "낫겄다.",
+        "dialect": "낫겄다."
+    },
+    {
+        "standard": "낫다",
+        "dialect": "낫다"
+    },
+    {
+        "standard": "났다",
+        "dialect": "났다"
+    },
+    {
+        "standard": "낮다",
+        "dialect": "낮다"
+    },
+    {
+        "standard": "낳고",
+        "dialect": "낳고"
+    },
+    {
+        "standard": "낳은",
+        "dialect": "낳은"
+    },
+    {
+        "standard": "내",
+        "dialect": "내"
+    },
+    {
+        "standard": "내.",
+        "dialect": "내."
+    },
+    {
+        "standard": "내가",
+        "dialect": "내가"
+    },
+    {
+        "standard": "내같아도",
+        "dialect": "내같아도"
+    },
+    {
+        "standard": "내게",
+        "dialect": "내게"
+    },
+    {
+        "standard": "내고",
+        "dialect": "내고"
+    },
+    {
+        "standard": "내꺼",
+        "dialect": "내꺼"
+    },
+    {
+        "standard": "내나",
+        "dialect": "내나"
+    },
+    {
+        "standard": "내네",
+        "dialect": "내네"
+    },
+    {
+        "standard": "내년이다",
+        "dialect": "내년이다"
+    },
+    {
+        "standard": "내놔도",
+        "dialect": "내놔도"
+    },
+    {
+        "standard": "내놔라",
+        "dialect": "내놔라"
+    },
+    {
+        "standard": "내는",
+        "dialect": "내는"
+    },
+    {
+        "standard": "내니까",
+        "dialect": "내니까"
+    },
+    {
+        "standard": "내다",
+        "dialect": "내다"
+    },
+    {
+        "standard": "내도",
+        "dialect": "내도"
+    },
+    {
+        "standard": "내도록",
+        "dialect": "내도록"
+    },
+    {
+        "standard": "내라",
+        "dialect": "내라"
+    },
+    {
+        "standard": "내란",
+        "dialect": "내란"
+    },
+    {
+        "standard": "내랑",
+        "dialect": "내랑"
+    },
+    {
+        "standard": "내래",
+        "dialect": "내래"
+    },
+    {
+        "standard": "내려온나",
+        "dialect": "내려온나"
+    },
+    {
+        "standard": "내리",
+        "dialect": "내리"
+    },
+    {
+        "standard": "내야",
+        "dialect": "내야"
+    },
+    {
+        "standard": "내에",
+        "dialect": "내에"
+    },
+    {
+        "standard": "내의",
+        "dialect": "내의"
+    },
+    {
+        "standard": "내인테",
+        "dialect": "내인테"
+    },
+    {
+        "standard": "내한테",
+        "dialect": "내한테"
+    },
+    {
+        "standard": "낸",
+        "dialect": "낸"
+    },
+    {
+        "standard": "낸다",
+        "dialect": "낸다"
+    },
+    {
+        "standard": "냅두고",
+        "dialect": "냅두고"
+    },
+    {
+        "standard": "냅두면",
+        "dialect": "냅두면"
+    },
+    {
+        "standard": "냅둔",
+        "dialect": "냅둔"
+    },
+    {
+        "standard": "냅둬.",
+        "dialect": "냅둬."
+    },
+    {
+        "standard": "냅둬도",
+        "dialect": "냅둬도"
+    },
+    {
+        "standard": "냅둬라",
+        "dialect": "냅둬라"
+    },
+    {
+        "standard": "너",
+        "dialect": "너"
+    },
+    {
+        "standard": "너.",
+        "dialect": "너."
+    },
+    {
+        "standard": "너가",
+        "dialect": "너가"
+    },
+    {
+        "standard": "너거",
+        "dialect": "너거"
+    },
+    {
+        "standard": "너거가",
+        "dialect": "너거가"
+    },
+    {
+        "standard": "너거도",
+        "dialect": "너거도"
+    },
+    {
+        "standard": "너거들",
+        "dialect": "너거들"
+    },
+    {
+        "standard": "너거들끼리",
+        "dialect": "너거들끼리"
+    },
+    {
+        "standard": "너거들은",
+        "dialect": "너거들은"
+    },
+    {
+        "standard": "너거들이",
+        "dialect": "너거들이"
+    },
+    {
+        "standard": "너그",
+        "dialect": "너그"
+    },
+    {
+        "standard": "너그들",
+        "dialect": "너그들"
+    },
+    {
+        "standard": "너그들이",
+        "dialect": "너그들이"
+    },
+    {
+        "standard": "너네",
+        "dialect": "너네"
+    },
+    {
+        "standard": "너네가",
+        "dialect": "너네가"
+    },
+    {
+        "standard": "너네끼리",
+        "dialect": "너네끼리"
+    },
+    {
+        "standard": "너네는",
+        "dialect": "너네는"
+    },
+    {
+        "standard": "너네도",
+        "dialect": "너네도"
+    },
+    {
+        "standard": "너네들",
+        "dialect": "너네들"
+    },
+    {
+        "standard": "너네들끼리",
+        "dialect": "너네들끼리"
+    },
+    {
+        "standard": "너네들은",
+        "dialect": "너네들은"
+    },
+    {
+        "standard": "너네들이",
+        "dialect": "너네들이"
+    },
+    {
+        "standard": "너네처럼",
+        "dialect": "너네처럼"
+    },
+    {
+        "standard": "너는",
+        "dialect": "너는"
+    },
+    {
+        "standard": "너들이",
+        "dialect": "너들이"
+    },
+    {
+        "standard": "너랑",
+        "dialect": "너랑"
+    },
+    {
+        "standard": "너머",
+        "dialect": "너머"
+    },
+    {
+        "standard": "너무",
+        "dialect": "너무"
+    },
+    {
+        "standard": "넌",
+        "dialect": "넌"
+    },
+    {
+        "standard": "널",
+        "dialect": "널"
+    },
+    {
+        "standard": "넘",
+        "dialect": "넘"
+    },
+    {
+        "standard": "넘나",
+        "dialect": "넘나"
+    },
+    {
+        "standard": "넘는다",
+        "dialect": "넘는다"
+    },
+    {
+        "standard": "넘들",
+        "dialect": "넘들"
+    },
+    {
+        "standard": "넘들을",
+        "dialect": "넘들을"
+    },
+    {
+        "standard": "넘들이",
+        "dialect": "넘들이"
+    },
+    {
+        "standard": "넘어가",
+        "dialect": "넘어가"
+    },
+    {
+        "standard": "넘어간다",
+        "dialect": "넘어간다"
+    },
+    {
+        "standard": "넘었다",
+        "dialect": "넘었다"
+    },
+    {
+        "standard": "넘을",
+        "dialect": "넘을"
+    },
+    {
+        "standard": "넘이",
+        "dialect": "넘이"
+    },
+    {
+        "standard": "넣나?",
+        "dialect": "넣나?"
+    },
+    {
+        "standard": "넣는다",
+        "dialect": "넣는다"
+    },
+    {
+        "standard": "넣을려고",
+        "dialect": "넣을려고"
+    },
+    {
+        "standard": "네",
+        "dialect": "네"
+    },
+    {
+        "standard": "네가",
+        "dialect": "네가"
+    },
+    {
+        "standard": "노니까",
+        "dialect": "노니까"
+    },
+    {
+        "standard": "노래고",
+        "dialect": "노래고"
+    },
+    {
+        "standard": "논",
+        "dialect": "논"
+    },
+    {
+        "standard": "놀라",
+        "dialect": "놀라"
+    },
+    {
+        "standard": "놀라고",
+        "dialect": "놀라고"
+    },
+    {
+        "standard": "놀래",
+        "dialect": "놀래"
+    },
+    {
+        "standard": "놀랬다",
+        "dialect": "놀랬다"
+    },
+    {
+        "standard": "놀랬던",
+        "dialect": "놀랬던"
+    },
+    {
+        "standard": "놈",
+        "dialect": "놈"
+    },
+    {
+        "standard": "높다",
+        "dialect": "높다"
+    },
+    {
+        "standard": "놓고",
+        "dialect": "놓고"
+    },
+    {
+        "standard": "놓고는",
+        "dialect": "놓고는"
+    },
+    {
+        "standard": "놓는",
+        "dialect": "놓는"
+    },
+    {
+        "standard": "놓았는데",
+        "dialect": "놓았는데"
+    },
+    {
+        "standard": "놓으면",
+        "dialect": "놓으면"
+    },
+    {
+        "standard": "놓은",
+        "dialect": "놓은"
+    },
+    {
+        "standard": "놓을",
+        "dialect": "놓을"
+    },
+    {
+        "standard": "놓지",
+        "dialect": "놓지"
+    },
+    {
+        "standard": "놔",
+        "dialect": "놔"
+    },
+    {
+        "standard": "놔두고",
+        "dialect": "놔두고"
+    },
+    {
+        "standard": "놔두는",
+        "dialect": "놔두는"
+    },
+    {
+        "standard": "놔두니까",
+        "dialect": "놔두니까"
+    },
+    {
+        "standard": "놔두면",
+        "dialect": "놔두면"
+    },
+    {
+        "standard": "놔둔다",
+        "dialect": "놔둔다"
+    },
+    {
+        "standard": "놔둘",
+        "dialect": "놔둘"
+    },
+    {
+        "standard": "놔둬",
+        "dialect": "놔둬"
+    },
+    {
+        "standard": "놔둬도",
+        "dialect": "놔둬도"
+    },
+    {
+        "standard": "놔서",
+        "dialect": "놔서"
+    },
+    {
+        "standard": "놔야",
+        "dialect": "놔야"
+    },
+    {
+        "standard": "놨네",
+        "dialect": "놨네"
+    },
+    {
+        "standard": "놨는데",
+        "dialect": "놨는데"
+    },
+    {
+        "standard": "놨더니",
+        "dialect": "놨더니"
+    },
+    {
+        "standard": "누",
+        "dialect": "누"
+    },
+    {
+        "standard": "누루고",
+        "dialect": "누루고"
+    },
+    {
+        "standard": "눈꼽만큼도",
+        "dialect": "눈꼽만큼도"
+    },
+    {
+        "standard": "느",
+        "dialect": "느"
+    },
+    {
+        "standard": "느그",
+        "dialect": "느그"
+    },
+    {
+        "standard": "느그가",
+        "dialect": "느그가"
+    },
+    {
+        "standard": "느그는",
+        "dialect": "느그는"
+    },
+    {
+        "standard": "느그들",
+        "dialect": "느그들"
+    },
+    {
+        "standard": "느그들끼리",
+        "dialect": "느그들끼리"
+    },
+    {
+        "standard": "느그들은",
+        "dialect": "느그들은"
+    },
+    {
+        "standard": "느그들이",
+        "dialect": "느그들이"
+    },
+    {
+        "standard": "느그랑",
+        "dialect": "느그랑"
+    },
+    {
+        "standard": "느껴",
+        "dialect": "느껴"
+    },
+    {
+        "standard": "느껴진다",
+        "dialect": "느껴진다"
+    },
+    {
+        "standard": "느꼈다",
+        "dialect": "느꼈다"
+    },
+    {
+        "standard": "느낌이라",
+        "dialect": "느낌이라"
+    },
+    {
+        "standard": "느리다",
+        "dialect": "느리다"
+    },
+    {
+        "standard": "느무",
+        "dialect": "느무"
+    },
+    {
+        "standard": "는",
+        "dialect": "는"
+    },
+    {
+        "standard": "늘",
+        "dialect": "늘"
+    },
+    {
+        "standard": "니",
+        "dialect": "니"
+    },
+    {
+        "standard": "니가",
+        "dialect": "니가"
+    },
+    {
+        "standard": "니가?",
+        "dialect": "니가?"
+    },
+    {
+        "standard": "니같은",
+        "dialect": "니같은"
+    },
+    {
+        "standard": "니거",
+        "dialect": "니거"
+    },
+    {
+        "standard": "니꺼",
+        "dialect": "니꺼"
+    },
+    {
+        "standard": "니나",
+        "dialect": "니나"
+    },
+    {
+        "standard": "니네",
+        "dialect": "니네"
+    },
+    {
+        "standard": "니네가",
+        "dialect": "니네가"
+    },
+    {
+        "standard": "니네끼리",
+        "dialect": "니네끼리"
+    },
+    {
+        "standard": "니네나",
+        "dialect": "니네나"
+    },
+    {
+        "standard": "니네는",
+        "dialect": "니네는"
+    },
+    {
+        "standard": "니네도",
+        "dialect": "니네도"
+    },
+    {
+        "standard": "니네들",
+        "dialect": "니네들"
+    },
+    {
+        "standard": "니네들이",
+        "dialect": "니네들이"
+    },
+    {
+        "standard": "니네를",
+        "dialect": "니네를"
+    },
+    {
+        "standard": "니네집",
+        "dialect": "니네집"
+    },
+    {
+        "standard": "니네한테",
+        "dialect": "니네한테"
+    },
+    {
+        "standard": "니넨",
+        "dialect": "니넨"
+    },
+    {
+        "standard": "니는",
+        "dialect": "니는"
+    },
+    {
+        "standard": "니다",
+        "dialect": "니다"
+    },
+    {
+        "standard": "니도",
+        "dialect": "니도"
+    },
+    {
+        "standard": "니들",
+        "dialect": "니들"
+    },
+    {
+        "standard": "니들끼리",
+        "dialect": "니들끼리"
+    },
+    {
+        "standard": "니들도",
+        "dialect": "니들도"
+    },
+    {
+        "standard": "니들만",
+        "dialect": "니들만"
+    },
+    {
+        "standard": "니들은",
+        "dialect": "니들은"
+    },
+    {
+        "standard": "니들을",
+        "dialect": "니들을"
+    },
+    {
+        "standard": "니들이",
+        "dialect": "니들이"
+    },
+    {
+        "standard": "니들이랑",
+        "dialect": "니들이랑"
+    },
+    {
+        "standard": "니들처럼",
+        "dialect": "니들처럼"
+    },
+    {
+        "standard": "니들한테",
+        "dialect": "니들한테"
+    },
+    {
+        "standard": "니부터",
+        "dialect": "니부터"
+    },
+    {
+        "standard": "니편내편은",
+        "dialect": "니편내편은"
+    },
+    {
+        "standard": "닌",
+        "dialect": "닌"
+    },
+    {
+        "standard": "다",
+        "dialect": "다"
+    },
+    {
+        "standard": "다가",
+        "dialect": "다가"
+    },
+    {
+        "standard": "다녔다",
+        "dialect": "다녔다"
+    },
+    {
+        "standard": "다닌다",
+        "dialect": "다닌다"
+    },
+    {
+        "standard": "다닌다.",
+        "dialect": "다닌다."
+    },
+    {
+        "standard": "다님",
+        "dialect": "다님"
+    },
+    {
+        "standard": "다르나",
+        "dialect": "다르나"
+    },
+    {
+        "standard": "다르다",
+        "dialect": "다르다"
+    },
+    {
+        "standard": "다른거다",
+        "dialect": "다른거다"
+    },
+    {
+        "standard": "다른다",
+        "dialect": "다른다"
+    },
+    {
+        "standard": "다름",
+        "dialect": "다름"
+    },
+    {
+        "standard": "다리고",
+        "dialect": "다리고"
+    },
+    {
+        "standard": "다양하다",
+        "dialect": "다양하다"
+    },
+    {
+        "standard": "다행이다.",
+        "dialect": "다행이다."
+    },
+    {
+        "standard": "닥쳐",
+        "dialect": "고마해라"
+    },
+    {
+        "standard": "닥쳐라",
+        "dialect": "시끄럽다카이"
+    },
+    {
+        "standard": "단",
+        "dialect": "단"
+    },
+    {
+        "standard": "달",
+        "dialect": "달"
+    },
+    {
+        "standard": "달다",
+        "dialect": "달다"
+    },
+    {
+        "standard": "달달하고",
+        "dialect": "달달하고"
+    },
+    {
+        "standard": "달달한",
+        "dialect": "달달한"
+    },
+    {
+        "standard": "달라",
+        "dialect": "달라"
+    },
+    {
+        "standard": "달라진다",
+        "dialect": "달라진다"
+    },
+    {
+        "standard": "달리",
+        "dialect": "달리"
+    },
+    {
+        "standard": "달린다",
+        "dialect": "달린다"
+    },
+    {
+        "standard": "닮았다",
+        "dialect": "닮았다"
+    },
+    {
+        "standard": "담구고",
+        "dialect": "담구고"
+    },
+    {
+        "standard": "담에",
+        "dialect": "담에"
+    },
+    {
+        "standard": "답답하다",
+        "dialect": "답답하다"
+    },
+    {
+        "standard": "당한다",
+        "dialect": "당한다"
+    },
+    {
+        "standard": "당했다",
+        "dialect": "당했다"
+    },
+    {
+        "standard": "대",
+        "dialect": "대"
+    },
+    {
+        "standard": "대가",
+        "dialect": "대가"
+    },
+    {
+        "standard": "대가리가",
+        "dialect": "대가리가"
+    },
+    {
+        "standard": "대게",
+        "dialect": "대게"
+    },
+    {
+        "standard": "대고",
+        "dialect": "대고"
+    },
+    {
+        "standard": "대니",
+        "dialect": "대니"
+    },
+    {
+        "standard": "대단하다.",
+        "dialect": "대단하다."
+    },
+    {
+        "standard": "대도",
+        "dialect": "대도"
+    },
+    {
+        "standard": "대리",
+        "dialect": "대리"
+    },
+    {
+        "standard": "대면",
+        "dialect": "대면"
+    },
+    {
+        "standard": "대빵",
+        "dialect": "대빵"
+    },
+    {
+        "standard": "대사가",
+        "dialect": "대사가"
+    },
+    {
+        "standard": "댔던",
+        "dialect": "댔던"
+    },
+    {
+        "standard": "댕기고",
+        "dialect": "댕기고"
+    },
+    {
+        "standard": "댕기는데",
+        "dialect": "댕기는데"
+    },
+    {
+        "standard": "더럽게",
+        "dialect": "더럽게"
+    },
+    {
+        "standard": "더럽다",
+        "dialect": "더럽다"
+    },
+    {
+        "standard": "더불",
+        "dialect": "더불"
+    },
+    {
+        "standard": "덤탱이",
+        "dialect": "덤탱이"
+    },
+    {
+        "standard": "덥다",
+        "dialect": "덥다"
+    },
+    {
+        "standard": "데",
+        "dialect": "데"
+    },
+    {
+        "standard": "데가",
+        "dialect": "데가"
+    },
+    {
+        "standard": "데고",
+        "dialect": "데고"
+    },
+    {
+        "standard": "데꼬",
+        "dialect": "데꼬"
+    },
+    {
+        "standard": "데려가",
+        "dialect": "데려가"
+    },
+    {
+        "standard": "델고",
+        "dialect": "델고"
+    },
+    {
+        "standard": "델꼬",
+        "dialect": "델꼬"
+    },
+    {
+        "standard": "도",
+        "dialect": "도"
+    },
+    {
+        "standard": "도라이",
+        "dialect": "도라이"
+    },
+    {
+        "standard": "도망쳤다",
+        "dialect": "도망쳤다"
+    },
+    {
+        "standard": "도와주나?",
+        "dialect": "도와주나?"
+    },
+    {
+        "standard": "돈까스",
+        "dialect": "돈까스"
+    },
+    {
+        "standard": "돈다",
+        "dialect": "돈다"
+    },
+    {
+        "standard": "돌려놔",
+        "dialect": "돌려놔"
+    },
+    {
+        "standard": "돌아가",
+        "dialect": "돌아가"
+    },
+    {
+        "standard": "돌아가셨다",
+        "dialect": "돌아가셨다"
+    },
+    {
+        "standard": "돌아간다",
+        "dialect": "돌아간다"
+    },
+    {
+        "standard": "돌아이",
+        "dialect": "돌이가"
+    },
+    {
+        "standard": "돌았냐?",
+        "dialect": "미칫나"
+    },
+    {
+        "standard": "동",
+        "dialect": "동"
+    },
+    {
+        "standard": "동아리",
+        "dialect": "동아리"
+    },
+    {
+        "standard": "돼도",
+        "dialect": "돼도"
+    },
+    {
+        "standard": "돼야",
+        "dialect": "돼야"
+    },
+    {
+        "standard": "됐나",
+        "dialect": "됐나"
+    },
+    {
+        "standard": "됐나?",
+        "dialect": "됐나?"
+    },
+    {
+        "standard": "됐다",
+        "dialect": "됐다"
+    },
+    {
+        "standard": "됐다.",
+        "dialect": "됐다."
+    },
+    {
+        "standard": "됐지",
+        "dialect": "됐지"
+    },
+    {
+        "standard": "되겠나.",
+        "dialect": "되겠나."
+    },
+    {
+        "standard": "되겠나?",
+        "dialect": "되겠나?"
+    },
+    {
+        "standard": "되기",
+        "dialect": "되기"
+    },
+    {
+        "standard": "되나",
+        "dialect": "되나"
+    },
+    {
+        "standard": "되나.",
+        "dialect": "되나."
+    },
+    {
+        "standard": "되나?",
+        "dialect": "되나?"
+    },
+    {
+        "standard": "되냐?",
+        "dialect": "되냐?"
+    },
+    {
+        "standard": "되는",
+        "dialect": "되는"
+    },
+    {
+        "standard": "되는가",
+        "dialect": "되는가"
+    },
+    {
+        "standard": "되는거",
+        "dialect": "되는거"
+    },
+    {
+        "standard": "되는기라",
+        "dialect": "되는기라"
+    },
+    {
+        "standard": "되더라구요.",
+        "dialect": "되더라구요."
+    },
+    {
+        "standard": "되던",
+        "dialect": "되던"
+    },
+    {
+        "standard": "되려",
+        "dialect": "되려"
+    },
+    {
+        "standard": "되었다",
+        "dialect": "되었다"
+    },
+    {
+        "standard": "되지",
+        "dialect": "되지"
+    },
+    {
+        "standard": "되지?",
+        "dialect": "되지?"
+    },
+    {
+        "standard": "되질",
+        "dialect": "되질"
+    },
+    {
+        "standard": "된다",
+        "dialect": "된다"
+    },
+    {
+        "standard": "된다.",
+        "dialect": "된다."
+    },
+    {
+        "standard": "된다라고",
+        "dialect": "된다라고"
+    },
+    {
+        "standard": "된데이.",
+        "dialect": "된데이."
+    },
+    {
+        "standard": "될거",
+        "dialect": "될거"
+    },
+    {
+        "standard": "될껄",
+        "dialect": "될껄"
+    },
+    {
+        "standard": "될꼬",
+        "dialect": "될꼬"
+    },
+    {
+        "standard": "될려고",
+        "dialect": "될려고"
+    },
+    {
+        "standard": "될려면",
+        "dialect": "될려면"
+    },
+    {
+        "standard": "됨",
+        "dialect": "됨"
+    },
+    {
+        "standard": "됨.",
+        "dialect": "됨."
+    },
+    {
+        "standard": "둘이가",
+        "dialect": "둘이가"
+    },
+    {
+        "standard": "둬서",
+        "dialect": "둬서"
+    },
+    {
+        "standard": "뒤져라",
+        "dialect": "뒤져라"
+    },
+    {
+        "standard": "뒤지게",
+        "dialect": "뒤지게"
+    },
+    {
+        "standard": "뒷",
+        "dialect": "뒷"
+    },
+    {
+        "standard": "드",
+        "dialect": "드"
+    },
+    {
+        "standard": "드가야",
+        "dialect": "드가야"
+    },
+    {
+        "standard": "드가자",
+        "dialect": "드가자"
+    },
+    {
+        "standard": "드라마가",
+        "dialect": "드라마가"
+    },
+    {
+        "standard": "드러븐",
+        "dialect": "드러븐"
+    },
+    {
+        "standard": "드러운",
+        "dialect": "드러운"
+    },
+    {
+        "standard": "드러워",
+        "dialect": "드러워"
+    },
+    {
+        "standard": "드럽게",
+        "dialect": "드럽게"
+    },
+    {
+        "standard": "드럽고",
+        "dialect": "드럽고"
+    },
+    {
+        "standard": "든다",
+        "dialect": "든다"
+    },
+    {
+        "standard": "든다.",
+        "dialect": "든다."
+    },
+    {
+        "standard": "듣는다",
+        "dialect": "듣는다"
+    },
+    {
+        "standard": "듣는다.",
+        "dialect": "듣는다."
+    },
+    {
+        "standard": "들",
+        "dialect": "들"
+    },
+    {
+        "standard": "들고",
+        "dialect": "들고"
+    },
+    {
+        "standard": "들라",
+        "dialect": "들라"
+    },
+    {
+        "standard": "들렸다",
+        "dialect": "들렸다"
+    },
+    {
+        "standard": "들리나?",
+        "dialect": "들리나?"
+    },
+    {
+        "standard": "들린다",
+        "dialect": "들린다"
+    },
+    {
+        "standard": "들어가",
+        "dialect": "들어가"
+    },
+    {
+        "standard": "들어간다",
+        "dialect": "들어간다"
+    },
+    {
+        "standard": "들어감",
+        "dialect": "들어감"
+    },
+    {
+        "standard": "들어갔는데",
+        "dialect": "들어갔는데"
+    },
+    {
+        "standard": "들어갔다",
+        "dialect": "들어갔다"
+    },
+    {
+        "standard": "들어봐",
+        "dialect": "들어봐"
+    },
+    {
+        "standard": "들어온다",
+        "dialect": "들어온다"
+    },
+    {
+        "standard": "들었다",
+        "dialect": "들었다"
+    },
+    {
+        "standard": "들었다.",
+        "dialect": "들었다."
+    },
+    {
+        "standard": "들었음.",
+        "dialect": "들었음."
+    },
+    {
+        "standard": "들은",
+        "dialect": "들은"
+    },
+    {
+        "standard": "들을려고",
+        "dialect": "들을려고"
+    },
+    {
+        "standard": "들일려고",
+        "dialect": "들일려고"
+    },
+    {
+        "standard": "등치",
+        "dialect": "등치"
+    },
+    {
+        "standard": "등치는",
+        "dialect": "등치는"
+    },
+    {
+        "standard": "디게",
+        "dialect": "디게"
+    },
+    {
+        "standard": "디지게",
+        "dialect": "디지게"
+    },
+    {
+        "standard": "딘",
+        "dialect": "딘"
+    },
+    {
+        "standard": "딜",
+        "dialect": "딜"
+    },
+    {
+        "standard": "따로",
+        "dialect": "따로"
+    },
+    {
+        "standard": "따르고",
+        "dialect": "따르고"
+    },
+    {
+        "standard": "따른",
+        "dialect": "따른"
+    },
+    {
+        "standard": "따른게",
+        "dialect": "따른게"
+    },
+    {
+        "standard": "따를",
+        "dialect": "따를"
+    },
+    {
+        "standard": "따박따박",
+        "dialect": "따박따박"
+    },
+    {
+        "standard": "딴",
+        "dialect": "딴"
+    },
+    {
+        "standard": "딴건",
+        "dialect": "딴건"
+    },
+    {
+        "standard": "딴데",
+        "dialect": "딴데"
+    },
+    {
+        "standard": "딸랑",
+        "dialect": "딸랑"
+    },
+    {
+        "standard": "딸래미",
+        "dialect": "딸래미"
+    },
+    {
+        "standard": "딸래미가",
+        "dialect": "딸래미가"
+    },
+    {
+        "standard": "딸려서",
+        "dialect": "딸려서"
+    },
+    {
+        "standard": "딸리는",
+        "dialect": "딸리는"
+    },
+    {
+        "standard": "딸리니까",
+        "dialect": "딸리니까"
+    },
+    {
+        "standard": "딸린",
+        "dialect": "딸린"
+    },
+    {
+        "standard": "때가",
+        "dialect": "때가"
+    },
+    {
+        "standard": "때다",
+        "dialect": "때다"
+    },
+    {
+        "standard": "때로",
+        "dialect": "때로"
+    },
+    {
+        "standard": "때를",
+        "dialect": "때를"
+    },
+    {
+        "standard": "때릴려고",
+        "dialect": "때릴려고"
+    },
+    {
+        "standard": "때메",
+        "dialect": "때메"
+    },
+    {
+        "standard": "때에",
+        "dialect": "때에"
+    },
+    {
+        "standard": "땐",
+        "dialect": "땐"
+    },
+    {
+        "standard": "땜시",
+        "dialect": "땜시"
+    },
+    {
+        "standard": "땜에",
+        "dialect": "땜에"
+    },
+    {
+        "standard": "떠",
+        "dialect": "떠"
+    },
+    {
+        "standard": "떠있다",
+        "dialect": "떠있다"
+    },
+    {
+        "standard": "떡",
+        "dialect": "떡"
+    },
+    {
+        "standard": "떨어지나",
+        "dialect": "떨어지나"
+    },
+    {
+        "standard": "떨어진다",
+        "dialect": "떨어진다"
+    },
+    {
+        "standard": "또라이",
+        "dialect": "미친개이"
+    },
+    {
+        "standard": "똑",
+        "dialect": "똑"
+    },
+    {
+        "standard": "똑같다",
+        "dialect": "똑같다"
+    },
+    {
+        "standard": "똑디",
+        "dialect": "똑디"
+    },
+    {
+        "standard": "똘아이",
+        "dialect": "또라이"
+    },
+    {
+        "standard": "똥글",
+        "dialect": "똥글"
+    },
+    {
+        "standard": "뚜드려",
+        "dialect": "뚜드려"
+    },
+    {
+        "standard": "뜯어가",
+        "dialect": "뜯어가"
+    },
+    {
+        "standard": "뜻이다",
+        "dialect": "뜻이다"
+    },
+    {
+        "standard": "래야",
+        "dialect": "래야"
+    },
+    {
+        "standard": "레알",
+        "dialect": "레알"
+    },
+    {
+        "standard": "마",
+        "dialect": "마"
+    },
+    {
+        "standard": "마.",
+        "dialect": "마."
+    },
+    {
+        "standard": "마고",
+        "dialect": "마고"
+    },
+    {
+        "standard": "마네",
+        "dialect": "마네"
+    },
+    {
+        "standard": "마니",
+        "dialect": "마니"
+    },
+    {
+        "standard": "마라",
+        "dialect": "마라"
+    },
+    {
+        "standard": "마라.",
+        "dialect": "마라."
+    },
+    {
+        "standard": "마라고",
+        "dialect": "마라고"
+    },
+    {
+        "standard": "마리",
+        "dialect": "마리"
+    },
+    {
+        "standard": "마시나",
+        "dialect": "마시나"
+    },
+    {
+        "standard": "마이",
+        "dialect": "마이"
+    },
+    {
+        "standard": "마자",
+        "dialect": "마자"
+    },
+    {
+        "standard": "마치",
+        "dialect": "마치"
+    },
+    {
+        "standard": "막는다",
+        "dialect": "막는다"
+    },
+    {
+        "standard": "막았다",
+        "dialect": "막았다"
+    },
+    {
+        "standard": "만나나",
+        "dialect": "만나나"
+    },
+    {
+        "standard": "만날",
+        "dialect": "만날"
+    },
+    {
+        "standard": "만남",
+        "dialect": "만남"
+    },
+    {
+        "standard": "만다",
+        "dialect": "만다"
+    },
+    {
+        "standard": "만드나?",
+        "dialect": "만드나?"
+    },
+    {
+        "standard": "만든다",
+        "dialect": "만든다"
+    },
+    {
+        "standard": "만들라",
+        "dialect": "만들라"
+    },
+    {
+        "standard": "만들라고",
+        "dialect": "만들라고"
+    },
+    {
+        "standard": "만들려고",
+        "dialect": "만들려고"
+    },
+    {
+        "standard": "만들었나",
+        "dialect": "만들었나"
+    },
+    {
+        "standard": "만들었다",
+        "dialect": "만들었다"
+    },
+    {
+        "standard": "만만치",
+        "dialect": "만만치"
+    },
+    {
+        "standard": "많구만",
+        "dialect": "많구만"
+    },
+    {
+        "standard": "많노",
+        "dialect": "많노"
+    },
+    {
+        "standard": "많다",
+        "dialect": "많다"
+    },
+    {
+        "standard": "많다.",
+        "dialect": "많다."
+    },
+    {
+        "standard": "많더라",
+        "dialect": "많더라"
+    },
+    {
+        "standard": "많아진다",
+        "dialect": "많아진다"
+    },
+    {
+        "standard": "많아짐.",
+        "dialect": "많아짐."
+    },
+    {
+        "standard": "많았다.",
+        "dialect": "많았다."
+    },
+    {
+        "standard": "많음",
+        "dialect": "많음"
+    },
+    {
+        "standard": "많음.",
+        "dialect": "많음."
+    },
+    {
+        "standard": "많이",
+        "dialect": "많이"
+    },
+    {
+        "standard": "말",
+        "dialect": "말"
+    },
+    {
+        "standard": "말라",
+        "dialect": "말라"
+    },
+    {
+        "standard": "말라고",
+        "dialect": "말라고"
+    },
+    {
+        "standard": "말라면서",
+        "dialect": "말라면서"
+    },
+    {
+        "standard": "말란",
+        "dialect": "말란"
+    },
+    {
+        "standard": "말랑",
+        "dialect": "말랑"
+    },
+    {
+        "standard": "말야",
+        "dialect": "말야"
+    },
+    {
+        "standard": "말야.",
+        "dialect": "말야."
+    },
+    {
+        "standard": "말이가?",
+        "dialect": "말이가?"
+    },
+    {
+        "standard": "말이고?",
+        "dialect": "말이고?"
+    },
+    {
+        "standard": "말이다",
+        "dialect": "말이다"
+    },
+    {
+        "standard": "말이다.",
+        "dialect": "말이다."
+    },
+    {
+        "standard": "말이다?",
+        "dialect": "말이다?"
+    },
+    {
+        "standard": "말이라",
+        "dialect": "말이라"
+    },
+    {
+        "standard": "말이여",
+        "dialect": "말이여"
+    },
+    {
+        "standard": "말임?",
+        "dialect": "말임?"
+    },
+    {
+        "standard": "말하믄",
+        "dialect": "말하믄"
+    },
+    {
+        "standard": "말한다",
+        "dialect": "말한다"
+    },
+    {
+        "standard": "말했다",
+        "dialect": "말했다"
+    },
+    {
+        "standard": "맘",
+        "dialect": "맘"
+    },
+    {
+        "standard": "맘대로",
+        "dialect": "맘대로"
+    },
+    {
+        "standard": "맘도",
+        "dialect": "맘도"
+    },
+    {
+        "standard": "맘만",
+        "dialect": "맘만"
+    },
+    {
+        "standard": "맘먹고",
+        "dialect": "맘먹고"
+    },
+    {
+        "standard": "맘에",
+        "dialect": "맘에"
+    },
+    {
+        "standard": "맘이",
+        "dialect": "맘이"
+    },
+    {
+        "standard": "맘처럼",
+        "dialect": "맘처럼"
+    },
+    {
+        "standard": "맛난",
+        "dialect": "맛난"
+    },
+    {
+        "standard": "맛이다",
+        "dialect": "맛이다"
+    },
+    {
+        "standard": "맛있나",
+        "dialect": "맛있나"
+    },
+    {
+        "standard": "맛있다",
+        "dialect": "맛있다"
+    },
+    {
+        "standard": "맛탱이",
+        "dialect": "맛탱이"
+    },
+    {
+        "standard": "망친다",
+        "dialect": "망친다"
+    },
+    {
+        "standard": "망했다",
+        "dialect": "망했다"
+    },
+    {
+        "standard": "맞기",
+        "dialect": "맞기"
+    },
+    {
+        "standard": "맞나",
+        "dialect": "맞나"
+    },
+    {
+        "standard": "맞나.",
+        "dialect": "맞나."
+    },
+    {
+        "standard": "맞나?",
+        "dialect": "맞나?"
+    },
+    {
+        "standard": "맞네",
+        "dialect": "맞네"
+    },
+    {
+        "standard": "맞는다",
+        "dialect": "맞는다"
+    },
+    {
+        "standard": "맞다",
+        "dialect": "맞다"
+    },
+    {
+        "standard": "맞다.",
+        "dialect": "맞다."
+    },
+    {
+        "standard": "맞대",
+        "dialect": "맞대"
+    },
+    {
+        "standard": "맞아여",
+        "dialect": "맞아여"
+    },
+    {
+        "standard": "맞았다",
+        "dialect": "맞았다"
+    },
+    {
+        "standard": "맞어",
+        "dialect": "맞어"
+    },
+    {
+        "standard": "맞음",
+        "dialect": "맞음"
+    },
+    {
+        "standard": "맞제",
+        "dialect": "맞제"
+    },
+    {
+        "standard": "맞죠?",
+        "dialect": "맞죠?"
+    },
+    {
+        "standard": "맞지",
+        "dialect": "맞지"
+    },
+    {
+        "standard": "맞추기",
+        "dialect": "맞추기"
+    },
+    {
+        "standard": "맞추는",
+        "dialect": "맞추는"
+    },
+    {
+        "standard": "매",
+        "dialect": "매"
+    },
+    {
+        "standard": "매매",
+        "dialect": "매매"
+    },
+    {
+        "standard": "맥이고",
+        "dialect": "맥이고"
+    },
+    {
+        "standard": "맥이는",
+        "dialect": "맥이는"
+    },
+    {
+        "standard": "맨",
+        "dialect": "맨"
+    },
+    {
+        "standard": "맨날",
+        "dialect": "맨날"
+    },
+    {
+        "standard": "맹",
+        "dialect": "맹"
+    },
+    {
+        "standard": "맹키로",
+        "dialect": "맹키로"
+    },
+    {
+        "standard": "머",
+        "dialect": "머"
+    },
+    {
+        "standard": "머가",
+        "dialect": "머가"
+    },
+    {
+        "standard": "머고",
+        "dialect": "머고"
+    },
+    {
+        "standard": "머니",
+        "dialect": "머니"
+    },
+    {
+        "standard": "머다",
+        "dialect": "머다"
+    },
+    {
+        "standard": "머든",
+        "dialect": "머든"
+    },
+    {
+        "standard": "머든지",
+        "dialect": "머든지"
+    },
+    {
+        "standard": "머라",
+        "dialect": "머라"
+    },
+    {
+        "standard": "머라고",
+        "dialect": "머라고"
+    },
+    {
+        "standard": "머라카노",
+        "dialect": "머라카노"
+    },
+    {
+        "standard": "머스마",
+        "dialect": "머스마"
+    },
+    {
+        "standard": "머시",
+        "dialect": "머시"
+    },
+    {
+        "standard": "머시기?",
+        "dialect": "머시기?"
+    },
+    {
+        "standard": "머야",
+        "dialect": "머야"
+    },
+    {
+        "standard": "머야?",
+        "dialect": "머야?"
+    },
+    {
+        "standard": "머이",
+        "dialect": "머이"
+    },
+    {
+        "standard": "머지",
+        "dialect": "머지"
+    },
+    {
+        "standard": "머지?",
+        "dialect": "머지?"
+    },
+    {
+        "standard": "머하고",
+        "dialect": "머하고"
+    },
+    {
+        "standard": "머하냐?",
+        "dialect": "머하냐?"
+    },
+    {
+        "standard": "머하는",
+        "dialect": "머하는"
+    },
+    {
+        "standard": "먹겠나?",
+        "dialect": "먹겠나?"
+    },
+    {
+        "standard": "먹겠다",
+        "dialect": "먹겠다"
+    },
+    {
+        "standard": "먹는",
+        "dialect": "먹는"
+    },
+    {
+        "standard": "먹는다",
+        "dialect": "먹는다"
+    },
+    {
+        "standard": "먹는다.",
+        "dialect": "먹는다."
+    },
+    {
+        "standard": "먹던",
+        "dialect": "먹던"
+    },
+    {
+        "standard": "먹어",
+        "dialect": "먹어"
+    },
+    {
+        "standard": "먹었다",
+        "dialect": "먹었다"
+    },
+    {
+        "standard": "먹을려고",
+        "dialect": "먹을려고"
+    },
+    {
+        "standard": "먹음",
+        "dialect": "먹음"
+    },
+    {
+        "standard": "먼",
+        "dialect": "먼"
+    },
+    {
+        "standard": "먼가",
+        "dialect": "먼가"
+    },
+    {
+        "standard": "먼데",
+        "dialect": "먼데"
+    },
+    {
+        "standard": "먼지",
+        "dialect": "먼지"
+    },
+    {
+        "standard": "멀",
+        "dialect": "멀"
+    },
+    {
+        "standard": "멀다",
+        "dialect": "멀다"
+    },
+    {
+        "standard": "멀었다",
+        "dialect": "멀었다"
+    },
+    {
+        "standard": "멋있다",
+        "dialect": "멋있다"
+    },
+    {
+        "standard": "메",
+        "dialect": "메"
+    },
+    {
+        "standard": "멕여",
+        "dialect": "멕여"
+    },
+    {
+        "standard": "면은",
+        "dialect": "면은"
+    },
+    {
+        "standard": "몇",
+        "dialect": "몇"
+    },
+    {
+        "standard": "모",
+        "dialect": "모"
+    },
+    {
+        "standard": "모가",
+        "dialect": "모가"
+    },
+    {
+        "standard": "모든",
+        "dialect": "모든"
+    },
+    {
+        "standard": "모든지",
+        "dialect": "모든지"
+    },
+    {
+        "standard": "모래",
+        "dialect": "모래"
+    },
+    {
+        "standard": "모르겄다",
+        "dialect": "모르겄다"
+    },
+    {
+        "standard": "모르겠다",
+        "dialect": "모르겠다"
+    },
+    {
+        "standard": "모르겠다.",
+        "dialect": "모르겠다."
+    },
+    {
+        "standard": "모르겠음",
+        "dialect": "모르겠음"
+    },
+    {
+        "standard": "모르겠음.",
+        "dialect": "모르겠음."
+    },
+    {
+        "standard": "모르나",
+        "dialect": "모르나"
+    },
+    {
+        "standard": "모르나?",
+        "dialect": "모르나?"
+    },
+    {
+        "standard": "모른다",
+        "dialect": "모른다"
+    },
+    {
+        "standard": "모른다.",
+        "dialect": "모른다."
+    },
+    {
+        "standard": "모아",
+        "dialect": "모아"
+    },
+    {
+        "standard": "모욕",
+        "dialect": "모욕"
+    },
+    {
+        "standard": "모자라",
+        "dialect": "모자라"
+    },
+    {
+        "standard": "모자랄",
+        "dialect": "모지랄"
+    },
+    {
+        "standard": "몬",
+        "dialect": "몬"
+    },
+    {
+        "standard": "몬사는",
+        "dialect": "몬사는"
+    },
+    {
+        "standard": "몬한",
+        "dialect": "몬한"
+    },
+    {
+        "standard": "몰라",
+        "dialect": "몰라"
+    },
+    {
+        "standard": "몰랐다",
+        "dialect": "몰랐다"
+    },
+    {
+        "standard": "못",
+        "dialect": "못"
+    },
+    {
+        "standard": "못간다",
+        "dialect": "못간다"
+    },
+    {
+        "standard": "못봤다",
+        "dialect": "못봤다"
+    },
+    {
+        "standard": "못생겼다",
+        "dialect": "못생겼다"
+    },
+    {
+        "standard": "못하겠다.",
+        "dialect": "못하겠다."
+    },
+    {
+        "standard": "못하나",
+        "dialect": "못하나"
+    },
+    {
+        "standard": "못한다",
+        "dialect": "못한다"
+    },
+    {
+        "standard": "못했나?",
+        "dialect": "못했나?"
+    },
+    {
+        "standard": "못했다",
+        "dialect": "못했다"
+    },
+    {
+        "standard": "무",
+        "dialect": "무"
+    },
+    {
+        "standard": "무겁다",
+        "dialect": "무겁다"
+    },
+    {
+        "standard": "무도",
+        "dialect": "무도"
+    },
+    {
+        "standard": "무릅을",
+        "dialect": "무릅을"
+    },
+    {
+        "standard": "무섭다",
+        "dialect": "무섭다"
+    },
+    {
+        "standard": "무시",
+        "dialect": "무시"
+    },
+    {
+        "standard": "무시가",
+        "dialect": "무시가"
+    },
+    {
+        "standard": "무시하고",
+        "dialect": "무시하고"
+    },
+    {
+        "standard": "무신",
+        "dialect": "무신"
+    },
+    {
+        "standard": "무어라",
+        "dialect": "무어라"
+    },
+    {
+        "standard": "무튼",
+        "dialect": "무튼"
+    },
+    {
+        "standard": "묵고",
+        "dialect": "묵고"
+    },
+    {
+        "standard": "묵었나?",
+        "dialect": "묵었나?"
+    },
+    {
+        "standard": "묵었다",
+        "dialect": "묵었다"
+    },
+    {
+        "standard": "묵으면",
+        "dialect": "묵으면"
+    },
+    {
+        "standard": "묵은",
+        "dialect": "묵은"
+    },
+    {
+        "standard": "문",
+        "dialect": "문"
+    },
+    {
+        "standard": "문제다",
+        "dialect": "문제다"
+    },
+    {
+        "standard": "문화다",
+        "dialect": "문화다"
+    },
+    {
+        "standard": "묻나?",
+        "dialect": "묻나?"
+    },
+    {
+        "standard": "물",
+        "dialect": "물"
+    },
+    {
+        "standard": "뭐고",
+        "dialect": "뭐고"
+    },
+    {
+        "standard": "뭐고.",
+        "dialect": "뭐고."
+    },
+    {
+        "standard": "뭐고?",
+        "dialect": "뭐고?"
+    },
+    {
+        "standard": "뭐꼬",
+        "dialect": "뭐꼬"
+    },
+    {
+        "standard": "뭐냐면",
+        "dialect": "뭐냐면"
+    },
+    {
+        "standard": "뭐니",
+        "dialect": "뭐니"
+    },
+    {
+        "standard": "뭐니?",
+        "dialect": "뭐니?"
+    },
+    {
+        "standard": "뭐라",
+        "dialect": "뭐라"
+    },
+    {
+        "standard": "뭐라하지",
+        "dialect": "뭐라하지"
+    },
+    {
+        "standard": "뭐로",
+        "dialect": "뭐로"
+    },
+    {
+        "standard": "뭐야",
+        "dialect": "뭐야"
+    },
+    {
+        "standard": "뭐여",
+        "dialect": "뭐여"
+    },
+    {
+        "standard": "뭐여?",
+        "dialect": "뭐여?"
+    },
+    {
+        "standard": "뭐하나?",
+        "dialect": "뭐하나?"
+    },
+    {
+        "standard": "뭐하노",
+        "dialect": "뭐하노"
+    },
+    {
+        "standard": "뭐하노?",
+        "dialect": "뭐하노?"
+    },
+    {
+        "standard": "뭔",
+        "dialect": "뭔"
+    },
+    {
+        "standard": "뭔가",
+        "dialect": "뭔가"
+    },
+    {
+        "standard": "뭔갈",
+        "dialect": "뭔갈"
+    },
+    {
+        "standard": "뭔데?",
+        "dialect": "뭔데?"
+    },
+    {
+        "standard": "뭘",
+        "dialect": "뭘"
+    },
+    {
+        "standard": "뭣도",
+        "dialect": "뭣도"
+    },
+    {
+        "standard": "뭣이고",
+        "dialect": "뭣이고"
+    },
+    {
+        "standard": "므슨",
+        "dialect": "므슨"
+    },
+    {
+        "standard": "미래엔",
+        "dialect": "미래엔"
+    },
+    {
+        "standard": "미뤄져서",
+        "dialect": "미뤄져서"
+    },
+    {
+        "standard": "미안하다",
+        "dialect": "미안하다"
+    },
+    {
+        "standard": "미쳤나",
+        "dialect": "미쳤나"
+    },
+    {
+        "standard": "미친놈",
+        "dialect": "미친노므 자슥"
+    },
+    {
+        "standard": "미친놈이",
+        "dialect": "돌아삔나"
+    },
+    {
+        "standard": "미친다",
+        "dialect": "미친다"
+    },
+    {
+        "standard": "믿나",
+        "dialect": "믿나"
+    },
+    {
+        "standard": "믿나?",
+        "dialect": "믿나?"
+    },
+    {
+        "standard": "믿는다",
+        "dialect": "믿는다"
+    },
+    {
+        "standard": "믿어도",
+        "dialect": "믿어도"
+    },
+    {
+        "standard": "및",
+        "dialect": "및"
+    },
+    {
+        "standard": "밑에가",
+        "dialect": "밑에가"
+    },
+    {
+        "standard": "바껴",
+        "dialect": "바껴"
+    },
+    {
+        "standard": "바껴도",
+        "dialect": "바껴도"
+    },
+    {
+        "standard": "바껴서",
+        "dialect": "바껴서"
+    },
+    {
+        "standard": "바껴야",
+        "dialect": "바껴야"
+    },
+    {
+        "standard": "바꼈네요",
+        "dialect": "바꼈네요"
+    },
+    {
+        "standard": "바꼈는데",
+        "dialect": "바꼈는데"
+    },
+    {
+        "standard": "바꼈다고",
+        "dialect": "바꼈다고"
+    },
+    {
+        "standard": "바꾸라고",
+        "dialect": "바꾸라고"
+    },
+    {
+        "standard": "바꾼다",
+        "dialect": "바꾼다"
+    },
+    {
+        "standard": "바꿔",
+        "dialect": "바꿔"
+    },
+    {
+        "standard": "바꿔도",
+        "dialect": "바꿔도"
+    },
+    {
+        "standard": "바꿔서",
+        "dialect": "바꿔서"
+    },
+    {
+        "standard": "바꿔야",
+        "dialect": "바꿔야"
+    },
+    {
+        "standard": "바꿔주고",
+        "dialect": "바꿔주고"
+    },
+    {
+        "standard": "바꿔준",
+        "dialect": "바꿔준"
+    },
+    {
+        "standard": "바꿨는데",
+        "dialect": "바꿨는데"
+    },
+    {
+        "standard": "바꿨다",
+        "dialect": "바꿨다"
+    },
+    {
+        "standard": "바뀌었다",
+        "dialect": "바뀌었다"
+    },
+    {
+        "standard": "바뀐다",
+        "dialect": "바뀐다"
+    },
+    {
+        "standard": "바뀜",
+        "dialect": "바뀜"
+    },
+    {
+        "standard": "바라고",
+        "dialect": "바라고"
+    },
+    {
+        "standard": "바보가",
+        "dialect": "바보가"
+    },
+    {
+        "standard": "바보다",
+        "dialect": "바보다"
+    },
+    {
+        "standard": "바쁘다",
+        "dialect": "바쁘다"
+    },
+    {
+        "standard": "반대다.",
+        "dialect": "반대다."
+    },
+    {
+        "standard": "받나",
+        "dialect": "받나"
+    },
+    {
+        "standard": "받는다",
+        "dialect": "받는다"
+    },
+    {
+        "standard": "받았다",
+        "dialect": "받았다"
+    },
+    {
+        "standard": "받았다.",
+        "dialect": "받았다."
+    },
+    {
+        "standard": "받을려고",
+        "dialect": "받을려고"
+    },
+    {
+        "standard": "방구",
+        "dialect": "방구"
+    },
+    {
+        "standard": "배",
+        "dialect": "배"
+    },
+    {
+        "standard": "배아",
+        "dialect": "배아"
+    },
+    {
+        "standard": "버렸다",
+        "dialect": "버렸다"
+    },
+    {
+        "standard": "버릴려고",
+        "dialect": "버릴려고"
+    },
+    {
+        "standard": "번다",
+        "dialect": "번다"
+    },
+    {
+        "standard": "벌건",
+        "dialect": "벌건"
+    },
+    {
+        "standard": "벌려",
+        "dialect": "벌려"
+    },
+    {
+        "standard": "벌여",
+        "dialect": "벌여"
+    },
+    {
+        "standard": "벌이",
+        "dialect": "벌이"
+    },
+    {
+        "standard": "벌이고",
+        "dialect": "벌이고"
+    },
+    {
+        "standard": "벗어났다",
+        "dialect": "벗어났다"
+    },
+    {
+        "standard": "변한다",
+        "dialect": "변한다"
+    },
+    {
+        "standard": "변했다",
+        "dialect": "변했다"
+    },
+    {
+        "standard": "별개다",
+        "dialect": "별개다"
+    },
+    {
+        "standard": "별꺼",
+        "dialect": "별꺼"
+    },
+    {
+        "standard": "별로다",
+        "dialect": "별로다"
+    },
+    {
+        "standard": "별로임.",
+        "dialect": "별로임."
+    },
+    {
+        "standard": "별루다",
+        "dialect": "별루다"
+    },
+    {
+        "standard": "병신",
+        "dialect": "빙신"
+    },
+    {
+        "standard": "보나",
+        "dialect": "보나"
+    },
+    {
+        "standard": "보나?",
+        "dialect": "보나?"
+    },
+    {
+        "standard": "보냈다",
+        "dialect": "보냈다"
+    },
+    {
+        "standard": "보는기",
+        "dialect": "보는기"
+    },
+    {
+        "standard": "보다",
+        "dialect": "보다"
+    },
+    {
+        "standard": "보도",
+        "dialect": "보도"
+    },
+    {
+        "standard": "보따리",
+        "dialect": "보따리"
+    },
+    {
+        "standard": "보라.",
+        "dialect": "보라."
+    },
+    {
+        "standard": "보로",
+        "dialect": "보로"
+    },
+    {
+        "standard": "보믄",
+        "dialect": "보믄"
+    },
+    {
+        "standard": "보셈",
+        "dialect": "보셈"
+    },
+    {
+        "standard": "보소",
+        "dialect": "보소"
+    },
+    {
+        "standard": "보여준다",
+        "dialect": "보여준다"
+    },
+    {
+        "standard": "보이",
+        "dialect": "보이"
+    },
+    {
+        "standard": "보이나",
+        "dialect": "보이나"
+    },
+    {
+        "standard": "보인다",
+        "dialect": "보인다"
+    },
+    {
+        "standard": "보인다.",
+        "dialect": "보인다."
+    },
+    {
+        "standard": "보자",
+        "dialect": "보자"
+    },
+    {
+        "standard": "본게",
+        "dialect": "본게"
+    },
+    {
+        "standard": "본다",
+        "dialect": "본다"
+    },
+    {
+        "standard": "본다.",
+        "dialect": "본다."
+    },
+    {
+        "standard": "본디",
+        "dialect": "본디"
+    },
+    {
+        "standard": "볼려고",
+        "dialect": "볼려고"
+    },
+    {
+        "standard": "볼려면",
+        "dialect": "볼려면"
+    },
+    {
+        "standard": "볼만하다",
+        "dialect": "볼만하다"
+    },
+    {
+        "standard": "봄",
+        "dialect": "봄"
+    },
+    {
+        "standard": "봐라",
+        "dialect": "봐라"
+    },
+    {
+        "standard": "봤고",
+        "dialect": "봤고"
+    },
+    {
+        "standard": "봤나",
+        "dialect": "봤나"
+    },
+    {
+        "standard": "봤나?",
+        "dialect": "봤나?"
+    },
+    {
+        "standard": "봤네",
+        "dialect": "봤네"
+    },
+    {
+        "standard": "봤니",
+        "dialect": "봤니"
+    },
+    {
+        "standard": "봤다",
+        "dialect": "봤다"
+    },
+    {
+        "standard": "봤다.",
+        "dialect": "봤다."
+    },
+    {
+        "standard": "봤음",
+        "dialect": "봤음"
+    },
+    {
+        "standard": "봤음?",
+        "dialect": "봤음?"
+    },
+    {
+        "standard": "뵈기",
+        "dialect": "뵈기"
+    },
+    {
+        "standard": "부끄럽다",
+        "dialect": "부끄럽다"
+    },
+    {
+        "standard": "부러움",
+        "dialect": "부러움"
+    },
+    {
+        "standard": "부로",
+        "dialect": "부로"
+    },
+    {
+        "standard": "부른다",
+        "dialect": "부른다"
+    },
+    {
+        "standard": "부리고",
+        "dialect": "부리고"
+    },
+    {
+        "standard": "부리는",
+        "dialect": "부리는"
+    },
+    {
+        "standard": "부분들도",
+        "dialect": "부분들도"
+    },
+    {
+        "standard": "부족하다",
+        "dialect": "부족하다"
+    },
+    {
+        "standard": "분",
+        "dialect": "분"
+    },
+    {
+        "standard": "분이다",
+        "dialect": "분이다"
+    },
+    {
+        "standard": "불만이고",
+        "dialect": "불만이고"
+    },
+    {
+        "standard": "불쌍타",
+        "dialect": "불쌍타"
+    },
+    {
+        "standard": "불편하다",
+        "dialect": "불편하다"
+    },
+    {
+        "standard": "불편함",
+        "dialect": "불편함"
+    },
+    {
+        "standard": "붓다",
+        "dialect": "붓다"
+    },
+    {
+        "standard": "붙었다",
+        "dialect": "붙었다"
+    },
+    {
+        "standard": "비",
+        "dialect": "비"
+    },
+    {
+        "standard": "비는",
+        "dialect": "비는"
+    },
+    {
+        "standard": "비비",
+        "dialect": "비비"
+    },
+    {
+        "standard": "비스무리한",
+        "dialect": "비스무리한"
+    },
+    {
+        "standard": "빕니다",
+        "dialect": "빕니다"
+    },
+    {
+        "standard": "빠지나",
+        "dialect": "빠지나"
+    },
+    {
+        "standard": "빡세게",
+        "dialect": "빡세게"
+    },
+    {
+        "standard": "빡신",
+        "dialect": "빡신"
+    },
+    {
+        "standard": "빡쳐서",
+        "dialect": "빡쳐서"
+    },
+    {
+        "standard": "빡침",
+        "dialect": "빡침"
+    },
+    {
+        "standard": "빤쥬",
+        "dialect": "빤쥬"
+    },
+    {
+        "standard": "빼껴서",
+        "dialect": "빼껴서"
+    },
+    {
+        "standard": "빼낀",
+        "dialect": "빼낀"
+    },
+    {
+        "standard": "뺏겨",
+        "dialect": "뺏겨"
+    },
+    {
+        "standard": "뺏기고",
+        "dialect": "뺏기고"
+    },
+    {
+        "standard": "뺐다",
+        "dialect": "뺐다"
+    },
+    {
+        "standard": "뻔하다",
+        "dialect": "뻔하다"
+    },
+    {
+        "standard": "뽑는다",
+        "dialect": "뽑는다"
+    },
+    {
+        "standard": "뽑았다",
+        "dialect": "뽑았다"
+    },
+    {
+        "standard": "뽕",
+        "dialect": "뽕"
+    },
+    {
+        "standard": "뿌리가",
+        "dialect": "뿌리가"
+    },
+    {
+        "standard": "뿌린",
+        "dialect": "뿌린"
+    },
+    {
+        "standard": "뿐",
+        "dialect": "뿐"
+    },
+    {
+        "standard": "뿐이다",
+        "dialect": "뿐이다"
+    },
+    {
+        "standard": "삐라",
+        "dialect": "삐라"
+    },
+    {
+        "standard": "사",
+        "dialect": "사"
+    },
+    {
+        "standard": "사겨",
+        "dialect": "사겨"
+    },
+    {
+        "standard": "사겼는데",
+        "dialect": "사겼는데"
+    },
+    {
+        "standard": "사기다",
+        "dialect": "사기다"
+    },
+    {
+        "standard": "사나",
+        "dialect": "사나"
+    },
+    {
+        "standard": "사나?",
+        "dialect": "사나?"
+    },
+    {
+        "standard": "사단이",
+        "dialect": "사단이"
+    },
+    {
+        "standard": "사도",
+        "dialect": "사도"
+    },
+    {
+        "standard": "사라진다",
+        "dialect": "사라진다"
+    },
+    {
+        "standard": "사람들이다",
+        "dialect": "사람들이다"
+    },
+    {
+        "standard": "사람이다",
+        "dialect": "사람이다"
+    },
+    {
+        "standard": "사람이라",
+        "dialect": "사람이라"
+    },
+    {
+        "standard": "사서",
+        "dialect": "사서"
+    },
+    {
+        "standard": "사제",
+        "dialect": "사제"
+    },
+    {
+        "standard": "사진",
+        "dialect": "사진"
+    },
+    {
+        "standard": "산다",
+        "dialect": "산다"
+    },
+    {
+        "standard": "살",
+        "dialect": "살"
+    },
+    {
+        "standard": "살기",
+        "dialect": "살기"
+    },
+    {
+        "standard": "살든지",
+        "dialect": "살든지"
+    },
+    {
+        "standard": "살라고",
+        "dialect": "살라고"
+    },
+    {
+        "standard": "살라는",
+        "dialect": "살라는"
+    },
+    {
+        "standard": "살라믄",
+        "dialect": "살라믄"
+    },
+    {
+        "standard": "살려고",
+        "dialect": "살려고"
+    },
+    {
+        "standard": "살려는",
+        "dialect": "살려는"
+    },
+    {
+        "standard": "살려면",
+        "dialect": "살려면"
+    },
+    {
+        "standard": "살아가",
+        "dialect": "살아가"
+    },
+    {
+        "standard": "살았다",
+        "dialect": "살았다"
+    },
+    {
+        "standard": "살어",
+        "dialect": "살어"
+    },
+    {
+        "standard": "살을",
+        "dialect": "살을"
+    },
+    {
+        "standard": "샀는데",
+        "dialect": "샀는데"
+    },
+    {
+        "standard": "상관없다.",
+        "dialect": "상관없다."
+    },
+    {
+        "standard": "상징이다",
+        "dialect": "상징이다"
+    },
+    {
+        "standard": "새끼",
+        "dialect": "쌔끼"
+    },
+    {
+        "standard": "새끼가",
+        "dialect": "시끼가"
+    },
+    {
+        "standard": "샘",
+        "dialect": "샘"
+    },
+    {
+        "standard": "생각난다",
+        "dialect": "생각난다"
+    },
+    {
+        "standard": "생각하나",
+        "dialect": "생각하나"
+    },
+    {
+        "standard": "생각하나?",
+        "dialect": "생각하나?"
+    },
+    {
+        "standard": "생각한다",
+        "dialect": "생각한다"
+    },
+    {
+        "standard": "생각한다.",
+        "dialect": "생각한다."
+    },
+    {
+        "standard": "생각함.",
+        "dialect": "생각함."
+    },
+    {
+        "standard": "생겼나?",
+        "dialect": "생겼나?"
+    },
+    {
+        "standard": "생겼다",
+        "dialect": "생겼다"
+    },
+    {
+        "standard": "생기겠나?",
+        "dialect": "생기겠나?"
+    },
+    {
+        "standard": "생긴다",
+        "dialect": "생긴다"
+    },
+    {
+        "standard": "생김.",
+        "dialect": "생김."
+    },
+    {
+        "standard": "서",
+        "dialect": "서"
+    },
+    {
+        "standard": "서서",
+        "dialect": "서서"
+    },
+    {
+        "standard": "선다",
+        "dialect": "선다"
+    },
+    {
+        "standard": "선호하나?",
+        "dialect": "선호하나?"
+    },
+    {
+        "standard": "성",
+        "dialect": "성"
+    },
+    {
+        "standard": "성이나",
+        "dialect": "성이나"
+    },
+    {
+        "standard": "세가",
+        "dialect": "세가"
+    },
+    {
+        "standard": "세운다",
+        "dialect": "세운다"
+    },
+    {
+        "standard": "소는",
+        "dialect": "소는"
+    },
+    {
+        "standard": "소리가",
+        "dialect": "소리가"
+    },
+    {
+        "standard": "소리고",
+        "dialect": "소리고"
+    },
+    {
+        "standard": "속",
+        "dialect": "속"
+    },
+    {
+        "standard": "손꾸락이",
+        "dialect": "손꾸락이"
+    },
+    {
+        "standard": "손주가",
+        "dialect": "손주가"
+    },
+    {
+        "standard": "손해다",
+        "dialect": "손해다"
+    },
+    {
+        "standard": "수다",
+        "dialect": "수다"
+    },
+    {
+        "standard": "쉬고",
+        "dialect": "쉬고"
+    },
+    {
+        "standard": "쉽나",
+        "dialect": "쉽나"
+    },
+    {
+        "standard": "쉽다",
+        "dialect": "쉽다"
+    },
+    {
+        "standard": "슨",
+        "dialect": "슨"
+    },
+    {
+        "standard": "슬프다",
+        "dialect": "슬프다"
+    },
+    {
+        "standard": "슬픔.",
+        "dialect": "슬픔."
+    },
+    {
+        "standard": "시간이다",
+        "dialect": "시간이다"
+    },
+    {
+        "standard": "시기",
+        "dialect": "시기"
+    },
+    {
+        "standard": "시기다",
+        "dialect": "시기다"
+    },
+    {
+        "standard": "시원하다",
+        "dialect": "시원하다"
+    },
+    {
+        "standard": "시작한다",
+        "dialect": "시작한다"
+    },
+    {
+        "standard": "시작할라고",
+        "dialect": "시작할라고"
+    },
+    {
+        "standard": "시초다",
+        "dialect": "시초다"
+    },
+    {
+        "standard": "시키",
+        "dialect": "시키"
+    },
+    {
+        "standard": "시키나",
+        "dialect": "시키나"
+    },
+    {
+        "standard": "시킨다",
+        "dialect": "시킨다"
+    },
+    {
+        "standard": "시킬라고",
+        "dialect": "시킬라고"
+    },
+    {
+        "standard": "신기하다",
+        "dialect": "신기하다"
+    },
+    {
+        "standard": "신기하다.",
+        "dialect": "신기하다."
+    },
+    {
+        "standard": "신천지가",
+        "dialect": "신천지가"
+    },
+    {
+        "standard": "실",
+        "dialect": "실"
+    },
+    {
+        "standard": "실고",
+        "dialect": "실고"
+    },
+    {
+        "standard": "실실",
+        "dialect": "실실"
+    },
+    {
+        "standard": "실컨",
+        "dialect": "실컨"
+    },
+    {
+        "standard": "싫다",
+        "dialect": "싫다"
+    },
+    {
+        "standard": "싫대",
+        "dialect": "싫대"
+    },
+    {
+        "standard": "싫어한다",
+        "dialect": "싫어한다"
+    },
+    {
+        "standard": "싫음",
+        "dialect": "싫음"
+    },
+    {
+        "standard": "싫음.",
+        "dialect": "싫음."
+    },
+    {
+        "standard": "심하다",
+        "dialect": "심하다"
+    },
+    {
+        "standard": "심했다",
+        "dialect": "심했다"
+    },
+    {
+        "standard": "싶나",
+        "dialect": "싶나"
+    },
+    {
+        "standard": "싶다",
+        "dialect": "싶다"
+    },
+    {
+        "standard": "싶다.",
+        "dialect": "싶다."
+    },
+    {
+        "standard": "싶음",
+        "dialect": "싶음"
+    },
+    {
+        "standard": "싶음.",
+        "dialect": "싶음."
+    },
+    {
+        "standard": "싸",
+        "dialect": "싸"
+    },
+    {
+        "standard": "싸가지",
+        "dialect": "싸가지"
+    },
+    {
+        "standard": "싸가지가",
+        "dialect": "싸가지가"
+    },
+    {
+        "standard": "싸그리",
+        "dialect": "싸그리"
+    },
+    {
+        "standard": "싸다",
+        "dialect": "싸다"
+    },
+    {
+        "standard": "싸다구",
+        "dialect": "싸다구"
+    },
+    {
+        "standard": "싸대기를",
+        "dialect": "싸대기를"
+    },
+    {
+        "standard": "싸도",
+        "dialect": "싸도"
+    },
+    {
+        "standard": "싸면",
+        "dialect": "싸면"
+    },
+    {
+        "standard": "싸웠다",
+        "dialect": "싸웠다"
+    },
+    {
+        "standard": "싸이즈",
+        "dialect": "싸이즈"
+    },
+    {
+        "standard": "싼",
+        "dialect": "싼"
+    },
+    {
+        "standard": "쌀이",
+        "dialect": "쌀이"
+    },
+    {
+        "standard": "쌔가",
+        "dialect": "쌔가"
+    },
+    {
+        "standard": "쌤",
+        "dialect": "쌤"
+    },
+    {
+        "standard": "쌤이",
+        "dialect": "쌤이"
+    },
+    {
+        "standard": "쌩",
+        "dialect": "쌩"
+    },
+    {
+        "standard": "쌩판",
+        "dialect": "쌩판"
+    },
+    {
+        "standard": "써라",
+        "dialect": "써라"
+    },
+    {
+        "standard": "써제끼고",
+        "dialect": "써제끼고"
+    },
+    {
+        "standard": "썩어",
+        "dialect": "썩어"
+    },
+    {
+        "standard": "썬",
+        "dialect": "썬"
+    },
+    {
+        "standard": "썼나?",
+        "dialect": "썼나?"
+    },
+    {
+        "standard": "썼다",
+        "dialect": "썼다"
+    },
+    {
+        "standard": "쎄",
+        "dialect": "쎄"
+    },
+    {
+        "standard": "쎄게",
+        "dialect": "쎄게"
+    },
+    {
+        "standard": "쎄고",
+        "dialect": "쎄고"
+    },
+    {
+        "standard": "쎄다고",
+        "dialect": "쎄다고"
+    },
+    {
+        "standard": "쎄다면",
+        "dialect": "쎄다면"
+    },
+    {
+        "standard": "쎄서",
+        "dialect": "쎄서"
+    },
+    {
+        "standard": "쎈",
+        "dialect": "쎈"
+    },
+    {
+        "standard": "쎈데",
+        "dialect": "쎈데"
+    },
+    {
+        "standard": "쏙",
+        "dialect": "쏙"
+    },
+    {
+        "standard": "쏴",
+        "dialect": "쏴"
+    },
+    {
+        "standard": "쓰나",
+        "dialect": "쓰나"
+    },
+    {
+        "standard": "쓰라",
+        "dialect": "쓰라"
+    },
+    {
+        "standard": "쓰레기다",
+        "dialect": "쓰레기다"
+    },
+    {
+        "standard": "쓰려",
+        "dialect": "쓰려"
+    },
+    {
+        "standard": "쓰잘데기",
+        "dialect": "쓰잘데기"
+    },
+    {
+        "standard": "쓰잘데기없는",
+        "dialect": "쓰잘데기없는"
+    },
+    {
+        "standard": "쓰잘데없는",
+        "dialect": "쓰잘데없는"
+    },
+    {
+        "standard": "쓸려고",
+        "dialect": "쓸려고"
+    },
+    {
+        "standard": "쓸려면",
+        "dialect": "쓸려면"
+    },
+    {
+        "standard": "씨잘데기없는",
+        "dialect": "씨잘데기없는"
+    },
+    {
+        "standard": "씻는다",
+        "dialect": "씻는다"
+    },
+    {
+        "standard": "아",
+        "dialect": "아"
+    },
+    {
+        "standard": "아가",
+        "dialect": "아가"
+    },
+    {
+        "standard": "아깝다",
+        "dialect": "아깝다"
+    },
+    {
+        "standard": "아나",
+        "dialect": "아나"
+    },
+    {
+        "standard": "아나.",
+        "dialect": "아나."
+    },
+    {
+        "standard": "아나?",
+        "dialect": "아나?"
+    },
+    {
+        "standard": "아냐",
+        "dialect": "아냐"
+    },
+    {
+        "standard": "아냐?",
+        "dialect": "아냐?"
+    },
+    {
+        "standard": "아녀",
+        "dialect": "아녀"
+    },
+    {
+        "standard": "아녀?",
+        "dialect": "아녀?"
+    },
+    {
+        "standard": "아는",
+        "dialect": "아는"
+    },
+    {
+        "standard": "아는가",
+        "dialect": "아는가"
+    },
+    {
+        "standard": "아니",
+        "dialect": "아니"
+    },
+    {
+        "standard": "아니?",
+        "dialect": "아니?"
+    },
+    {
+        "standard": "아니가",
+        "dialect": "아니가"
+    },
+    {
+        "standard": "아니가.",
+        "dialect": "아니가."
+    },
+    {
+        "standard": "아니가?",
+        "dialect": "아니가?"
+    },
+    {
+        "standard": "아니나?",
+        "dialect": "아니나?"
+    },
+    {
+        "standard": "아니냐",
+        "dialect": "아니냐"
+    },
+    {
+        "standard": "아니다",
+        "dialect": "아니다"
+    },
+    {
+        "standard": "아니다.",
+        "dialect": "아니다."
+    },
+    {
+        "standard": "아니라",
+        "dialect": "아니라"
+    },
+    {
+        "standard": "아니라.",
+        "dialect": "아니라."
+    },
+    {
+        "standard": "아니믄",
+        "dialect": "아니믄"
+    },
+    {
+        "standard": "아니야",
+        "dialect": "아니야"
+    },
+    {
+        "standard": "아니야?",
+        "dialect": "아니야?"
+    },
+    {
+        "standard": "아니었나",
+        "dialect": "아니었나"
+    },
+    {
+        "standard": "아니었나?",
+        "dialect": "아니었나?"
+    },
+    {
+        "standard": "아니었는데",
+        "dialect": "아니었는데"
+    },
+    {
+        "standard": "아니었다",
+        "dialect": "아니었다"
+    },
+    {
+        "standard": "아니었음",
+        "dialect": "아니었음"
+    },
+    {
+        "standard": "아니여",
+        "dialect": "아니여"
+    },
+    {
+        "standard": "아니제?",
+        "dialect": "아니제?"
+    },
+    {
+        "standard": "아닌거다",
+        "dialect": "아닌거다"
+    },
+    {
+        "standard": "아님",
+        "dialect": "아님"
+    },
+    {
+        "standard": "아님.",
+        "dialect": "아님."
+    },
+    {
+        "standard": "아님?",
+        "dialect": "아님?"
+    },
+    {
+        "standard": "아닙니까",
+        "dialect": "아닙니까"
+    },
+    {
+        "standard": "아들",
+        "dialect": "아들"
+    },
+    {
+        "standard": "아들끼리",
+        "dialect": "아들끼리"
+    },
+    {
+        "standard": "아들도",
+        "dialect": "아들도"
+    },
+    {
+        "standard": "아들로",
+        "dialect": "아들로"
+    },
+    {
+        "standard": "아들만",
+        "dialect": "아들만"
+    },
+    {
+        "standard": "아들은",
+        "dialect": "아들은"
+    },
+    {
+        "standard": "아들을",
+        "dialect": "아들을"
+    },
+    {
+        "standard": "아들이",
+        "dialect": "아들이"
+    },
+    {
+        "standard": "아들이라",
+        "dialect": "아들이라"
+    },
+    {
+        "standard": "아들한테",
+        "dialect": "아들한테"
+    },
+    {
+        "standard": "아따",
+        "dialect": "아따"
+    },
+    {
+        "standard": "아래",
+        "dialect": "아래"
+    },
+    {
+        "standard": "아부지",
+        "dialect": "아부지"
+    },
+    {
+        "standard": "아부지가",
+        "dialect": "아부지가"
+    },
+    {
+        "standard": "아부지는",
+        "dialect": "아부지는"
+    },
+    {
+        "standard": "아부지랑",
+        "dialect": "아부지랑"
+    },
+    {
+        "standard": "아쉽다",
+        "dialect": "아쉽다"
+    },
+    {
+        "standard": "아아",
+        "dialect": "아아"
+    },
+    {
+        "standard": "아에",
+        "dialect": "아에"
+    },
+    {
+        "standard": "아이",
+        "dialect": "아이"
+    },
+    {
+        "standard": "아이가",
+        "dialect": "아이가"
+    },
+    {
+        "standard": "아이가.",
+        "dialect": "아이가."
+    },
+    {
+        "standard": "아이가?",
+        "dialect": "아이가?"
+    },
+    {
+        "standard": "아이고",
+        "dialect": "아이고"
+    },
+    {
+        "standard": "아이고.",
+        "dialect": "아이고."
+    },
+    {
+        "standard": "아이다",
+        "dialect": "아이다"
+    },
+    {
+        "standard": "아이디",
+        "dialect": "아이디"
+    },
+    {
+        "standard": "아이라면",
+        "dialect": "아이라면"
+    },
+    {
+        "standard": "아인데",
+        "dialect": "아인데"
+    },
+    {
+        "standard": "아작",
+        "dialect": "아작"
+    },
+    {
+        "standard": "아재",
+        "dialect": "아재"
+    },
+    {
+        "standard": "아줌씨들",
+        "dialect": "아줌씨들"
+    },
+    {
+        "standard": "아지매",
+        "dialect": "아지매"
+    },
+    {
+        "standard": "아프다",
+        "dialect": "아프다"
+    },
+    {
+        "standard": "안",
+        "dialect": "안"
+    },
+    {
+        "standard": "안가노",
+        "dialect": "안가노"
+    },
+    {
+        "standard": "안간다",
+        "dialect": "안간다"
+    },
+    {
+        "standard": "안그런다",
+        "dialect": "안그런다"
+    },
+    {
+        "standard": "안끼고",
+        "dialect": "안끼고"
+    },
+    {
+        "standard": "안나나",
+        "dialect": "안나나"
+    },
+    {
+        "standard": "안다",
+        "dialect": "안다"
+    },
+    {
+        "standard": "안됐나?",
+        "dialect": "안됐나?"
+    },
+    {
+        "standard": "안됐다",
+        "dialect": "안됐다"
+    },
+    {
+        "standard": "안되나",
+        "dialect": "안되나"
+    },
+    {
+        "standard": "안되나?",
+        "dialect": "안되나?"
+    },
+    {
+        "standard": "안된다",
+        "dialect": "안된다"
+    },
+    {
+        "standard": "안됨",
+        "dialect": "안됨"
+    },
+    {
+        "standard": "안좋다",
+        "dialect": "안좋다"
+    },
+    {
+        "standard": "안주",
+        "dialect": "안주"
+    },
+    {
+        "standard": "안주나",
+        "dialect": "안주나"
+    },
+    {
+        "standard": "안하고",
+        "dialect": "안하고"
+    },
+    {
+        "standard": "안하나",
+        "dialect": "안하나"
+    },
+    {
+        "standard": "안하나?",
+        "dialect": "안하나?"
+    },
+    {
+        "standard": "안한다",
+        "dialect": "안한다"
+    },
+    {
+        "standard": "안했다",
+        "dialect": "안했다"
+    },
+    {
+        "standard": "앉아",
+        "dialect": "앉아"
+    },
+    {
+        "standard": "앉았다",
+        "dialect": "앉았다"
+    },
+    {
+        "standard": "않나",
+        "dialect": "않나"
+    },
+    {
+        "standard": "않나.",
+        "dialect": "않나."
+    },
+    {
+        "standard": "않나?",
+        "dialect": "않나?"
+    },
+    {
+        "standard": "않냐",
+        "dialect": "않냐"
+    },
+    {
+        "standard": "않냐?",
+        "dialect": "않냐?"
+    },
+    {
+        "standard": "않는",
+        "dialect": "않는"
+    },
+    {
+        "standard": "않는가?",
+        "dialect": "않는가?"
+    },
+    {
+        "standard": "않는다",
+        "dialect": "않는다"
+    },
+    {
+        "standard": "않니?",
+        "dialect": "않니?"
+    },
+    {
+        "standard": "않다",
+        "dialect": "않다"
+    },
+    {
+        "standard": "않다.",
+        "dialect": "않다."
+    },
+    {
+        "standard": "않았나",
+        "dialect": "않았나"
+    },
+    {
+        "standard": "않았나?",
+        "dialect": "않았나?"
+    },
+    {
+        "standard": "않았다",
+        "dialect": "않았다"
+    },
+    {
+        "standard": "않았음",
+        "dialect": "않았음"
+    },
+    {
+        "standard": "않어",
+        "dialect": "않어"
+    },
+    {
+        "standard": "않음",
+        "dialect": "않음"
+    },
+    {
+        "standard": "않음.",
+        "dialect": "않음."
+    },
+    {
+        "standard": "않음?",
+        "dialect": "않음?"
+    },
+    {
+        "standard": "알겠나",
+        "dialect": "알겠나"
+    },
+    {
+        "standard": "알겠나.",
+        "dialect": "알겠나."
+    },
+    {
+        "standard": "알겠다.",
+        "dialect": "알겠다."
+    },
+    {
+        "standard": "알라",
+        "dialect": "알라"
+    },
+    {
+        "standard": "알랑가",
+        "dialect": "알랑가"
+    },
+    {
+        "standard": "알려",
+        "dialect": "알려"
+    },
+    {
+        "standard": "알려준다",
+        "dialect": "알려준다"
+    },
+    {
+        "standard": "알았나",
+        "dialect": "알았나"
+    },
+    {
+        "standard": "알았나?",
+        "dialect": "알았나?"
+    },
+    {
+        "standard": "알았다",
+        "dialect": "알았다"
+    },
+    {
+        "standard": "알았다.",
+        "dialect": "알았다."
+    },
+    {
+        "standard": "알어?",
+        "dialect": "알어?"
+    },
+    {
+        "standard": "알재",
+        "dialect": "알재"
+    },
+    {
+        "standard": "알제",
+        "dialect": "알제"
+    },
+    {
+        "standard": "알지",
+        "dialect": "알지"
+    },
+    {
+        "standard": "앎?",
+        "dialect": "앎?"
+    },
+    {
+        "standard": "암",
+        "dialect": "암"
+    },
+    {
+        "standard": "암것도",
+        "dialect": "암것도"
+    },
+    {
+        "standard": "암말",
+        "dialect": "암말"
+    },
+    {
+        "standard": "암튼",
+        "dialect": "암튼"
+    },
+    {
+        "standard": "앞전",
+        "dialect": "앞전"
+    },
+    {
+        "standard": "앞전에",
+        "dialect": "앞전에"
+    },
+    {
+        "standard": "애가",
+        "dialect": "애가"
+    },
+    {
+        "standard": "애기",
+        "dialect": "애기"
+    },
+    {
+        "standard": "애기가",
+        "dialect": "애기가"
+    },
+    {
+        "standard": "애기들은",
+        "dialect": "애기들은"
+    },
+    {
+        "standard": "애기를",
+        "dialect": "애기를"
+    },
+    {
+        "standard": "애도",
+        "dialect": "애도"
+    },
+    {
+        "standard": "애들",
+        "dialect": "애들"
+    },
+    {
+        "standard": "애들이",
+        "dialect": "애들이"
+    },
+    {
+        "standard": "애자",
+        "dialect": "애자"
+    },
+    {
+        "standard": "앤지",
+        "dialect": "앤지"
+    },
+    {
+        "standard": "야",
+        "dialect": "야"
+    },
+    {
+        "standard": "야가",
+        "dialect": "야가"
+    },
+    {
+        "standard": "야기",
+        "dialect": "야기"
+    },
+    {
+        "standard": "야는",
+        "dialect": "야는"
+    },
+    {
+        "standard": "야도",
+        "dialect": "야도"
+    },
+    {
+        "standard": "야들이",
+        "dialect": "야들이"
+    },
+    {
+        "standard": "야만",
+        "dialect": "야만"
+    },
+    {
+        "standard": "야하고",
+        "dialect": "야하고"
+    },
+    {
+        "standard": "양",
+        "dialect": "양"
+    },
+    {
+        "standard": "얘기가",
+        "dialect": "얘기가"
+    },
+    {
+        "standard": "얘기다",
+        "dialect": "얘기다"
+    },
+    {
+        "standard": "얘기도",
+        "dialect": "얘기도"
+    },
+    {
+        "standard": "얘기라",
+        "dialect": "얘기라"
+    },
+    {
+        "standard": "얘기하니까",
+        "dialect": "얘기하니까"
+    },
+    {
+        "standard": "얘기했는데",
+        "dialect": "얘기했는데"
+    },
+    {
+        "standard": "얘긴",
+        "dialect": "얘긴"
+    },
+    {
+        "standard": "얘길",
+        "dialect": "얘길"
+    },
+    {
+        "standard": "얘네",
+        "dialect": "얘네"
+    },
+    {
+        "standard": "얘네들은",
+        "dialect": "얘네들은"
+    },
+    {
+        "standard": "어거지로",
+        "dialect": "어거지로"
+    },
+    {
+        "standard": "어거지를",
+        "dialect": "어거지를"
+    },
+    {
+        "standard": "어니",
+        "dialect": "어니"
+    },
+    {
+        "standard": "어데",
+        "dialect": "어데"
+    },
+    {
+        "standard": "어디",
+        "dialect": "어디"
+    },
+    {
+        "standard": "어디고",
+        "dialect": "어디고"
+    },
+    {
+        "standard": "어디있노",
+        "dialect": "어디있노"
+    },
+    {
+        "standard": "어딜",
+        "dialect": "어딜"
+    },
+    {
+        "standard": "어따",
+        "dialect": "어따"
+    },
+    {
+        "standard": "어뜨카지",
+        "dialect": "어뜨카지"
+    },
+    {
+        "standard": "어뜩하냐?",
+        "dialect": "어뜩하냐?"
+    },
+    {
+        "standard": "어렵다",
+        "dialect": "어렵다"
+    },
+    {
+        "standard": "어마무시한",
+        "dialect": "어마무시한"
+    },
+    {
+        "standard": "어서",
+        "dialect": "어서"
+    },
+    {
+        "standard": "어여",
+        "dialect": "어여"
+    },
+    {
+        "standard": "어울린다",
+        "dialect": "어울린다"
+    },
+    {
+        "standard": "어이",
+        "dialect": "어이"
+    },
+    {
+        "standard": "어제",
+        "dialect": "어제"
+    },
+    {
+        "standard": "어지",
+        "dialect": "어지"
+    },
+    {
+        "standard": "어짜피",
+        "dialect": "어짜피"
+    },
+    {
+        "standard": "어째",
+        "dialect": "어째"
+    },
+    {
+        "standard": "어쨌든",
+        "dialect": "어쨌든"
+    },
+    {
+        "standard": "어쩌고",
+        "dialect": "어쩌고"
+    },
+    {
+        "standard": "어쩌구",
+        "dialect": "어쩌구"
+    },
+    {
+        "standard": "어찌",
+        "dialect": "어찌"
+    },
+    {
+        "standard": "어케",
+        "dialect": "어케"
+    },
+    {
+        "standard": "억수로",
+        "dialect": "억수로"
+    },
+    {
+        "standard": "언냐는",
+        "dialect": "언냐는"
+    },
+    {
+        "standard": "언제",
+        "dialect": "언제"
+    },
+    {
+        "standard": "언제고",
+        "dialect": "언제고"
+    },
+    {
+        "standard": "얻었다",
+        "dialect": "얻었다"
+    },
+    {
+        "standard": "얼라들",
+        "dialect": "얼라들"
+    },
+    {
+        "standard": "얼렁",
+        "dialect": "얼렁"
+    },
+    {
+        "standard": "얼마고",
+        "dialect": "얼마고"
+    },
+    {
+        "standard": "얼만데",
+        "dialect": "얼만데"
+    },
+    {
+        "standard": "얼만큼",
+        "dialect": "얼만큼"
+    },
+    {
+        "standard": "얼매나",
+        "dialect": "얼매나"
+    },
+    {
+        "standard": "얼척이",
+        "dialect": "얼척이"
+    },
+    {
+        "standard": "얼탱이가",
+        "dialect": "얼탱이가"
+    },
+    {
+        "standard": "엄따",
+        "dialect": "엄따"
+    },
+    {
+        "standard": "엄한",
+        "dialect": "엄한"
+    },
+    {
+        "standard": "없구요",
+        "dialect": "없구요"
+    },
+    {
+        "standard": "없나",
+        "dialect": "없나"
+    },
+    {
+        "standard": "없나?",
+        "dialect": "없나?"
+    },
+    {
+        "standard": "없는가",
+        "dialect": "없는가"
+    },
+    {
+        "standard": "없는가?",
+        "dialect": "없는가?"
+    },
+    {
+        "standard": "없는거라",
+        "dialect": "없는거라"
+    },
+    {
+        "standard": "없는디",
+        "dialect": "없는디"
+    },
+    {
+        "standard": "없니?",
+        "dialect": "없니?"
+    },
+    {
+        "standard": "없다",
+        "dialect": "없다"
+    },
+    {
+        "standard": "없다.",
+        "dialect": "없다."
+    },
+    {
+        "standard": "없대",
+        "dialect": "없대"
+    },
+    {
+        "standard": "없더라",
+        "dialect": "없더라"
+    },
+    {
+        "standard": "없데",
+        "dialect": "없데"
+    },
+    {
+        "standard": "없앨려고",
+        "dialect": "없앨려고"
+    },
+    {
+        "standard": "없어진다",
+        "dialect": "없어진다"
+    },
+    {
+        "standard": "없었다",
+        "dialect": "없었다"
+    },
+    {
+        "standard": "없었다.",
+        "dialect": "없었다."
+    },
+    {
+        "standard": "없었음.",
+        "dialect": "없었음."
+    },
+    {
+        "standard": "없으이",
+        "dialect": "없으이"
+    },
+    {
+        "standard": "없은",
+        "dialect": "없은"
+    },
+    {
+        "standard": "없음",
+        "dialect": "없음"
+    },
+    {
+        "standard": "없음.",
+        "dialect": "없음."
+    },
+    {
+        "standard": "없제.",
+        "dialect": "없제."
+    },
+    {
+        "standard": "없제?",
+        "dialect": "없제?"
+    },
+    {
+        "standard": "에",
+        "dialect": "에"
+    },
+    {
+        "standard": "여",
+        "dialect": "여"
+    },
+    {
+        "standard": "여가",
+        "dialect": "여가"
+    },
+    {
+        "standard": "여그",
+        "dialect": "여그"
+    },
+    {
+        "standard": "여기서",
+        "dialect": "여기서"
+    },
+    {
+        "standard": "여까지",
+        "dialect": "여까지"
+    },
+    {
+        "standard": "여는",
+        "dialect": "여는"
+    },
+    {
+        "standard": "여도",
+        "dialect": "여도"
+    },
+    {
+        "standard": "여서",
+        "dialect": "여서"
+    },
+    {
+        "standard": "여시",
+        "dialect": "여시"
+    },
+    {
+        "standard": "여야",
+        "dialect": "여야"
+    },
+    {
+        "standard": "여쭤보고",
+        "dialect": "여쭤보고"
+    },
+    {
+        "standard": "여쭤볼게요.",
+        "dialect": "여쭤볼게요."
+    },
+    {
+        "standard": "여쭤봐도",
+        "dialect": "여쭤봐도"
+    },
+    {
+        "standard": "여친",
+        "dialect": "여친"
+    },
+    {
+        "standard": "여튼",
+        "dialect": "여튼"
+    },
+    {
+        "standard": "역하다",
+        "dialect": "역하다"
+    },
+    {
+        "standard": "열",
+        "dialect": "열"
+    },
+    {
+        "standard": "였나",
+        "dialect": "였나"
+    },
+    {
+        "standard": "였는데",
+        "dialect": "였는데"
+    },
+    {
+        "standard": "였다",
+        "dialect": "였다"
+    },
+    {
+        "standard": "였음",
+        "dialect": "였음"
+    },
+    {
+        "standard": "영",
+        "dialect": "영"
+    },
+    {
+        "standard": "영화",
+        "dialect": "영화"
+    },
+    {
+        "standard": "영화가",
+        "dialect": "영화가"
+    },
+    {
+        "standard": "영환데",
+        "dialect": "영환데"
+    },
+    {
+        "standard": "예쁘다",
+        "dialect": "예쁘다"
+    },
+    {
+        "standard": "오나?",
+        "dialect": "오나?"
+    },
+    {
+        "standard": "오더라",
+        "dialect": "오더라"
+    },
+    {
+        "standard": "오만",
+        "dialect": "오만"
+    },
+    {
+        "standard": "오지게",
+        "dialect": "오지게"
+    },
+    {
+        "standard": "오지고",
+        "dialect": "오지고"
+    },
+    {
+        "standard": "오질라게",
+        "dialect": "오질라게"
+    },
+    {
+        "standard": "온나",
+        "dialect": "온나"
+    },
+    {
+        "standard": "온다",
+        "dialect": "온다"
+    },
+    {
+        "standard": "온데",
+        "dialect": "온데"
+    },
+    {
+        "standard": "올",
+        "dialect": "올"
+    },
+    {
+        "standard": "올라",
+        "dialect": "올라"
+    },
+    {
+        "standard": "올라가",
+        "dialect": "올라가"
+    },
+    {
+        "standard": "올라온다",
+        "dialect": "올라온다"
+    },
+    {
+        "standard": "올랐나?",
+        "dialect": "올랐나?"
+    },
+    {
+        "standard": "올려고",
+        "dialect": "올려고"
+    },
+    {
+        "standard": "올렸다",
+        "dialect": "올렸다"
+    },
+    {
+        "standard": "올릴라고",
+        "dialect": "올릴라고"
+    },
+    {
+        "standard": "와",
+        "dialect": "와"
+    },
+    {
+        "standard": "와.",
+        "dialect": "와."
+    },
+    {
+        "standard": "와?",
+        "dialect": "와?"
+    },
+    {
+        "standard": "와이리",
+        "dialect": "와이리"
+    },
+    {
+        "standard": "왔나",
+        "dialect": "왔나"
+    },
+    {
+        "standard": "왔다",
+        "dialect": "왔다"
+    },
+    {
+        "standard": "왔다.",
+        "dialect": "왔다."
+    },
+    {
+        "standard": "왕창",
+        "dialect": "왕창"
+    },
+    {
+        "standard": "왜나면",
+        "dialect": "왜나면"
+    },
+    {
+        "standard": "왜냐면",
+        "dialect": "왜냐면"
+    },
+    {
+        "standard": "왜케",
+        "dialect": "왜케"
+    },
+    {
+        "standard": "왠지",
+        "dialect": "왠지"
+    },
+    {
+        "standard": "왤케",
+        "dialect": "왤케"
+    },
+    {
+        "standard": "요",
+        "dialect": "요"
+    },
+    {
+        "standard": "요거",
+        "dialect": "요거"
+    },
+    {
+        "standard": "요고",
+        "dialect": "요고"
+    },
+    {
+        "standard": "요기서",
+        "dialect": "요기서"
+    },
+    {
+        "standard": "요런",
+        "dialect": "요런"
+    },
+    {
+        "standard": "요렇게",
+        "dialect": "요렇게"
+    },
+    {
+        "standard": "요새",
+        "dialect": "요새"
+    },
+    {
+        "standard": "요샌",
+        "dialect": "요샌"
+    },
+    {
+        "standard": "요즘",
+        "dialect": "요즘"
+    },
+    {
+        "standard": "용서한다",
+        "dialect": "용서한다"
+    },
+    {
+        "standard": "우리다",
+        "dialect": "우리다"
+    },
+    {
+        "standard": "우짜다가",
+        "dialect": "우짜다가"
+    },
+    {
+        "standard": "우짤라고",
+        "dialect": "우짤라고"
+    },
+    {
+        "standard": "우째",
+        "dialect": "우째"
+    },
+    {
+        "standard": "우찌",
+        "dialect": "우찌"
+    },
+    {
+        "standard": "운동한다",
+        "dialect": "운동한다"
+    },
+    {
+        "standard": "울",
+        "dialect": "울"
+    },
+    {
+        "standard": "움직인다",
+        "dialect": "움직인다"
+    },
+    {
+        "standard": "웃겼다",
+        "dialect": "웃겼다"
+    },
+    {
+        "standard": "웃기노",
+        "dialect": "웃기노"
+    },
+    {
+        "standard": "웃기다",
+        "dialect": "웃기다"
+    },
+    {
+        "standard": "웃기다.",
+        "dialect": "웃기다."
+    },
+    {
+        "standard": "웃긴다",
+        "dialect": "웃긴다"
+    },
+    {
+        "standard": "웃는다",
+        "dialect": "웃는다"
+    },
+    {
+        "standard": "웃었다",
+        "dialect": "웃었다"
+    },
+    {
+        "standard": "원한다",
+        "dialect": "원한다"
+    },
+    {
+        "standard": "웰케",
+        "dialect": "웰케"
+    },
+    {
+        "standard": "웹툰",
+        "dialect": "웹툰"
+    },
+    {
+        "standard": "위가",
+        "dialect": "위가"
+    },
+    {
+        "standard": "위다",
+        "dialect": "위다"
+    },
+    {
+        "standard": "위험하다",
+        "dialect": "위험하다"
+    },
+    {
+        "standard": "은제",
+        "dialect": "은제"
+    },
+    {
+        "standard": "을매나",
+        "dialect": "을매나"
+    },
+    {
+        "standard": "의미가",
+        "dialect": "의미가"
+    },
+    {
+        "standard": "의심된다",
+        "dialect": "의심된다"
+    },
+    {
+        "standard": "이",
+        "dialect": "이"
+    },
+    {
+        "standard": "이가",
+        "dialect": "이가"
+    },
+    {
+        "standard": "이거",
+        "dialect": "이거"
+    },
+    {
+        "standard": "이거네",
+        "dialect": "이거네"
+    },
+    {
+        "standard": "이거다",
+        "dialect": "이거다"
+    },
+    {
+        "standard": "이거이",
+        "dialect": "이거이"
+    },
+    {
+        "standard": "이걸로",
+        "dialect": "이걸로"
+    },
+    {
+        "standard": "이게",
+        "dialect": "이게"
+    },
+    {
+        "standard": "이고",
+        "dialect": "이고"
+    },
+    {
+        "standard": "이기",
+        "dialect": "이기"
+    },
+    {
+        "standard": "이놈",
+        "dialect": "인마"
+    },
+    {
+        "standard": "이놈은",
+        "dialect": "인마는"
+    },
+    {
+        "standard": "이놈이",
+        "dialect": "임마가"
+    },
+    {
+        "standard": "이다",
+        "dialect": "이다"
+    },
+    {
+        "standard": "이대",
+        "dialect": "이대"
+    },
+    {
+        "standard": "이따",
+        "dialect": "이따"
+    },
+    {
+        "standard": "이따구",
+        "dialect": "이따구"
+    },
+    {
+        "standard": "이따구로",
+        "dialect": "이따구로"
+    },
+    {
+        "standard": "이딴",
+        "dialect": "이딴"
+    },
+    {
+        "standard": "이라",
+        "dialect": "이라"
+    },
+    {
+        "standard": "이라고",
+        "dialect": "이라고"
+    },
+    {
+        "standard": "이라기",
+        "dialect": "이라기"
+    },
+    {
+        "standard": "이라노",
+        "dialect": "이라노"
+    },
+    {
+        "standard": "이라는",
+        "dialect": "이라는"
+    },
+    {
+        "standard": "이라는데",
+        "dialect": "이라는데"
+    },
+    {
+        "standard": "이라니깐",
+        "dialect": "이라니깐"
+    },
+    {
+        "standard": "이라면",
+        "dialect": "이라면"
+    },
+    {
+        "standard": "이라지만",
+        "dialect": "이라지만"
+    },
+    {
+        "standard": "이란",
+        "dialect": "이란"
+    },
+    {
+        "standard": "이란다",
+        "dialect": "이란다"
+    },
+    {
+        "standard": "이랄까",
+        "dialect": "이랄까"
+    },
+    {
+        "standard": "이랍니다.",
+        "dialect": "이랍니다."
+    },
+    {
+        "standard": "이래",
+        "dialect": "이래"
+    },
+    {
+        "standard": "이래서",
+        "dialect": "이래서"
+    },
+    {
+        "standard": "이랬다",
+        "dialect": "이랬다"
+    },
+    {
+        "standard": "이러게",
+        "dialect": "이러게"
+    },
+    {
+        "standard": "이러나?",
+        "dialect": "이러나?"
+    },
+    {
+        "standard": "이러니까",
+        "dialect": "이러니까"
+    },
+    {
+        "standard": "이런다",
+        "dialect": "이런다"
+    },
+    {
+        "standard": "이럴려고",
+        "dialect": "이럴려고"
+    },
+    {
+        "standard": "이럼",
+        "dialect": "이럼"
+    },
+    {
+        "standard": "이렇다",
+        "dialect": "이렇다"
+    },
+    {
+        "standard": "이로",
+        "dialect": "이로"
+    },
+    {
+        "standard": "이뤄",
+        "dialect": "이뤄"
+    },
+    {
+        "standard": "이르게",
+        "dialect": "이르게"
+    },
+    {
+        "standard": "이른",
+        "dialect": "이른"
+    },
+    {
+        "standard": "이름이다.",
+        "dialect": "이름이다."
+    },
+    {
+        "standard": "이리",
+        "dialect": "이리"
+    },
+    {
+        "standard": "이뻐",
+        "dialect": "이뻐"
+    },
+    {
+        "standard": "이쁘게",
+        "dialect": "이쁘게"
+    },
+    {
+        "standard": "이쁘고",
+        "dialect": "이쁘고"
+    },
+    {
+        "standard": "이쁘다",
+        "dialect": "이쁘다"
+    },
+    {
+        "standard": "이쁘면",
+        "dialect": "이쁘면"
+    },
+    {
+        "standard": "이쁜",
+        "dialect": "이쁜"
+    },
+    {
+        "standard": "이상하다",
+        "dialect": "이상하다"
+    },
+    {
+        "standard": "이상하다.",
+        "dialect": "이상하다."
+    },
+    {
+        "standard": "이상해진다",
+        "dialect": "이상해진다"
+    },
+    {
+        "standard": "이었노?",
+        "dialect": "이었노?"
+    },
+    {
+        "standard": "이용한다",
+        "dialect": "이용한다"
+    },
+    {
+        "standard": "이용한다.",
+        "dialect": "이용한다."
+    },
+    {
+        "standard": "이자",
+        "dialect": "이자"
+    },
+    {
+        "standard": "이자는",
+        "dialect": "이자는"
+    },
+    {
+        "standard": "이저",
+        "dialect": "이저"
+    },
+    {
+        "standard": "이제",
+        "dialect": "이제"
+    },
+    {
+        "standard": "이제사",
+        "dialect": "이제사"
+    },
+    {
+        "standard": "이젠",
+        "dialect": "이젠"
+    },
+    {
+        "standard": "이지",
+        "dialect": "이지"
+    },
+    {
+        "standard": "이후가",
+        "dialect": "이후가"
+    },
+    {
+        "standard": "인가",
+        "dialect": "인가"
+    },
+    {
+        "standard": "인나",
+        "dialect": "인나"
+    },
+    {
+        "standard": "인자",
+        "dialect": "인자"
+    },
+    {
+        "standard": "인제",
+        "dialect": "인제"
+    },
+    {
+        "standard": "인지",
+        "dialect": "인지"
+    },
+    {
+        "standard": "일거",
+        "dialect": "일거"
+    },
+    {
+        "standard": "일고",
+        "dialect": "일고"
+    },
+    {
+        "standard": "일딴",
+        "dialect": "일딴"
+    },
+    {
+        "standard": "일로",
+        "dialect": "일로"
+    },
+    {
+        "standard": "일루",
+        "dialect": "일루"
+    },
+    {
+        "standard": "일부러",
+        "dialect": "일부러"
+    },
+    {
+        "standard": "일부로",
+        "dialect": "일부로"
+    },
+    {
+        "standard": "일어난다",
+        "dialect": "일어난다"
+    },
+    {
+        "standard": "일이고",
+        "dialect": "일이고"
+    },
+    {
+        "standard": "일이고.",
+        "dialect": "일이고."
+    },
+    {
+        "standard": "일이고?",
+        "dialect": "일이고?"
+    },
+    {
+        "standard": "일이다",
+        "dialect": "일이다"
+    },
+    {
+        "standard": "일케",
+        "dialect": "일케"
+    },
+    {
+        "standard": "일한다",
+        "dialect": "일한다"
+    },
+    {
+        "standard": "잃는다",
+        "dialect": "잃는다"
+    },
+    {
+        "standard": "임마",
+        "dialect": "임마"
+    },
+    {
+        "standard": "입는다",
+        "dialect": "입는다"
+    },
+    {
+        "standard": "있겠나",
+        "dialect": "있겠나"
+    },
+    {
+        "standard": "있겠나.",
+        "dialect": "있겠나."
+    },
+    {
+        "standard": "있겠나?",
+        "dialect": "있겠나?"
+    },
+    {
+        "standard": "있겠다",
+        "dialect": "있겠다"
+    },
+    {
+        "standard": "있겠다.",
+        "dialect": "있겠다."
+    },
+    {
+        "standard": "있나",
+        "dialect": "있나"
+    },
+    {
+        "standard": "있나.",
+        "dialect": "있나."
+    },
+    {
+        "standard": "있나?",
+        "dialect": "있나?"
+    },
+    {
+        "standard": "있네",
+        "dialect": "있네"
+    },
+    {
+        "standard": "있노",
+        "dialect": "있노"
+    },
+    {
+        "standard": "있노?",
+        "dialect": "있노?"
+    },
+    {
+        "standard": "있는가",
+        "dialect": "있는가"
+    },
+    {
+        "standard": "있는거다",
+        "dialect": "있는거다"
+    },
+    {
+        "standard": "있는데?",
+        "dialect": "있는데?"
+    },
+    {
+        "standard": "있니?",
+        "dialect": "있니?"
+    },
+    {
+        "standard": "있다",
+        "dialect": "있다"
+    },
+    {
+        "standard": "있다.",
+        "dialect": "있다."
+    },
+    {
+        "standard": "있다가",
+        "dialect": "있다가"
+    },
+    {
+        "standard": "있다는거",
+        "dialect": "있다는거"
+    },
+    {
+        "standard": "있다매",
+        "dialect": "있다매"
+    },
+    {
+        "standard": "있대",
+        "dialect": "있대"
+    },
+    {
+        "standard": "있더라",
+        "dialect": "있더라"
+    },
+    {
+        "standard": "있더만",
+        "dialect": "있더만"
+    },
+    {
+        "standard": "있든",
+        "dialect": "있든"
+    },
+    {
+        "standard": "있디",
+        "dialect": "있디"
+    },
+    {
+        "standard": "있어용",
+        "dialect": "있어용"
+    },
+    {
+        "standard": "있었나",
+        "dialect": "있었나"
+    },
+    {
+        "standard": "있었나?",
+        "dialect": "있었나?"
+    },
+    {
+        "standard": "있었는디",
+        "dialect": "있었는디"
+    },
+    {
+        "standard": "있었다",
+        "dialect": "있었다"
+    },
+    {
+        "standard": "있었다.",
+        "dialect": "있었다."
+    },
+    {
+        "standard": "있었음",
+        "dialect": "있었음"
+    },
+    {
+        "standard": "있었음.",
+        "dialect": "있었음."
+    },
+    {
+        "standard": "있음",
+        "dialect": "있음"
+    },
+    {
+        "standard": "있음.",
+        "dialect": "있음."
+    },
+    {
+        "standard": "있음?",
+        "dialect": "있음?"
+    },
+    {
+        "standard": "있지?",
+        "dialect": "있지?"
+    },
+    {
+        "standard": "잉",
+        "dialect": "잉"
+    },
+    {
+        "standard": "자",
+        "dialect": "자"
+    },
+    {
+        "standard": "자가",
+        "dialect": "자가"
+    },
+    {
+        "standard": "자고",
+        "dialect": "자고"
+    },
+    {
+        "standard": "자기가",
+        "dialect": "자기가"
+    },
+    {
+        "standard": "자기네",
+        "dialect": "자기네"
+    },
+    {
+        "standard": "자나",
+        "dialect": "자나"
+    },
+    {
+        "standard": "자는",
+        "dialect": "자는"
+    },
+    {
+        "standard": "자들",
+        "dialect": "자들"
+    },
+    {
+        "standard": "자들은",
+        "dialect": "자들은"
+    },
+    {
+        "standard": "자들이",
+        "dialect": "자들이"
+    },
+    {
+        "standard": "자를",
+        "dialect": "자를"
+    },
+    {
+        "standard": "자빠졌다",
+        "dialect": "자빠졌다"
+    },
+    {
+        "standard": "자살했다",
+        "dialect": "자살했다"
+    },
+    {
+        "standard": "작다",
+        "dialect": "작다"
+    },
+    {
+        "standard": "잔인하다",
+        "dialect": "잔인하다"
+    },
+    {
+        "standard": "잘못했나?",
+        "dialect": "잘못했나?"
+    },
+    {
+        "standard": "잘생겼다",
+        "dialect": "잘생겼다"
+    },
+    {
+        "standard": "잘하더라",
+        "dialect": "잘하더라"
+    },
+    {
+        "standard": "잘하믄",
+        "dialect": "잘하믄"
+    },
+    {
+        "standard": "잘한다",
+        "dialect": "잘한다"
+    },
+    {
+        "standard": "잘했다",
+        "dialect": "잘했다"
+    },
+    {
+        "standard": "잡는다",
+        "dialect": "잡는다"
+    },
+    {
+        "standard": "잡아다",
+        "dialect": "잡아다"
+    },
+    {
+        "standard": "잡힌다",
+        "dialect": "잡힌다"
+    },
+    {
+        "standard": "장난아니다",
+        "dialect": "장난아니다"
+    },
+    {
+        "standard": "장난치나",
+        "dialect": "장난치나"
+    },
+    {
+        "standard": "장난하나",
+        "dialect": "장난하나"
+    },
+    {
+        "standard": "장난하나?",
+        "dialect": "장난하나?"
+    },
+    {
+        "standard": "재가",
+        "dialect": "재가"
+    },
+    {
+        "standard": "재끼고",
+        "dialect": "재끼고"
+    },
+    {
+        "standard": "재밌다",
+        "dialect": "재밌다"
+    },
+    {
+        "standard": "재밌다.",
+        "dialect": "재밌다."
+    },
+    {
+        "standard": "재밌음",
+        "dialect": "재밌음"
+    },
+    {
+        "standard": "저",
+        "dialect": "저"
+    },
+    {
+        "standard": "저가",
+        "dialect": "저가"
+    },
+    {
+        "standard": "저거",
+        "dialect": "저거"
+    },
+    {
+        "standard": "저거는",
+        "dialect": "저거는"
+    },
+    {
+        "standard": "저거도",
+        "dialect": "저거도"
+    },
+    {
+        "standard": "저것도",
+        "dialect": "저것도"
+    },
+    {
+        "standard": "저게",
+        "dialect": "저게"
+    },
+    {
+        "standard": "저기",
+        "dialect": "저기"
+    },
+    {
+        "standard": "저까지",
+        "dialect": "저까지"
+    },
+    {
+        "standard": "저놈들",
+        "dialect": "점마들"
+    },
+    {
+        "standard": "저놈은",
+        "dialect": "점마는"
+    },
+    {
+        "standard": "저는",
+        "dialect": "저는"
+    },
+    {
+        "standard": "저도",
+        "dialect": "저도"
+    },
+    {
+        "standard": "저들",
+        "dialect": "저들"
+    },
+    {
+        "standard": "저라면",
+        "dialect": "저라면"
+    },
+    {
+        "standard": "저래",
+        "dialect": "저래"
+    },
+    {
+        "standard": "저래서",
+        "dialect": "저래서"
+    },
+    {
+        "standard": "저러고",
+        "dialect": "저러고"
+    },
+    {
+        "standard": "저러노",
+        "dialect": "저러노"
+    },
+    {
+        "standard": "저리",
+        "dialect": "저리"
+    },
+    {
+        "standard": "저번",
+        "dialect": "저번"
+    },
+    {
+        "standard": "저번달에",
+        "dialect": "저번달에"
+    },
+    {
+        "standard": "저번에",
+        "dialect": "저번에"
+    },
+    {
+        "standard": "저번엔",
+        "dialect": "저번엔"
+    },
+    {
+        "standard": "적어서",
+        "dialect": "적어서"
+    },
+    {
+        "standard": "전",
+        "dialect": "전"
+    },
+    {
+        "standard": "전이고",
+        "dialect": "전이고"
+    },
+    {
+        "standard": "절",
+        "dialect": "절"
+    },
+    {
+        "standard": "절때",
+        "dialect": "절때"
+    },
+    {
+        "standard": "절때로",
+        "dialect": "절때로"
+    },
+    {
+        "standard": "절로",
+        "dialect": "절로"
+    },
+    {
+        "standard": "절이",
+        "dialect": "절이"
+    },
+    {
+        "standard": "점마",
+        "dialect": "점마"
+    },
+    {
+        "standard": "접",
+        "dialect": "접"
+    },
+    {
+        "standard": "정도가",
+        "dialect": "정도가"
+    },
+    {
+        "standard": "제",
+        "dialect": "제"
+    },
+    {
+        "standard": "제끼고",
+        "dialect": "제끼고"
+    },
+    {
+        "standard": "젤",
+        "dialect": "젤"
+    },
+    {
+        "standard": "져",
+        "dialect": "져"
+    },
+    {
+        "standard": "조그만한",
+        "dialect": "조그만한"
+    },
+    {
+        "standard": "조근조근",
+        "dialect": "조근조근"
+    },
+    {
+        "standard": "존재한다",
+        "dialect": "존재한다"
+    },
+    {
+        "standard": "졸라",
+        "dialect": "졸라"
+    },
+    {
+        "standard": "좀",
+        "dialect": "좀"
+    },
+    {
+        "standard": "좀만",
+        "dialect": "좀만"
+    },
+    {
+        "standard": "좋겠나",
+        "dialect": "좋겠나"
+    },
+    {
+        "standard": "좋겠다",
+        "dialect": "좋겠다"
+    },
+    {
+        "standard": "좋겠다.",
+        "dialect": "좋겠다."
+    },
+    {
+        "standard": "좋긴",
+        "dialect": "좋긴"
+    },
+    {
+        "standard": "좋나",
+        "dialect": "좋나"
+    },
+    {
+        "standard": "좋나?",
+        "dialect": "좋나?"
+    },
+    {
+        "standard": "좋다",
+        "dialect": "좋다"
+    },
+    {
+        "standard": "좋다.",
+        "dialect": "좋다."
+    },
+    {
+        "standard": "좋더라",
+        "dialect": "좋더라"
+    },
+    {
+        "standard": "좋아라",
+        "dialect": "좋아라"
+    },
+    {
+        "standard": "좋아졌다",
+        "dialect": "좋아졌다"
+    },
+    {
+        "standard": "좋아하나",
+        "dialect": "좋아하나"
+    },
+    {
+        "standard": "좋아하는데",
+        "dialect": "좋아하는데"
+    },
+    {
+        "standard": "좋아하드라",
+        "dialect": "좋아하드라"
+    },
+    {
+        "standard": "좋아하드라고",
+        "dialect": "좋아하드라고"
+    },
+    {
+        "standard": "좋아한다",
+        "dialect": "좋아한다"
+    },
+    {
+        "standard": "좋아한다.",
+        "dialect": "좋아한다."
+    },
+    {
+        "standard": "좋았다",
+        "dialect": "좋았다"
+    },
+    {
+        "standard": "좋음",
+        "dialect": "좋음"
+    },
+    {
+        "standard": "좋음.",
+        "dialect": "좋음."
+    },
+    {
+        "standard": "죄고",
+        "dialect": "죄고"
+    },
+    {
+        "standard": "주",
+        "dialect": "주"
+    },
+    {
+        "standard": "주가",
+        "dialect": "주가"
+    },
+    {
+        "standard": "주께",
+        "dialect": "주께"
+    },
+    {
+        "standard": "주나",
+        "dialect": "주나"
+    },
+    {
+        "standard": "주는",
+        "dialect": "주는"
+    },
+    {
+        "standard": "주도",
+        "dialect": "주도"
+    },
+    {
+        "standard": "주디로만",
+        "dialect": "주디로만"
+    },
+    {
+        "standard": "주라",
+        "dialect": "주라"
+    },
+    {
+        "standard": "주만",
+        "dialect": "주만"
+    },
+    {
+        "standard": "주소",
+        "dialect": "주소"
+    },
+    {
+        "standard": "주야",
+        "dialect": "주야"
+    },
+    {
+        "standard": "주의가",
+        "dialect": "주의가"
+    },
+    {
+        "standard": "주이소",
+        "dialect": "주이소"
+    },
+    {
+        "standard": "주재",
+        "dialect": "주재"
+    },
+    {
+        "standard": "주제",
+        "dialect": "주제"
+    },
+    {
+        "standard": "죽는다",
+        "dialect": "죽는다"
+    },
+    {
+        "standard": "죽었다",
+        "dialect": "죽었다"
+    },
+    {
+        "standard": "죽였다",
+        "dialect": "죽였다"
+    },
+    {
+        "standard": "죽을라고",
+        "dialect": "죽을라고"
+    },
+    {
+        "standard": "죽인다",
+        "dialect": "죽인다"
+    },
+    {
+        "standard": "죽일라고",
+        "dialect": "죽일라고"
+    },
+    {
+        "standard": "준거다",
+        "dialect": "준거다"
+    },
+    {
+        "standard": "준다",
+        "dialect": "준다"
+    },
+    {
+        "standard": "줄려고",
+        "dialect": "줄려고"
+    },
+    {
+        "standard": "줄어든다",
+        "dialect": "줄어든다"
+    },
+    {
+        "standard": "줏어",
+        "dialect": "줏어"
+    },
+    {
+        "standard": "중요하나",
+        "dialect": "중요하나"
+    },
+    {
+        "standard": "중요하나?",
+        "dialect": "중요하나?"
+    },
+    {
+        "standard": "중요하다",
+        "dialect": "중요하다"
+    },
+    {
+        "standard": "중요하지",
+        "dialect": "중요하지"
+    },
+    {
+        "standard": "줘",
+        "dialect": "줘"
+    },
+    {
+        "standard": "줘서",
+        "dialect": "줘서"
+    },
+    {
+        "standard": "줬나?",
+        "dialect": "줬나?"
+    },
+    {
+        "standard": "줬으면",
+        "dialect": "줬으면"
+    },
+    {
+        "standard": "쥐",
+        "dialect": "쥐"
+    },
+    {
+        "standard": "즈그",
+        "dialect": "즈그"
+    },
+    {
+        "standard": "즈그가",
+        "dialect": "즈그가"
+    },
+    {
+        "standard": "즈그끼리",
+        "dialect": "즈그끼리"
+    },
+    {
+        "standard": "즈그들",
+        "dialect": "즈그들"
+    },
+    {
+        "standard": "즈그들끼리",
+        "dialect": "즈그들끼리"
+    },
+    {
+        "standard": "즈그들도",
+        "dialect": "즈그들도"
+    },
+    {
+        "standard": "즈그들은",
+        "dialect": "즈그들은"
+    },
+    {
+        "standard": "즈그들이",
+        "dialect": "즈그들이"
+    },
+    {
+        "standard": "즈그들한테",
+        "dialect": "즈그들한테"
+    },
+    {
+        "standard": "즐겁다",
+        "dialect": "즐겁다"
+    },
+    {
+        "standard": "증말",
+        "dialect": "증말"
+    },
+    {
+        "standard": "지",
+        "dialect": "지"
+    },
+    {
+        "standard": "지가",
+        "dialect": "지가"
+    },
+    {
+        "standard": "지기는",
+        "dialect": "지기는"
+    },
+    {
+        "standard": "지나",
+        "dialect": "지나"
+    },
+    {
+        "standard": "지네",
+        "dialect": "지네"
+    },
+    {
+        "standard": "지네가",
+        "dialect": "지네가"
+    },
+    {
+        "standard": "지네끼리",
+        "dialect": "지네끼리"
+    },
+    {
+        "standard": "지네들",
+        "dialect": "지네들"
+    },
+    {
+        "standard": "지네들끼리",
+        "dialect": "지네들끼리"
+    },
+    {
+        "standard": "지네들이",
+        "dialect": "지네들이"
+    },
+    {
+        "standard": "지네한테",
+        "dialect": "지네한테"
+    },
+    {
+        "standard": "지는",
+        "dialect": "지는"
+    },
+    {
+        "standard": "지대로",
+        "dialect": "지대로"
+    },
+    {
+        "standard": "지도",
+        "dialect": "지도"
+    },
+    {
+        "standard": "지들",
+        "dialect": "지들"
+    },
+    {
+        "standard": "지들끼리",
+        "dialect": "지들끼리"
+    },
+    {
+        "standard": "지들끼리도",
+        "dialect": "지들끼리도"
+    },
+    {
+        "standard": "지들끼리만",
+        "dialect": "지들끼리만"
+    },
+    {
+        "standard": "지들도",
+        "dialect": "지들도"
+    },
+    {
+        "standard": "지들은",
+        "dialect": "지들은"
+    },
+    {
+        "standard": "지들이",
+        "dialect": "지들이"
+    },
+    {
+        "standard": "지들한테",
+        "dialect": "지들한테"
+    },
+    {
+        "standard": "지를",
+        "dialect": "지를"
+    },
+    {
+        "standard": "지린다",
+        "dialect": "지린다"
+    },
+    {
+        "standard": "지만",
+        "dialect": "지만"
+    },
+    {
+        "standard": "지만의",
+        "dialect": "지만의"
+    },
+    {
+        "standard": "지멋대로",
+        "dialect": "지멋대로"
+    },
+    {
+        "standard": "지면",
+        "dialect": "지면"
+    },
+    {
+        "standard": "지발",
+        "dialect": "지발"
+    },
+    {
+        "standard": "지보다",
+        "dialect": "지보다"
+    },
+    {
+        "standard": "지짜",
+        "dialect": "지짜"
+    },
+    {
+        "standard": "지친다",
+        "dialect": "지친다"
+    },
+    {
+        "standard": "지켰다",
+        "dialect": "지켰다"
+    },
+    {
+        "standard": "지한테",
+        "dialect": "지한테"
+    },
+    {
+        "standard": "진",
+        "dialect": "진"
+    },
+    {
+        "standard": "진다",
+        "dialect": "진다"
+    },
+    {
+        "standard": "진즉에",
+        "dialect": "진즉에"
+    },
+    {
+        "standard": "진짜가",
+        "dialect": "진짜가"
+    },
+    {
+        "standard": "진짜루",
+        "dialect": "진짜루"
+    },
+    {
+        "standard": "질",
+        "dialect": "질"
+    },
+    {
+        "standard": "질도",
+        "dialect": "질도"
+    },
+    {
+        "standard": "질린다",
+        "dialect": "질린다"
+    },
+    {
+        "standard": "질을",
+        "dialect": "질을"
+    },
+    {
+        "standard": "질이",
+        "dialect": "질이"
+    },
+    {
+        "standard": "짐",
+        "dialect": "짐"
+    },
+    {
+        "standard": "집이고",
+        "dialect": "집이고"
+    },
+    {
+        "standard": "집적",
+        "dialect": "집적"
+    },
+    {
+        "standard": "짓이고",
+        "dialect": "짓이고"
+    },
+    {
+        "standard": "짓이나",
+        "dialect": "짓이나"
+    },
+    {
+        "standard": "짓이다",
+        "dialect": "짓이다"
+    },
+    {
+        "standard": "짜",
+        "dialect": "짜"
+    },
+    {
+        "standard": "짜가",
+        "dialect": "짜가"
+    },
+    {
+        "standard": "짜고",
+        "dialect": "짜고"
+    },
+    {
+        "standard": "짜다",
+        "dialect": "짜다"
+    },
+    {
+        "standard": "짜르고",
+        "dialect": "짜르고"
+    },
+    {
+        "standard": "짜르면",
+        "dialect": "짜르면"
+    },
+    {
+        "standard": "짜른",
+        "dialect": "짜른"
+    },
+    {
+        "standard": "짜른다고",
+        "dialect": "짜른다고"
+    },
+    {
+        "standard": "짜를",
+        "dialect": "짜를"
+    },
+    {
+        "standard": "짜식",
+        "dialect": "짜식"
+    },
+    {
+        "standard": "짜증난다",
+        "dialect": "짜증난다"
+    },
+    {
+        "standard": "짜집기",
+        "dialect": "짜집기"
+    },
+    {
+        "standard": "짝",
+        "dialect": "짝"
+    },
+    {
+        "standard": "짝을",
+        "dialect": "짝을"
+    },
+    {
+        "standard": "짤라",
+        "dialect": "짤라"
+    },
+    {
+        "standard": "짤라도",
+        "dialect": "짤라도"
+    },
+    {
+        "standard": "짤려도",
+        "dialect": "짤려도"
+    },
+    {
+        "standard": "짤려서",
+        "dialect": "짤려서"
+    },
+    {
+        "standard": "짤리고",
+        "dialect": "짤리고"
+    },
+    {
+        "standard": "짤리면",
+        "dialect": "짤리면"
+    },
+    {
+        "standard": "짧다",
+        "dialect": "짧다"
+    },
+    {
+        "standard": "짬",
+        "dialect": "짬"
+    },
+    {
+        "standard": "짱",
+        "dialect": "짱"
+    },
+    {
+        "standard": "째서",
+        "dialect": "째서"
+    },
+    {
+        "standard": "쨍겨",
+        "dialect": "쨍겨"
+    },
+    {
+        "standard": "쩌는",
+        "dialect": "쩌는"
+    },
+    {
+        "standard": "쩐다",
+        "dialect": "쩐다"
+    },
+    {
+        "standard": "쩔어",
+        "dialect": "쩔어"
+    },
+    {
+        "standard": "쩜",
+        "dialect": "쩜"
+    },
+    {
+        "standard": "쪼그만",
+        "dialect": "쪼그만"
+    },
+    {
+        "standard": "쫄따구",
+        "dialect": "쫄따구"
+    },
+    {
+        "standard": "쫄려서",
+        "dialect": "쫄려서"
+    },
+    {
+        "standard": "쫌",
+        "dialect": "쫌"
+    },
+    {
+        "standard": "쫌.",
+        "dialect": "쫌."
+    },
+    {
+        "standard": "쫌만",
+        "dialect": "쫌만"
+    },
+    {
+        "standard": "쭝국",
+        "dialect": "쭝국"
+    },
+    {
+        "standard": "찌지",
+        "dialect": "찌지"
+    },
+    {
+        "standard": "찍는다",
+        "dialect": "찍는다"
+    },
+    {
+        "standard": "찐",
+        "dialect": "찐"
+    },
+    {
+        "standard": "찐다",
+        "dialect": "찐다"
+    },
+    {
+        "standard": "찐으로",
+        "dialect": "찐으로"
+    },
+    {
+        "standard": "찐짜",
+        "dialect": "찐짜"
+    },
+    {
+        "standard": "찝어가지고",
+        "dialect": "찝어가지고"
+    },
+    {
+        "standard": "찝어서",
+        "dialect": "찝어서"
+    },
+    {
+        "standard": "차",
+        "dialect": "차"
+    },
+    {
+        "standard": "차가",
+        "dialect": "차가"
+    },
+    {
+        "standard": "차이고",
+        "dialect": "차이고"
+    },
+    {
+        "standard": "차이다",
+        "dialect": "차이다"
+    },
+    {
+        "standard": "착하다",
+        "dialect": "착하다"
+    },
+    {
+        "standard": "참는다",
+        "dialect": "참는다"
+    },
+    {
+        "standard": "참말로",
+        "dialect": "참말로"
+    },
+    {
+        "standard": "창피하다",
+        "dialect": "창피하다"
+    },
+    {
+        "standard": "찾아가",
+        "dialect": "찾아가"
+    },
+    {
+        "standard": "찾았다.",
+        "dialect": "찾았다."
+    },
+    {
+        "standard": "채웠다",
+        "dialect": "채웠다"
+    },
+    {
+        "standard": "챙길려고",
+        "dialect": "챙길려고"
+    },
+    {
+        "standard": "처",
+        "dialect": "처"
+    },
+    {
+        "standard": "처음엔",
+        "dialect": "처음엔"
+    },
+    {
+        "standard": "첨",
+        "dialect": "첨"
+    },
+    {
+        "standard": "첨에",
+        "dialect": "첨에"
+    },
+    {
+        "standard": "쳐가지고",
+        "dialect": "쳐가지고"
+    },
+    {
+        "standard": "축구했다",
+        "dialect": "축구했다"
+    },
+    {
+        "standard": "출신이고",
+        "dialect": "출신이고"
+    },
+    {
+        "standard": "취준생",
+        "dialect": "취준생"
+    },
+    {
+        "standard": "치",
+        "dialect": "치"
+    },
+    {
+        "standard": "치가",
+        "dialect": "치가"
+    },
+    {
+        "standard": "치고",
+        "dialect": "치고"
+    },
+    {
+        "standard": "치면",
+        "dialect": "치면"
+    },
+    {
+        "standard": "치면은",
+        "dialect": "치면은"
+    },
+    {
+        "standard": "치아",
+        "dialect": "치아"
+    },
+    {
+        "standard": "치아라",
+        "dialect": "치아라"
+    },
+    {
+        "standard": "친다",
+        "dialect": "친다"
+    },
+    {
+        "standard": "카겠다.",
+        "dialect": "카겠다."
+    },
+    {
+        "standard": "카니",
+        "dialect": "카니"
+    },
+    {
+        "standard": "카드라",
+        "dialect": "카드라"
+    },
+    {
+        "standard": "카든데",
+        "dialect": "카든데"
+    },
+    {
+        "standard": "카이",
+        "dialect": "카이"
+    },
+    {
+        "standard": "카이.",
+        "dialect": "카이."
+    },
+    {
+        "standard": "칸",
+        "dialect": "칸"
+    },
+    {
+        "standard": "칼",
+        "dialect": "칼"
+    },
+    {
+        "standard": "캐",
+        "dialect": "캐"
+    },
+    {
+        "standard": "캤다가",
+        "dialect": "캤다가"
+    },
+    {
+        "standard": "커",
+        "dialect": "커"
+    },
+    {
+        "standard": "크다",
+        "dialect": "크다"
+    },
+    {
+        "standard": "크면서",
+        "dialect": "크면서"
+    },
+    {
+        "standard": "클",
+        "dialect": "클"
+    },
+    {
+        "standard": "클랐다",
+        "dialect": "클랐다"
+    },
+    {
+        "standard": "키고",
+        "dialect": "키고"
+    },
+    {
+        "standard": "키와",
+        "dialect": "키와"
+    },
+    {
+        "standard": "타령이고",
+        "dialect": "타령이고"
+    },
+    {
+        "standard": "태아",
+        "dialect": "태아"
+    },
+    {
+        "standard": "태아도",
+        "dialect": "태아도"
+    },
+    {
+        "standard": "태우고",
+        "dialect": "태우고"
+    },
+    {
+        "standard": "터졌다",
+        "dialect": "터졌다"
+    },
+    {
+        "standard": "터진다",
+        "dialect": "터진다"
+    },
+    {
+        "standard": "통채로",
+        "dialect": "통채로"
+    },
+    {
+        "standard": "튀었다",
+        "dialect": "튀었다"
+    },
+    {
+        "standard": "틀렸다",
+        "dialect": "틀렸다"
+    },
+    {
+        "standard": "틀렸다.",
+        "dialect": "틀렸다."
+    },
+    {
+        "standard": "틀리다",
+        "dialect": "틀리다"
+    },
+    {
+        "standard": "틀린",
+        "dialect": "틀린"
+    },
+    {
+        "standard": "티비에",
+        "dialect": "티비에"
+    },
+    {
+        "standard": "파가",
+        "dialect": "파가"
+    },
+    {
+        "standard": "팔린다",
+        "dialect": "팔린다"
+    },
+    {
+        "standard": "팔았나",
+        "dialect": "팔았나"
+    },
+    {
+        "standard": "팡",
+        "dialect": "팡"
+    },
+    {
+        "standard": "팩폭을",
+        "dialect": "팩폭을"
+    },
+    {
+        "standard": "퍼는",
+        "dialect": "퍼는"
+    },
+    {
+        "standard": "편하다",
+        "dialect": "편하다"
+    },
+    {
+        "standard": "편함",
+        "dialect": "편함"
+    },
+    {
+        "standard": "포가",
+        "dialect": "포가"
+    },
+    {
+        "standard": "푼다",
+        "dialect": "푼다"
+    },
+    {
+        "standard": "피",
+        "dialect": "피"
+    },
+    {
+        "standard": "피곤하다",
+        "dialect": "피곤하다"
+    },
+    {
+        "standard": "피는",
+        "dialect": "피는"
+    },
+    {
+        "standard": "피면서",
+        "dialect": "피면서"
+    },
+    {
+        "standard": "피자",
+        "dialect": "피자"
+    },
+    {
+        "standard": "피해가",
+        "dialect": "피해가"
+    },
+    {
+        "standard": "핀다",
+        "dialect": "핀다"
+    },
+    {
+        "standard": "필",
+        "dialect": "필"
+    },
+    {
+        "standard": "필요없다",
+        "dialect": "필요없다"
+    },
+    {
+        "standard": "필요하노",
+        "dialect": "필요하노"
+    },
+    {
+        "standard": "필요하다",
+        "dialect": "필요하다"
+    },
+    {
+        "standard": "하",
+        "dialect": "하"
+    },
+    {
+        "standard": "하겠나",
+        "dialect": "하겠나"
+    },
+    {
+        "standard": "하겠나?",
+        "dialect": "하겠나?"
+    },
+    {
+        "standard": "하겠노",
+        "dialect": "하겠노"
+    },
+    {
+        "standard": "하고",
+        "dialect": "하고"
+    },
+    {
+        "standard": "하구",
+        "dialect": "하구"
+    },
+    {
+        "standard": "하구만",
+        "dialect": "하구만"
+    },
+    {
+        "standard": "하긋다",
+        "dialect": "하긋다"
+    },
+    {
+        "standard": "하기사",
+        "dialect": "하기사"
+    },
+    {
+        "standard": "하나",
+        "dialect": "하나"
+    },
+    {
+        "standard": "하나.",
+        "dialect": "하나."
+    },
+    {
+        "standard": "하나?",
+        "dialect": "하나?"
+    },
+    {
+        "standard": "하나다",
+        "dialect": "하나다"
+    },
+    {
+        "standard": "하나다.",
+        "dialect": "하나다."
+    },
+    {
+        "standard": "하나도",
+        "dialect": "하나도"
+    },
+    {
+        "standard": "하나임.",
+        "dialect": "하나임."
+    },
+    {
+        "standard": "하노",
+        "dialect": "하노"
+    },
+    {
+        "standard": "하는가",
+        "dialect": "하는가"
+    },
+    {
+        "standard": "하는가?",
+        "dialect": "하는가?"
+    },
+    {
+        "standard": "하는거",
+        "dialect": "하는거"
+    },
+    {
+        "standard": "하는거고",
+        "dialect": "하는거고"
+    },
+    {
+        "standard": "하는거다",
+        "dialect": "하는거다"
+    },
+    {
+        "standard": "하는거라",
+        "dialect": "하는거라"
+    },
+    {
+        "standard": "하는거임",
+        "dialect": "하는거임"
+    },
+    {
+        "standard": "하니?",
+        "dialect": "하니?"
+    },
+    {
+        "standard": "하니께",
+        "dialect": "하니께"
+    },
+    {
+        "standard": "하다",
+        "dialect": "하다"
+    },
+    {
+        "standard": "하다.",
+        "dialect": "하다."
+    },
+    {
+        "standard": "하대",
+        "dialect": "하대"
+    },
+    {
+        "standard": "하더라",
+        "dialect": "하더라"
+    },
+    {
+        "standard": "하더라구요",
+        "dialect": "하더라구요"
+    },
+    {
+        "standard": "하더라구요.",
+        "dialect": "하더라구요."
+    },
+    {
+        "standard": "하더만",
+        "dialect": "하더만"
+    },
+    {
+        "standard": "하던지",
+        "dialect": "하던지"
+    },
+    {
+        "standard": "하도",
+        "dialect": "하도"
+    },
+    {
+        "standard": "하두",
+        "dialect": "하두"
+    },
+    {
+        "standard": "하드라도",
+        "dialect": "하드라도"
+    },
+    {
+        "standard": "하드만",
+        "dialect": "하드만"
+    },
+    {
+        "standard": "하든",
+        "dialect": "하든"
+    },
+    {
+        "standard": "하든가",
+        "dialect": "하든가"
+    },
+    {
+        "standard": "하든데",
+        "dialect": "하든데"
+    },
+    {
+        "standard": "하라고",
+        "dialect": "하라고"
+    },
+    {
+        "standard": "하마",
+        "dialect": "하마"
+    },
+    {
+        "standard": "하면은",
+        "dialect": "하면은"
+    },
+    {
+        "standard": "하믄",
+        "dialect": "하믄"
+    },
+    {
+        "standard": "하셈.",
+        "dialect": "하셈."
+    },
+    {
+        "standard": "하시나?",
+        "dialect": "하시나?"
+    },
+    {
+        "standard": "하여튼",
+        "dialect": "하여튼"
+    },
+    {
+        "standard": "하이",
+        "dialect": "하이"
+    },
+    {
+        "standard": "하이소.",
+        "dialect": "하이소."
+    },
+    {
+        "standard": "하튼",
+        "dialect": "하튼"
+    },
+    {
+        "standard": "학실히",
+        "dialect": "학실히"
+    },
+    {
+        "standard": "한개도",
+        "dialect": "한개도"
+    },
+    {
+        "standard": "한거다",
+        "dialect": "한거다"
+    },
+    {
+        "standard": "한게",
+        "dialect": "한게"
+    },
+    {
+        "standard": "한국인이다",
+        "dialect": "한국인이다"
+    },
+    {
+        "standard": "한다",
+        "dialect": "한다"
+    },
+    {
+        "standard": "한다.",
+        "dialect": "한다."
+    },
+    {
+        "standard": "한단다",
+        "dialect": "한단다"
+    },
+    {
+        "standard": "한대",
+        "dialect": "한대"
+    },
+    {
+        "standard": "한데",
+        "dialect": "한데"
+    },
+    {
+        "standard": "한참",
+        "dialect": "한참"
+    },
+    {
+        "standard": "할까",
+        "dialect": "할까"
+    },
+    {
+        "standard": "할라",
+        "dialect": "할라"
+    },
+    {
+        "standard": "할라고",
+        "dialect": "할라고"
+    },
+    {
+        "standard": "할라면",
+        "dialect": "할라면"
+    },
+    {
+        "standard": "할란다",
+        "dialect": "할란다"
+    },
+    {
+        "standard": "할려고",
+        "dialect": "할려고"
+    },
+    {
+        "standard": "할려나",
+        "dialect": "할려나"
+    },
+    {
+        "standard": "할려는",
+        "dialect": "할려는"
+    },
+    {
+        "standard": "할려면",
+        "dialect": "할려면"
+    },
+    {
+        "standard": "할매",
+        "dialect": "할매"
+    },
+    {
+        "standard": "할매가",
+        "dialect": "할매가"
+    },
+    {
+        "standard": "할배",
+        "dialect": "할배"
+    },
+    {
+        "standard": "할배가",
+        "dialect": "할배가"
+    },
+    {
+        "standard": "할배도",
+        "dialect": "할배도"
+    },
+    {
+        "standard": "할배들은",
+        "dialect": "할배들은"
+    },
+    {
+        "standard": "할튼",
+        "dialect": "할튼"
+    },
+    {
+        "standard": "함",
+        "dialect": "함"
+    },
+    {
+        "standard": "함.",
+        "dialect": "함."
+    },
+    {
+        "standard": "함?",
+        "dialect": "함?"
+    },
+    {
+        "standard": "함부러",
+        "dialect": "함부러"
+    },
+    {
+        "standard": "해가",
+        "dialect": "해가"
+    },
+    {
+        "standard": "해고",
+        "dialect": "해고"
+    },
+    {
+        "standard": "해꼬지",
+        "dialect": "해꼬지"
+    },
+    {
+        "standard": "해논",
+        "dialect": "해논"
+    },
+    {
+        "standard": "해놔도",
+        "dialect": "해놔도"
+    },
+    {
+        "standard": "해놔서",
+        "dialect": "해놔서"
+    },
+    {
+        "standard": "해놨는데",
+        "dialect": "해놨는데"
+    },
+    {
+        "standard": "해도",
+        "dialect": "해도"
+    },
+    {
+        "standard": "해라",
+        "dialect": "해라"
+    },
+    {
+        "standard": "해면",
+        "dialect": "해면"
+    },
+    {
+        "standard": "해볼려고",
+        "dialect": "해볼려고"
+    },
+    {
+        "standard": "해봐라",
+        "dialect": "해봐라"
+    },
+    {
+        "standard": "해서",
+        "dialect": "해서"
+    },
+    {
+        "standard": "해야된다",
+        "dialect": "해야된다"
+    },
+    {
+        "standard": "해주나",
+        "dialect": "해주나"
+    },
+    {
+        "standard": "해준다",
+        "dialect": "해준다"
+    },
+    {
+        "standard": "했나",
+        "dialect": "했나"
+    },
+    {
+        "standard": "했나?",
+        "dialect": "했나?"
+    },
+    {
+        "standard": "했노?",
+        "dialect": "했노?"
+    },
+    {
+        "standard": "했는",
+        "dialect": "했는"
+    },
+    {
+        "standard": "했는가",
+        "dialect": "했는가"
+    },
+    {
+        "standard": "했니?",
+        "dialect": "했니?"
+    },
+    {
+        "standard": "했다",
+        "dialect": "했다"
+    },
+    {
+        "standard": "했다.",
+        "dialect": "했다."
+    },
+    {
+        "standard": "했단",
+        "dialect": "했단"
+    },
+    {
+        "standard": "했었나",
+        "dialect": "했었나"
+    },
+    {
+        "standard": "했었나?",
+        "dialect": "했었나?"
+    },
+    {
+        "standard": "했었다",
+        "dialect": "했었다"
+    },
+    {
+        "standard": "했었다.",
+        "dialect": "했었다."
+    },
+    {
+        "standard": "했으믄",
+        "dialect": "했으믄"
+    },
+    {
+        "standard": "했음",
+        "dialect": "했음"
+    },
+    {
+        "standard": "했음.",
+        "dialect": "했음."
+    },
+    {
+        "standard": "했음?",
+        "dialect": "했음?"
+    },
+    {
+        "standard": "했지",
+        "dialect": "했지"
+    },
+    {
+        "standard": "행님",
+        "dialect": "행님"
+    },
+    {
+        "standard": "행님들",
+        "dialect": "행님들"
+    },
+    {
+        "standard": "허고",
+        "dialect": "허고"
+    },
+    {
+        "standard": "허긴",
+        "dialect": "허긴"
+    },
+    {
+        "standard": "허상이다",
+        "dialect": "허상이다"
+    },
+    {
+        "standard": "헌데",
+        "dialect": "헌데"
+    },
+    {
+        "standard": "헷갈리나?",
+        "dialect": "헷갈리나?"
+    },
+    {
+        "standard": "헷갈린다",
+        "dialect": "헷갈린다"
+    },
+    {
+        "standard": "혀",
+        "dialect": "혀"
+    },
+    {
+        "standard": "형아",
+        "dialect": "형아"
+    },
+    {
+        "standard": "형아가",
+        "dialect": "형아가"
+    },
+    {
+        "standard": "형이랑",
+        "dialect": "형이랑"
+    },
+    {
+        "standard": "혼난다",
+        "dialect": "혼난다"
+    },
+    {
+        "standard": "환장한다",
+        "dialect": "환장한다"
+    },
+    {
+        "standard": "회사서",
+        "dialect": "회사서"
+    },
+    {
+        "standard": "훈련소",
+        "dialect": "훈련소"
+    },
+    {
+        "standard": "흉하다",
+        "dialect": "흉하다"
+    },
+    {
+        "standard": "흑인이다",
+        "dialect": "흑인이다"
+    },
+    {
+        "standard": "희한하게",
+        "dialect": "희한하게"
+    },
+    {
+        "standard": "힘들다",
+        "dialect": "힘들다"
+    },
+    {
+        "standard": "힘들제?",
+        "dialect": "힘들제?"
+    }
+]
