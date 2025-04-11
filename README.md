@@ -25,7 +25,7 @@ pair_generator.py
 
 1. 제공되는 KOLD데이터셋 : kold_v1.json (40429개)
 
-2. gs_kold.json 생성(28989개)
+2. gs_kold.json 생성(28435개)
 ```
 python create_dataset.py
 ```
@@ -43,7 +43,7 @@ python create_dataset.py
 ```
 * hs_pairs_human_annotate.json, non-hs_pairs.json과 토큰 매칭 시켜서 최종데이터만들기(40429개)
 * 중복제거(40223개)
-* standard랑 dialect가 동일한 데이터 제거 (28989개)
+* standard랑 dialect가 동일한 데이터 제거 (28435개)
 * 한 단어, 두 단어 있는 것들 중 hate 개수 추가 (진행중)
 * hate speech위치추가(OFF_span)
 * 커리큘럼 러닝을 위한 TGT 추가: 

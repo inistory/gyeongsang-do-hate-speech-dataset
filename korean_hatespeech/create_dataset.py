@@ -57,14 +57,14 @@ for item in data:
     dialect = convert_to_dialect(standard, translation_dict)
 
     # 2. standard와 dialect가 동일하지 않은 경우만 추가
-    if standard != dialect:
-        extracted_data.append({
-            "standard": standard,
-            "dialect": dialect,
-            "OFF": OFF,
-            "TGT": TGT,
-            "OFF_span": OFF_span
-        })
+    if standard.replace(" ", "") != dialect.replace(" ", ""):
+            extracted_data.append({
+                "standard": standard,
+                "dialect": dialect,
+                "OFF": OFF,
+                "TGT": TGT,
+                "OFF_span": OFF_span
+            })
 
 ###############3. 중복 제거
 unique_data = {json.dumps(item, ensure_ascii=False): item for item in extracted_data}.values()
