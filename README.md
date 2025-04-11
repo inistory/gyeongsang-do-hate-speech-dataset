@@ -33,4 +33,6 @@ python create_dataset.py
 * hs_pairs_human_annotate.json, non-hs_pairs.json과 토큰 매칭 시켜서 최종데이터만들기(40429개)
 * 중복제거(40223개)
 * standard랑 dialect가 동일한 데이터 제거 (28989개)
+* 한 단어, 두 단어 있는 것들 중 hate 개수 추가 (진행중)
 * hate speech위치, hate 개수 추가(진행중)
+* OFF외에 외에 커리큘럼러닝에 활용할 수 있는 라벨을 데이터에 추가(진행중)
