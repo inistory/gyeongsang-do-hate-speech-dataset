@@ -25,3 +25,7 @@ Validation
 !unmatched_tokens_preprocessed.json
 !unmatched_tokens.json
 !all_pairs.json
+.env
+!detection_easy.json
+!detection_hard.json
+!detection_medium.json
