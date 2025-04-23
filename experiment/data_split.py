@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 
 # 1. 데이터 로드
-with open("gs_kold.json", "r", encoding="utf-8") as f:
+with open("/home/jungin/workspace/gyeongsang-do-hate-speech-dataset/korean_hatespeech/KOLD/data/gs_kold.json", "r", encoding="utf-8") as f:
     raw_data = json.load(f)
 
 # 2. 욕설 + span이 있는 샘플만 필터링

@@ -18,15 +18,18 @@ def create_translation_dict(hatespeech_file, non_hatespeech_file):
     # hatespeech_pairs_file 로드
     hatespeech_data = load_json(hatespeech_file)
     for pair in hatespeech_data:
-        translation_dict[pair["standard"]] = pair["dialect"]
+        if pair["standard"] not in translation_dict:  # 이미 존재하는 키는 무시
+            translation_dict[pair["standard"]] = pair["dialect"]
 
     # non_hatespeech_pairs_file 로드
     non_hatespeech_data = load_json(non_hatespeech_file)
     for pair in non_hatespeech_data:
         if "standard" in pair and "dialect" in pair:  # standard와 dialect가 모두 존재하는 경우
-            translation_dict[pair["standard"]] = pair["dialect"]
+            if pair["standard"] not in translation_dict:  # 이미 존재하는 키는 무시
+                translation_dict[pair["standard"]] = pair["dialect"]
         elif "dialect" in pair:  # dialect만 존재하는 경우
-            translation_dict[pair["dialect"]] = pair["dialect"]
+            if pair["dialect"] not in translation_dict:  # 이미 존재하는 키는 무시
+                translation_dict[pair["dialect"]] = pair["dialect"]
 
     return translation_dict
 
@@ -38,6 +41,23 @@ def convert_to_dialect(standard_sentence, translation_dict):
         # translation_dict에서 변환 가능한 토큰을 찾음
         converted_tokens.append(translation_dict.get(token, token))
     return " ".join(converted_tokens)  # 변환된 토큰을 다시 문장으로 합침
+
+# OFF_span을 변환된 dialect에서 추출하는 함수
+def extract_off_span_dialect(standard, dialect, off_span):
+    if off_span is None:
+        return None
+    try:
+        # standard에서 OFF_span의 위치를 찾음
+        start_idx = standard.find(off_span)
+        if start_idx == -1:
+            return None
+        end_idx = start_idx + len(off_span)
+
+        # dialect에서 동일한 위치의 문자열을 추출
+        return dialect[start_idx:end_idx]
+    except Exception as e:
+        print(f"OFF_span 변환 중 오류 발생: {e}")
+        return None
 
 # 데이터 로드
 data = load_json(input_file)
@@ -56,15 +76,19 @@ for item in data:
     # 표준어 문장을 사투리 문장으로 변환
     dialect = convert_to_dialect(standard, translation_dict)
 
+    # OFF_span은 변환된 dialect에서 추출
+    off_span_dialect = extract_off_span_dialect(standard, dialect, OFF_span)
+
     # 2. standard와 dialect가 동일하지 않은 경우만 추가
     if standard.replace(" ", "") != dialect.replace(" ", ""):
-            extracted_data.append({
-                "standard": standard,
-                "dialect": dialect,
-                "OFF": OFF,
-                "TGT": TGT,
-                "OFF_span": OFF_span
-            })
+        extracted_data.append({
+            "standard": standard,
+            "dialect": dialect,
+            "OFF": OFF,
+            "TGT": TGT,
+            "OFF_span": OFF_span,
+            "OFF_span_dialect": off_span_dialect
+        })
 
 ###############3. 중복 제거
 unique_data = {json.dumps(item, ensure_ascii=False): item for item in extracted_data}.values()
