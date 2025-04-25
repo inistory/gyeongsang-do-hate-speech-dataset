@@ -5,7 +5,7 @@ from collections import defaultdict
 import random
 
 # 1. 모델 및 토크나이저 설정
-model_name = "beomi/KcELECTRA-base"
+model_name = "MLP-KTLim/llama-3-Korean-Bllossom-8B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # 2. 데이터 로드
@@ -138,7 +138,7 @@ datasets = DatasetDict({
 # 7. 저장
 for level in ["easy", "medium", "hard"]:
     # JSON Lines 형식으로 저장 (UTF-8 인코딩 명시)
-    with open(f"detection_{level}.json", "w", encoding="utf-8") as f:
+    with open(f"detection_{level}.jsonl", "w", encoding="utf-8") as f:
         for item in datasets[level]:
             json.dump(item, f, ensure_ascii=False)
             f.write("\n")
