@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+
+#####[Full-finetuning]
 #training
 echo "================================================="
 echo "                   TRAINING                        "
@@ -10,7 +13,7 @@ CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --validation_file "./gs_kold_valid.json" \
     --test_file "./gs_kold_test.json" \
     --do_train True\
-    --output_dir "./output_easy" \
+    --output_dir "./output_full" \
     --num_train_epochs 3 \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
@@ -23,12 +26,12 @@ echo "================================================="
 echo "                  EVALUATION                       "
 echo "================================================="
 CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
-    --model_name_or_path "./output_easy" \
+    --model_name_or_path "./output_full" \
     --validation_file "./gs_kold_valid.json" \
     --test_file "./gs_kold_test.json" \
     --do_eval \
     --do_train False \
-    --output_dir "./output_eval" \
+    --output_dir "./output_full_eval" \
     --trust_remote_code true \
     --base_model_name_or_path "EleutherAI/polyglot-ko-5.8b"
 
@@ -38,10 +41,10 @@ echo "================================================="
 echo "                  PREDICTION                       "
 echo "================================================="
 CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
-    --model_name_or_path "./output_easy" \
+    --model_name_or_path "./output_full" \
     --test_file "./gs_kold_test.json" \
     --do_predict \
     --do_train False \
-    --output_dir "./output_predict" \
+    --output_dir "./output_full_predict" \
     --trust_remote_code true \
     --base_model_name_or_path "EleutherAI/polyglot-ko-5.8b"

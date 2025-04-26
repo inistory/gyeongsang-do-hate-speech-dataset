@@ -2,9 +2,10 @@ import json
 
 # 분석할 파일 경로 리스트
 file_paths = [
-    "./detection_easy.json",
-    "./detection_medium.json",
-    "./detection_hard.json"
+    "./detection_full.jsonl",
+    "./detection_easy.jsonl",
+    "./detection_medium.jsonl",
+    "./detection_hard.jsonl"
 ]
 
 # 전체 카테고리별 개수를 저장할 딕셔너리 초기화
@@ -44,8 +45,3 @@ for file_path in file_paths:
     for category, count in category_counts.items():
         print(f"  {category}: {count}")
     print()
-
-# 전체 결과 출력
-print("Total category counts across all files:")
-for category, count in total_category_counts.items():
-    print(f"{category}: {count}")

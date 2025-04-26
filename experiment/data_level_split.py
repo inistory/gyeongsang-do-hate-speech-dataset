@@ -126,17 +126,20 @@ def split_data_by_difficulty(raw_data):
 # 5. 커리큘럼 분할 수정
 curriculum = split_data_by_difficulty(raw_data)
 
+# full 버전 추가
+curriculum["full"] = raw_data
+
 # 6. DatasetDict 저장
 datasets = DatasetDict({
     level: Dataset.from_list([{
         **item,  # 기존 item의 모든 필드를 포함
-        "labels": item["labels"]  # labels 추가
+        "labels": item["labels"] if "labels" in item else get_token_labels(item["dialect"], item["OFF_span_dialect"])  # labels 추가
     } for item in samples])
     for level, samples in curriculum.items()
 })
 
 # 7. 저장
-for level in ["easy", "medium", "hard"]:
+for level in ["easy", "medium", "hard", "full"]:
     # JSON Lines 형식으로 저장 (UTF-8 인코딩 명시)
     with open(f"detection_{level}.jsonl", "w", encoding="utf-8") as f:
         for item in datasets[level]:
