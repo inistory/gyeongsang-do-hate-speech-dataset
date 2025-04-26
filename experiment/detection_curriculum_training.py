@@ -164,10 +164,11 @@ def main():
     try:
         print(f"Loading tokenizer from: {model_args.model_name_or_path}")
         tokenizer = AutoTokenizer.from_pretrained(
-            model_args.model_name_or_path,
-            trust_remote_code=model_args.trust_remote_code,
+            "EleutherAI/polyglot-ko-5.8b",  # 원본 모델의 토크나이저 사용
+            trust_remote_code=True,
             padding_side="right",
-            use_fast=True  # Fast tokenizer 사용
+            use_fast=True,  # Fast tokenizer 사용
+            local_files_only=False  # Hugging Face Hub에서 다운로드 허용
         )
         print("Tokenizer loaded successfully")
         print(f"Tokenizer type: {type(tokenizer)}")
@@ -254,7 +255,6 @@ def main():
             print("Loading base model for training...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                quantization_config=bnb_config,
                 torch_dtype=torch.float16,
                 device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
                 trust_remote_code=model_args.trust_remote_code,
@@ -279,7 +279,8 @@ def main():
         lora_dropout=0.1,
         bias="none",
         task_type="TOKEN_CLS",
-        inference_mode=False
+        inference_mode=False,
+        init_lora_weights=True  # LoRA 가중치 초기화 추가
     )
     lora_model = get_peft_model(base_model, lora_config)
 
@@ -288,7 +289,7 @@ def main():
 
     # 트레이너 설정
     training_args.dataloader_pin_memory = False  # pin_memory 비활성화
-    training_args.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    training_args.report_to = []  # wandb 로깅 비활성화
 
     trainer = Trainer(
         model=model,
@@ -323,27 +324,10 @@ def main():
         # 모델과 토크나이저 저장
         trainer.save_model(training_args.output_dir)
         tokenizer.save_pretrained(training_args.output_dir)
-
-    # 평가
-    if training_args.do_eval:
-        print("\n=== Starting Evaluation ===")
-        print(f"Validation file: {data_args.validation_file}")
-        print(f"Output directory: {training_args.output_dir}")
-        
-        if valid_dataset is None:
-            print("Error: No validation dataset available")
-        else:
-            print(f"Validation dataset size: {len(valid_dataset)}")
-            try:
-                # 출력 디렉토리 생성
-                os.makedirs(training_args.output_dir, exist_ok=True)
-                
-                metrics = trainer.evaluate()
-                print(f"Evaluation metrics: {metrics}")
-                trainer.log_metrics("eval", metrics)
-                trainer.save_metrics("eval", metrics)
-            except Exception as e:
-                print(f"Error during evaluation: {str(e)}")
+    elif training_args.do_eval:
+        metrics = trainer.evaluate()
+        trainer.log_metrics("eval", metrics)
+        trainer.save_metrics("eval", metrics)
 
     # 예측
     if training_args.do_predict:
