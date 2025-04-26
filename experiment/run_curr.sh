@@ -14,10 +14,10 @@ CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --test_file "./gs_kold_test.json" \
     --do_train True \
     --output_dir "./output_curriculum" \
-    --curriculum_epochs 1 1 1 \
+    --curriculum_epochs 10 10 10 \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
-    --learning_rate 2e-5 \
+    --learning_rate 1e-5 \
     --weight_decay 0.01
 
 #evaluation

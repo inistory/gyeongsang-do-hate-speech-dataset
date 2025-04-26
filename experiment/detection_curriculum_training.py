@@ -6,7 +6,7 @@ from datasets import Dataset
 from transformers import (
     AutoModel, AutoTokenizer, Trainer, TrainingArguments,
     DataCollatorForTokenClassification, BitsAndBytesConfig,
-    HfArgumentParser
+    HfArgumentParser, EarlyStoppingCallback
 )
 from peft import LoraConfig, get_peft_model
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
@@ -29,6 +29,38 @@ class ModelArguments:
     trust_remote_code: bool = field(
         default=True,
         metadata={"help": "Whether to trust remote code when loading the model"}
+    )
+    do_train: bool = field(
+        default=True,
+        metadata={"help": "Whether to run training."}
+    )
+    do_predict: bool = field(
+        default=False,
+        metadata={"help": "Whether to run predictions on the test set."}
+    )
+    do_eval: bool = field(
+        default=False,
+        metadata={"help": "Whether to run evaluation on the validation set."}
+    )
+    output_dir: str = field(
+        default="./output_curriculum",
+        metadata={"help": "The output directory where the model predictions and checkpoints will be written."}
+    )
+    per_device_train_batch_size: int = field(
+        default=16,
+        metadata={"help": "Batch size per GPU/TPU core/CPU for training."}
+    )
+    per_device_eval_batch_size: int = field(
+        default=16,
+        metadata={"help": "Batch size per GPU/TPU core/CPU for evaluation."}
+    )
+    learning_rate: float = field(
+        default=2e-5,
+        metadata={"help": "The initial learning rate for AdamW."}
+    )
+    weight_decay: float = field(
+        default=0.01,
+        metadata={"help": "Weight decay for AdamW if we apply some."}
     )
 
 @dataclass
@@ -53,23 +85,51 @@ class DataArguments:
     )
 
 @dataclass
-class TrainingArguments(TrainingArguments):
-    output_dir: str = field(
-        default="./output",
-        metadata={"help": "The output directory where the model predictions and checkpoints will be written."}
+class CustomTrainingArguments(TrainingArguments):
+    do_train: bool = field(
+        default=True,
+        metadata={"help": "Whether to run training."}
     )
-    do_train: bool = field(default=True, metadata={"help": "Whether to run training."})
-    do_eval: bool = field(default=False, metadata={"help": "Whether to run eval on the dev set."})
-    do_predict: bool = field(default=False, metadata={"help": "Whether to run predictions on the test set."})
-    save_total_limit: Optional[int] = field(
-        default=1,
-        metadata={"help": "Limit the total amount of checkpoints."}
+    do_predict: bool = field(
+        default=False,
+        metadata={"help": "Whether to run predictions on the test set."}
     )
-    save_steps: int = field(default=500, metadata={"help": "Save checkpoint every X updates steps."})
-    eval_steps: int = field(default=500, metadata={"help": "Run an evaluation every X steps."})
-    logging_steps: int = field(default=100, metadata={"help": "Log every X updates steps."})
-    no_cuda: bool = field(default=False, metadata={"help": "Do not use CUDA even when available"})
-    dataloader_pin_memory: bool = field(default=False, metadata={"help": "Whether or not to pin memory for DataLoader"})
+    metric_for_best_model: str = field(
+        default="mean_sample_accuracy",
+        metadata={"help": "The metric to use to compare models."}
+    )
+    load_best_model_at_end: bool = field(
+        default=False,
+        metadata={"help": "Whether to load the best model found during training at the end of training."}
+    )
+    greater_is_better: bool = field(
+        default=True,
+        metadata={"help": "Whether a larger value of the metric is better."}
+    )
+    dataloader_pin_memory: bool = field(
+        default=False,
+        metadata={"help": "Whether or not to pin memory for DataLoader"}
+    )
+    report_to: List[str] = field(
+        default_factory=list,
+        metadata={"help": "The list of integrations to report the results and logs to."}
+    )
+    eval_steps: int = field(
+        default=100,
+        metadata={"help": "Number of update steps between two evaluations."}
+    )
+    save_steps: int = field(
+        default=100,
+        metadata={"help": "Number of updates steps before two checkpoint saves."}
+    )
+    evaluation_strategy: str = field(
+        default="steps",
+        metadata={"help": "The evaluation strategy to use."}
+    )
+    save_strategy: str = field(
+        default="steps",
+        metadata={"help": "The checkpoint save strategy to use."}
+    )
 
 def compute_metrics(p):
     predictions, labels = p
@@ -89,12 +149,16 @@ def compute_metrics(p):
         valid_preds = [pred[i] for i in valid_indices]
         valid_labels = [label[i] for i in valid_indices]
         
-        # 정확한 예측 수 계산
-        correct_predictions = sum(1 for p, l in zip(valid_preds, valid_labels) if p == l)
-        total_tokens = len(valid_indices)
+        # 문자 단위로 정확도 계산
+        correct_chars = 0
+        total_chars = len(valid_labels)
+        
+        for p, l in zip(valid_preds, valid_labels):
+            if p == l:
+                correct_chars += 1
         
         # 샘플별 정확도 계산
-        sample_accuracy = correct_predictions / total_tokens if total_tokens > 0 else 0
+        sample_accuracy = correct_chars / total_chars if total_chars > 0 else 0
         sample_accuracies.append(sample_accuracy)
     
     # 전체 샘플의 평균 정확도 계산
@@ -173,30 +237,19 @@ def tokenize_and_align_labels(example, tokenizer, max_length=128, label_all_toke
         example["dialect"],
         truncation=True,
         padding="max_length",
-        max_length=max_length,
-        return_offsets_mapping=True
+        max_length=max_length
     )
     
-    # 오프셋 매핑을 사용하여 토큰과 레이블 정렬
-    offset_mapping = tokenized["offset_mapping"]
-    labels = example["labels"]
-    aligned_labels = []
+    # 원본 데이터의 labels 사용
+    original_labels = example["labels"]
     
-    for offset in offset_mapping:
-        if offset[0] == 0 and offset[1] == 0:  # [CLS] 토큰
-            aligned_labels.append(-100)
-        elif offset[0] == 0 and offset[1] == 0:  # [SEP] 토큰
-            aligned_labels.append(-100)
+    # 토큰화된 텍스트의 길이에 맞게 레이블 조정
+    aligned_labels = []
+    for i in range(max_length):
+        if i < len(original_labels):
+            aligned_labels.append(original_labels[i])
         else:
-            # 해당 토큰이 포함하는 문자 범위에 해당하는 레이블 찾기
-            token_labels = []
-            for i, (start, end) in enumerate(offset_mapping):
-                if start < offset[1] and end > offset[0]:
-                    if i < len(labels):
-                        token_labels.append(labels[i])
-            
-            # 토큰에 해당하는 레이블이 있으면 1, 없으면 0
-            aligned_labels.append(1 if any(l == 1 for l in token_labels) else 0)
+            aligned_labels.append(-100)  # 패딩 토큰은 -100으로 레이블링
     
     tokenized["labels"] = aligned_labels
     return tokenized
@@ -207,6 +260,10 @@ class TokenClassificationModel(nn.Module):
         self.base_model = base_model
         self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(hidden_size, num_labels)
+        
+        # 가중치 초기화
+        self.classifier.weight.data.normal_(mean=0.0, std=0.02)
+        self.classifier.bias.data.zero_()
         
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.to(device)
@@ -227,11 +284,17 @@ class TokenClassificationModel(nn.Module):
 
         loss = None
         if labels is not None:
-            loss_fct = nn.CrossEntropyLoss()
+            loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
             active_loss = attention_mask.view(-1) == 1
             active_logits = logits.view(-1, self.classifier.out_features)[active_loss]
             active_labels = labels.view(-1)[active_loss]
-            loss = loss_fct(active_logits, active_labels)
+            
+            # 손실 계산 전에 유효한 레이블이 있는지 확인
+            if active_labels.numel() > 0:
+                loss = loss_fct(active_logits, active_labels)
+            else:
+                # 유효한 레이블이 없는 경우 기본 손실값 설정
+                loss = torch.tensor(0.0, device=active_logits.device, requires_grad=True)
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
@@ -243,8 +306,38 @@ def main():
         device = torch.device("cpu")
     print(f"Using device: {device}")
 
-    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
-    model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((ModelArguments, DataArguments))
+    model_args, data_args = parser.parse_args_into_dataclasses()
+
+    # TrainingArguments 직접 생성
+    training_args = CustomTrainingArguments(
+        output_dir=model_args.output_dir,
+        do_train=model_args.do_train,
+        do_predict=model_args.do_predict,
+        save_total_limit=1,
+        save_steps=100,
+        eval_steps=100,
+        logging_steps=50,
+        no_cuda=False,
+        dataloader_pin_memory=False,
+        metric_for_best_model="mean_sample_accuracy",
+        load_best_model_at_end=False,
+        remove_unused_columns=True,
+        label_names=["labels"],
+        report_to=[],
+        optim="adamw_torch",
+        lr_scheduler_type="linear",
+        warmup_ratio=0.1,
+        max_grad_norm=1.0,
+        seed=42,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
+        learning_rate=2e-5,
+        weight_decay=0.01,
+        eval_accumulation_steps=1,
+        save_safetensors=True,
+        save_only_model=True
+    )
 
     train_datasets = []
     valid_dataset = None
@@ -285,7 +378,14 @@ def main():
                         if not line:
                             continue
                         try:
-                            data.append(json.loads(line))
+                            item = json.loads(line)
+                            # standard 필드 제외하고 필요한 필드만 사용
+                            processed_item = {
+                                "dialect": item["dialect"],
+                                "OFF_span_dialect": item.get("OFF_span_dialect", ""),
+                                "labels": item.get("labels", [0] * len(item["dialect"]))
+                            }
+                            data.append(processed_item)
                         except json.JSONDecodeError as e:
                             print(f"Error parsing JSON at line {line_num}: {e}")
                             continue
@@ -308,7 +408,7 @@ def main():
                 )
                 train_datasets.append(curr_dataset)
 
-    if training_args.do_eval and data_args.validation_file:
+    if training_args.do_train and data_args.validation_file:
         valid_data = load_jsonl(data_args.validation_file)
         if valid_data:
             valid_dataset = Dataset.from_list(valid_data)
@@ -343,7 +443,7 @@ def main():
                 trust_remote_code=model_args.trust_remote_code,
             )
         else:
-            print("Loading model for evaluation/prediction...")
+            print("Loading model for prediction...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
                 torch_dtype=torch.float16,
@@ -367,65 +467,65 @@ def main():
     lora_model = get_peft_model(base_model, lora_config)
     model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
 
-    training_args.dataloader_pin_memory = False
-    training_args.report_to = []
-
     if training_args.do_train:
         for difficulty_level, (curr_dataset, num_epochs) in enumerate(zip(train_datasets, data_args.curriculum_epochs)):
             print(f"\n=== Starting training on difficulty level {difficulty_level} for {num_epochs} epochs ===")
             
             training_args.num_train_epochs = num_epochs
             
+            # 데이터셋 크기에 따라 eval_steps와 save_steps 계산
+            num_update_steps_per_epoch = len(curr_dataset) // training_args.per_device_train_batch_size
+            training_args.eval_steps = num_update_steps_per_epoch  # 매 epoch마다 평가
+            training_args.save_steps = num_update_steps_per_epoch  # 매 epoch마다 저장
+            
             trainer = Trainer(
                 model=model,
                 args=training_args,
                 train_dataset=curr_dataset,
-                eval_dataset=valid_dataset if training_args.do_eval else None,
+                eval_dataset=valid_dataset,
                 tokenizer=tokenizer,
                 data_collator=DataCollatorForTokenClassification(tokenizer),
-                compute_metrics=compute_metrics,
+                compute_metrics=compute_metrics
             )
+            
+            # 학습 시작
+            best_metric = float('-inf')
+            best_checkpoint = None
             
             train_result = trainer.train()
             metrics = train_result.metrics
+            
+            # 현재 모델의 성능 평가
+            eval_metrics = trainer.evaluate()
+            current_metric = eval_metrics.get("eval_mean_sample_accuracy", 0)
+            
+            # 최고 성능 갱신 여부 확인
+            if current_metric > best_metric:
+                best_metric = current_metric
+                best_checkpoint = os.path.join(training_args.output_dir, f"checkpoint-level-{difficulty_level}")
+                trainer.save_model(best_checkpoint)
+                print(f"New best model saved at {best_checkpoint} with metric: {best_metric}")
+            
             trainer.log_metrics(f"train_level_{difficulty_level}", metrics)
             trainer.save_metrics(f"train_level_{difficulty_level}", metrics)
             trainer.save_state()
             
-            checkpoint_dir = os.path.join(training_args.output_dir, f"checkpoint-level-{difficulty_level}")
-            trainer.save_model(checkpoint_dir)
-        
-        original_config = AutoModel.from_pretrained(
-            "EleutherAI/polyglot-ko-5.8b",
-            trust_remote_code=True
-        ).config
-        original_config.model_type = "polyglot"
-        original_config.save_pretrained(training_args.output_dir)
-        trainer.save_model(training_args.output_dir)
-        tokenizer.save_pretrained(training_args.output_dir)
-    elif training_args.do_eval:
-        print("\n=== Starting Evaluation ===")
-        trainer = Trainer(
-            model=model,
-            args=training_args,
-            eval_dataset=valid_dataset,
-            tokenizer=tokenizer,
-            data_collator=DataCollatorForTokenClassification(tokenizer),
-            compute_metrics=compute_metrics,
-        )
-        metrics = trainer.evaluate()
-        trainer.log_metrics("eval", metrics)
-        trainer.save_metrics("eval", metrics)
-        
-        # 평가 모델 저장
-        original_config = AutoModel.from_pretrained(
-            "EleutherAI/polyglot-ko-5.8b",
-            trust_remote_code=True
-        ).config
-        original_config.model_type = "polyglot"
-        original_config.save_pretrained(training_args.output_dir)
-        trainer.save_model(training_args.output_dir)
-        tokenizer.save_pretrained(training_args.output_dir)
+            # 최고 성능 모델 로드
+            if best_checkpoint is not None:
+                print(f"Loading best model from {best_checkpoint} with metric: {best_metric}")
+                base_model = AutoModel.from_pretrained(
+                    best_checkpoint,
+                    torch_dtype=torch.float16,
+                    device_map="auto",
+                    trust_remote_code=model_args.trust_remote_code
+                )
+                lora_model = get_peft_model(base_model, lora_config)
+                model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
+            
+            # 최종 모델 저장
+            final_checkpoint_dir = os.path.join(training_args.output_dir, f"final-level-{difficulty_level}")
+            trainer.save_model(final_checkpoint_dir)
+            print(f"Final model saved at {final_checkpoint_dir}")
     elif training_args.do_predict:
         print("\n=== Starting Prediction ===")
         if test_dataset is None:
