@@ -2,7 +2,7 @@ import os
 import torch
 import numpy as np
 from torch import nn
-from datasets import load_dataset, Dataset
+from datasets import load_dataset, Dataset, concatenate_datasets
 from transformers import (
     AutoModel, AutoTokenizer, Trainer, TrainingArguments,
     DataCollatorForTokenClassification, BitsAndBytesConfig,
@@ -12,7 +12,7 @@ from peft import LoraConfig, get_peft_model
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 import argparse
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, List
 import json
 import os
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
@@ -37,8 +37,9 @@ class ModelArguments:
 
 @dataclass
 class DataArguments:
-    train_file: Optional[str] = field(
-        default=None, metadata={"help": "The input training data file (a json file)."}
+    train_files: Optional[List[str]] = field(
+        default_factory=list,
+        metadata={"help": "The input training data files for curriculum learning (json files)."}
     )
     validation_file: Optional[str] = field(
         default=None, metadata={"help": "The input validation data file (a json file)."}
@@ -49,6 +50,10 @@ class DataArguments:
     max_seq_length: int = field(
         default=128,
         metadata={"help": "The maximum total input sequence length after tokenization."}
+    )
+    curriculum_epochs: Optional[List[int]] = field(
+        default_factory=lambda: [1, 1, 1],
+        metadata={"help": "Number of epochs to train on each difficulty level"}
     )
 
 @dataclass
@@ -214,14 +219,18 @@ def main():
             return None
         return data
 
-    if training_args.do_train and data_args.train_file:
-        train_data = load_jsonl(data_args.train_file)
-        if train_data:
-            train_dataset = Dataset.from_list(train_data)
-            train_dataset = train_dataset.map(
-                lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
-                batched=False
-            )
+    # 커리큘럼 학습을 위한 데이터셋 로드
+    if training_args.do_train and data_args.train_files:
+        train_datasets = []
+        for train_file in data_args.train_files:
+            curr_data = load_jsonl(train_file)
+            if curr_data:
+                curr_dataset = Dataset.from_list(curr_data)
+                curr_dataset = curr_dataset.map(
+                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
+                    batched=False
+                )
+                train_datasets.append(curr_dataset)
 
     if training_args.do_eval and data_args.validation_file:
         valid_data = load_jsonl(data_args.validation_file)
@@ -291,37 +300,41 @@ def main():
     training_args.dataloader_pin_memory = False  # pin_memory 비활성화
     training_args.report_to = []  # wandb 로깅 비활성화
 
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset if training_args.do_train else None,
-        eval_dataset=valid_dataset if training_args.do_eval else None,
-        tokenizer=tokenizer,
-        data_collator=DataCollatorForTokenClassification(tokenizer),
-        compute_metrics=compute_metrics,
-    )
-
-    # 학습
+    # 커리큘럼 학습 실행
     if training_args.do_train:
-        train_result = trainer.train()
-        metrics = train_result.metrics
-        trainer.log_metrics("train", metrics)
-        trainer.save_metrics("train", metrics)
-        trainer.save_state()
+        for difficulty_level, (curr_dataset, num_epochs) in enumerate(zip(train_datasets, data_args.curriculum_epochs)):
+            print(f"\n=== Starting training on difficulty level {difficulty_level} for {num_epochs} epochs ===")
+            
+            # 현재 난이도 레벨에 대한 training arguments 수정
+            training_args.num_train_epochs = num_epochs
+            
+            trainer = Trainer(
+                model=model,
+                args=training_args,
+                train_dataset=curr_dataset,
+                eval_dataset=valid_dataset if training_args.do_eval else None,
+                tokenizer=tokenizer,
+                data_collator=DataCollatorForTokenClassification(tokenizer),
+                compute_metrics=compute_metrics,
+            )
+            
+            train_result = trainer.train()
+            metrics = train_result.metrics
+            trainer.log_metrics(f"train_level_{difficulty_level}", metrics)
+            trainer.save_metrics(f"train_level_{difficulty_level}", metrics)
+            trainer.save_state()
+            
+            # 각 난이도 레벨 완료 후 중간 체크포인트 저장
+            checkpoint_dir = os.path.join(training_args.output_dir, f"checkpoint-level-{difficulty_level}")
+            trainer.save_model(checkpoint_dir)
         
-        # 원본 모델의 config를 가져와서 수정
+        # 최종 모델 저장
         original_config = AutoModel.from_pretrained(
             "EleutherAI/polyglot-ko-5.8b",
             trust_remote_code=True
         ).config
-        
-        # config 수정
         original_config.model_type = "polyglot"
-        
-        # config 저장
         original_config.save_pretrained(training_args.output_dir)
-        
-        # 모델과 토크나이저 저장
         trainer.save_model(training_args.output_dir)
         tokenizer.save_pretrained(training_args.output_dir)
     elif training_args.do_eval:
