@@ -256,7 +256,7 @@ def main():
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
                 torch_dtype=torch.float16,
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
+                device_map="auto",  # device_map을 "auto"로 변경
                 trust_remote_code=model_args.trust_remote_code,
             )
         else:
@@ -264,7 +264,7 @@ def main():
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
                 torch_dtype=torch.float16,
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
+                device_map="auto",  # device_map을 "auto"로 변경
                 trust_remote_code=model_args.trust_remote_code
             )
     except Exception as e:
@@ -325,31 +325,20 @@ def main():
         trainer.save_model(training_args.output_dir)
         tokenizer.save_pretrained(training_args.output_dir)
     elif training_args.do_eval:
+        print("\n=== Starting Evaluation ===")
         metrics = trainer.evaluate()
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
-
-    # 예측
-    if training_args.do_predict:
+    elif training_args.do_predict:
         print("\n=== Starting Prediction ===")
-        print(f"Test file: {data_args.test_file}")
-        print(f"Output directory: {training_args.output_dir}")
-        
         if test_dataset is None:
             print("Error: No test dataset available")
         else:
-            print(f"Test dataset size: {len(test_dataset)}")
-            try:
-                # 출력 디렉토리 생성
-                os.makedirs(training_args.output_dir, exist_ok=True)
-                
-                predictions = trainer.predict(test_dataset=test_dataset)
-                metrics = predictions.metrics
-                print(f"Prediction metrics: {metrics}")
-                trainer.log_metrics("predict", metrics)
-                trainer.save_metrics("predict", metrics)
-            except Exception as e:
-                print(f"Error during prediction: {str(e)}")
+            predictions = trainer.predict(test_dataset=test_dataset)
+            metrics = predictions.metrics
+            print(f"Prediction metrics: {metrics}")
+            trainer.log_metrics("predict", metrics)
+            trainer.save_metrics("predict", metrics)
 
 if __name__ == "__main__":
     main()

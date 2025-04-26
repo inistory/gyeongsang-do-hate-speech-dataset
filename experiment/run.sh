@@ -1,7 +1,10 @@
 #!/bin/bash
 
 #training
-python detection_curriculum_training.py \
+echo "================================================="
+echo "                   TRAINING                        "
+echo "================================================="
+CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --model_name_or_path EleutherAI/polyglot-ko-5.8b \
     --train_file "./gs_kold_train.json" \
     --validation_file "./gs_kold_valid.json" \
@@ -16,20 +19,29 @@ python detection_curriculum_training.py \
 
 
 #evaluation
-python detection_curriculum_training.py \
+echo "================================================="
+echo "                  EVALUATION                       "
+echo "================================================="
+CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --model_name_or_path "./output_easy" \
     --validation_file "./gs_kold_valid.json" \
     --test_file "./gs_kold_test.json" \
     --do_eval \
+    --do_train False \
     --output_dir "./output_eval" \
     --trust_remote_code true \
     --base_model_name_or_path "EleutherAI/polyglot-ko-5.8b"
 
 #prediction
-python detection_curriculum_training.py \
+
+echo "================================================="
+echo "                  PREDICTION                       "
+echo "================================================="
+CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --model_name_or_path "./output_easy" \
     --test_file "./gs_kold_test.json" \
     --do_predict \
+    --do_train False \
     --output_dir "./output_predict" \
     --trust_remote_code true \
     --base_model_name_or_path "EleutherAI/polyglot-ko-5.8b"
