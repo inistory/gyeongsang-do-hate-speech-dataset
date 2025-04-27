@@ -12,7 +12,7 @@ from peft import LoraConfig, get_peft_model
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 import argparse
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, List
 import json
 import os
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
@@ -40,6 +40,9 @@ class DataArguments:
     train_file: Optional[str] = field(
         default=None, metadata={"help": "The input training data file (a json file)."}
     )
+    train_files: Optional[List[str]] = field(
+        default=None, metadata={"help": "The input training data files for curriculum learning (json files)."}
+    )
     validation_file: Optional[str] = field(
         default=None, metadata={"help": "The input validation data file (a json file)."}
     )
@@ -50,6 +53,9 @@ class DataArguments:
         default=128,
         metadata={"help": "The maximum total input sequence length after tokenization."}
     )
+    curriculum_epochs: Optional[List[int]] = field(
+        default=None, metadata={"help": "Number of epochs for each curriculum stage."}
+    )
 
 @dataclass
 class TrainingArguments(TrainingArguments):
@@ -58,7 +64,7 @@ class TrainingArguments(TrainingArguments):
         metadata={"help": "The output directory where the model predictions and checkpoints will be written."}
     )
     do_train: bool = field(default=True, metadata={"help": "Whether to run training."})
-    do_eval: bool = field(default=False, metadata={"help": "Whether to run eval on the dev set."})
+    do_eval: bool = field(default=True, metadata={"help": "Whether to run eval on the dev set."})
     do_predict: bool = field(default=False, metadata={"help": "Whether to run predictions on the test set."})
     save_total_limit: Optional[int] = field(
         default=1,
@@ -69,6 +75,8 @@ class TrainingArguments(TrainingArguments):
     logging_steps: int = field(default=100, metadata={"help": "Log every X updates steps."})
     no_cuda: bool = field(default=False, metadata={"help": "Do not use CUDA even when available"})
     dataloader_pin_memory: bool = field(default=False, metadata={"help": "Whether or not to pin memory for DataLoader"})
+    save_strategy: str = field(default="epoch", metadata={"help": "The strategy to use for saving checkpoints."})
+    evaluation_strategy: str = field(default="epoch", metadata={"help": "The strategy to use for evaluating checkpoints."})
 
 # 평가 함수
 def compute_metrics(p):
@@ -82,8 +90,13 @@ def compute_metrics(p):
                 true_labels.append(l_)
     precision, recall, f1, _ = precision_recall_fscore_support(true_labels, true_preds, average='binary')
     acc = accuracy_score(true_labels, true_preds)
-    return {"accuracy": acc, "precision": precision, "recall": recall, "f1": f1}
-
+    return {
+        "accuracy": acc, 
+        "precision": precision, 
+        "recall": recall, 
+        "f1": f1,
+        "eval_loss": p.metrics.get("eval_loss", 0.0)  # validation loss 추가
+    }
 # 전처리 함수
 def tokenize_and_align_labels(example, tokenizer, max_length=128, label_all_tokens=False):
     tokenized = tokenizer(example["dialect"], truncation=True, padding="max_length", max_length=max_length)
@@ -166,6 +179,33 @@ def main():
     parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    # 모델 이름에서 마지막 부분만 추출
+    model_name = model_args.model_name_or_path.split('/')[-1]
+    
+    # 출력 디렉토리 수정
+    if training_args.do_train:
+        training_args.output_dir = f"./output_curriculum_{model_name}"
+    elif training_args.do_eval:
+        training_args.output_dir = f"./output_curriculum_{model_name}_eval"
+    elif training_args.do_predict:
+        training_args.output_dir = f"./output_curriculum_{model_name}_predict"
+
+    # 학습 시 최적의 모델 선택을 위한 설정
+    if training_args.do_train:
+        training_args.save_strategy = "epoch"
+        training_args.evaluation_strategy = "epoch"
+        training_args.save_total_limit = 5
+        training_args.load_best_model_at_end = True
+        training_args.metric_for_best_model = "eval_loss"
+        training_args.greater_is_better = False
+
+    # 평가/예측 시 최적의 모델 사용
+    if training_args.do_eval or training_args.do_predict:
+        if os.path.exists(os.path.join(training_args.output_dir, "checkpoint-best")):
+            model_args.model_name_or_path = os.path.join(training_args.output_dir, "checkpoint-best")
+        else:
+            print("Warning: No checkpoint-best found, using the last checkpoint")
+
     # 데이터셋 변수 초기화
     train_dataset = None
     valid_dataset = None
@@ -222,14 +262,31 @@ def main():
         return data
 
     # 학습 데이터셋 로드
-    if training_args.do_train and data_args.train_file:
-        train_data = load_jsonl(data_args.train_file)
-        if train_data:
-            train_dataset = Dataset.from_list(train_data)
-            train_dataset = train_dataset.map(
-                lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
-                batched=False
-            )
+    if training_args.do_train:
+        if data_args.train_files:
+            print("Loading curriculum training files...")
+            train_data = []
+            for file_path in data_args.train_files:
+                file_data = load_jsonl(file_path)
+                if file_data:
+                    train_data.extend(file_data)
+            if train_data:
+                train_dataset = Dataset.from_list(train_data)
+                train_dataset = train_dataset.map(
+                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
+                    batched=False
+                )
+                print(f"Loaded {len(train_data)} training examples")
+        elif data_args.train_file:
+            print("Loading single training file...")
+            train_data = load_jsonl(data_args.train_file)
+            if train_data:
+                train_dataset = Dataset.from_list(train_data)
+                train_dataset = train_dataset.map(
+                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
+                    batched=False
+                )
+                print(f"Loaded {len(train_data)} training examples")
 
     # 검증 데이터셋 로드
     if training_args.do_eval and data_args.validation_file:
@@ -240,6 +297,7 @@ def main():
                 lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
                 batched=False
             )
+            print(f"Loaded {len(valid_data)} validation examples")
 
     # 테스트 데이터셋 로드
     if training_args.do_predict and data_args.test_file:
@@ -250,6 +308,10 @@ def main():
                 lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
                 batched=False
             )
+            print(f"Loaded {len(test_data)} test examples")
+
+    if training_args.do_train and train_dataset is None:
+        raise ValueError("No training dataset available. Please check your data files.")
 
     # 모델 설정
     bnb_config = BitsAndBytesConfig(

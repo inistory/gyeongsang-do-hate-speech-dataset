@@ -58,17 +58,22 @@ class TrainingArguments(TrainingArguments):
         metadata={"help": "The output directory where the model predictions and checkpoints will be written."}
     )
     do_train: bool = field(default=True, metadata={"help": "Whether to run training."})
-    do_eval: bool = field(default=False, metadata={"help": "Whether to run eval on the dev set."})
+    do_eval: bool = field(default=True, metadata={"help": "Whether to run eval on the dev set."})
     do_predict: bool = field(default=False, metadata={"help": "Whether to run predictions on the test set."})
     save_total_limit: Optional[int] = field(
-        default=1,
+        default=5,
         metadata={"help": "Limit the total amount of checkpoints."}
     )
-    save_steps: int = field(default=500, metadata={"help": "Save checkpoint every X updates steps."})
-    eval_steps: int = field(default=500, metadata={"help": "Run an evaluation every X steps."})
+    save_steps: int = field(default=100, metadata={"help": "Save checkpoint every X updates steps."})
+    eval_steps: int = field(default=100, metadata={"help": "Run an evaluation every X steps."})
     logging_steps: int = field(default=100, metadata={"help": "Log every X updates steps."})
     no_cuda: bool = field(default=False, metadata={"help": "Do not use CUDA even when available"})
     dataloader_pin_memory: bool = field(default=False, metadata={"help": "Whether or not to pin memory for DataLoader"})
+    save_strategy: str = field(default="no", metadata={"help": "The strategy to use for saving checkpoints."})
+    evaluation_strategy: str = field(default="no", metadata={"help": "The strategy to use for evaluating checkpoints."})
+    load_best_model_at_end: bool = field(default=False, metadata={"help": "Whether to load the best model found during training."})
+    metric_for_best_model: str = field(default="eval_loss", metadata={"help": "The metric to use to compare models."})
+    greater_is_better: bool = field(default=False, metadata={"help": "Whether the `metric_for_best_model` should be maximized or not."})
 
 # 평가 함수
 def compute_metrics(p):
@@ -82,7 +87,13 @@ def compute_metrics(p):
                 true_labels.append(l_)
     precision, recall, f1, _ = precision_recall_fscore_support(true_labels, true_preds, average='binary')
     acc = accuracy_score(true_labels, true_preds)
-    return {"accuracy": acc, "precision": precision, "recall": recall, "f1": f1}
+    return {
+        "accuracy": acc, 
+        "precision": precision, 
+        "recall": recall, 
+        "f1": f1,
+        "eval_loss": p.metrics.get("eval_loss", 0.0)  # validation loss 추가
+    }
 
 # 전처리 함수
 def tokenize_and_align_labels(example, tokenizer, max_length=128, label_all_tokens=False):
@@ -157,7 +168,7 @@ class TokenClassificationModel(nn.Module):
 def main():
     # GPU 설정
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # 첫 번째 GPU 사용
+        device = torch.device("cuda:0")
         torch.cuda.set_device(device)
     else:
         device = torch.device("cpu")
@@ -165,6 +176,38 @@ def main():
 
     parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+
+    # 모델 이름에서 마지막 부분만 추출
+    model_name = model_args.model_name_or_path.split('/')[-1]
+    
+    # 출력 디렉토리 수정
+    if training_args.do_train:
+        training_args.output_dir = f"./output_full_{model_name}"
+    elif training_args.do_eval:
+        training_args.output_dir = f"./output_full_{model_name}_eval"
+    elif training_args.do_predict:
+        training_args.output_dir = f"./output_full_{model_name}_predict"
+
+    # 학습 시 최적의 모델 선택을 위한 설정
+    if training_args.do_train:
+        training_args.save_strategy = "epoch"
+        training_args.evaluation_strategy = "epoch"
+        training_args.save_total_limit = 5
+        training_args.load_best_model_at_end = True
+        training_args.metric_for_best_model = "eval_loss"
+        training_args.greater_is_better = False
+    else:
+        # 평가/예측 시에는 load_best_model_at_end 사용하지 않음
+        training_args.load_best_model_at_end = False
+        training_args.save_strategy = "no"
+        training_args.evaluation_strategy = "no"
+
+    # 평가/예측 시 최적의 모델 사용
+    if training_args.do_eval or training_args.do_predict:
+        if os.path.exists(os.path.join(training_args.output_dir, "checkpoint-best")):
+            model_args.model_name_or_path = os.path.join(training_args.output_dir, "checkpoint-best")
+        else:
+            print("Warning: No checkpoint-best found, using the last checkpoint")
 
     # 데이터셋 변수 초기화
     train_dataset = None

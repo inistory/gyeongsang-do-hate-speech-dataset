@@ -29,3 +29,6 @@ Validation
 !detection_easy.json
 !detection_hard.json
 !detection_medium.json
+!gs_kold_test.json
+!gs_kold_train.json
+!gs_kold_valid.json
