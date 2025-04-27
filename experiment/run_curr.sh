@@ -17,8 +17,13 @@ CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
     --curriculum_epochs 10 10 10 \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
-    --learning_rate 1e-5 \
-    --weight_decay 0.01
+    --learning_rate 5e-5 \
+    --weight_decay 0.01 \
+    --max_grad_norm 0.5 \
+    --warmup_ratio 0.1 \
+    --fp16 False \
+    --gradient_accumulation_steps 2 \
+    --trust_remote_code True
 
 #evaluation
 echo "================================================="
