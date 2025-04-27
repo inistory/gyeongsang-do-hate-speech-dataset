@@ -117,7 +117,8 @@ class TokenClassificationModel(nn.Module):
         # 모든 모듈을 같은 디바이스로 이동
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.to(device)
-        self.classifier = self.classifier.to(device, dtype=torch.float16)
+        # classifier를 base_model과 같은 데이터 타입으로 설정
+        self.classifier = self.classifier.to(device, dtype=base_model.dtype)
 
     def forward(self, input_ids=None, attention_mask=None, labels=None, **kwargs):
         # 입력 텐서들을 현재 디바이스로 이동
@@ -135,11 +136,21 @@ class TokenClassificationModel(nn.Module):
 
         loss = None
         if labels is not None:
-            loss_fct = nn.CrossEntropyLoss()
+            # 수치적 안정성을 위해 log_softmax 사용
+            log_probs = F.log_softmax(logits, dim=-1)
+            loss_fct = nn.NLLLoss()
             active_loss = attention_mask.view(-1) == 1
-            active_logits = logits.view(-1, self.classifier.out_features)[active_loss]
+            active_logits = log_probs.view(-1, self.classifier.out_features)[active_loss]
             active_labels = labels.view(-1)[active_loss]
-            loss = loss_fct(active_logits, active_labels)
+            
+            # 손실 계산 전에 유효한 샘플이 있는지 확인
+            if active_labels.numel() > 0:
+                # 클래스 가중치 적용 (불균형 데이터셋 고려)
+                class_weights = torch.tensor([1.0, 2.0], device=active_labels.device)  # 1:2 비율로 가중치 설정
+                loss_fct = nn.NLLLoss(weight=class_weights)
+                loss = loss_fct(active_logits, active_labels)
+            else:
+                loss = torch.tensor(0.0, device=logits.device, requires_grad=True)
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
@@ -164,11 +175,12 @@ def main():
     try:
         print(f"Loading tokenizer from: {model_args.model_name_or_path}")
         tokenizer = AutoTokenizer.from_pretrained(
-            "EleutherAI/polyglot-ko-5.8b",  # 원본 모델의 토크나이저 사용
-            trust_remote_code=True,
+            model_args.model_name_or_path,
+            trust_remote_code=model_args.trust_remote_code,
             padding_side="right",
             use_fast=True,  # Fast tokenizer 사용
-            local_files_only=False  # Hugging Face Hub에서 다운로드 허용
+            local_files_only=False,  # Hugging Face Hub에서 다운로드 허용
+            model_type="polyglot"  # 모델 타입 명시
         )
         print("Tokenizer loaded successfully")
         print(f"Tokenizer type: {type(tokenizer)}")
@@ -214,6 +226,7 @@ def main():
             return None
         return data
 
+    # 데이터셋 로드
     if training_args.do_train and data_args.train_file:
         train_data = load_jsonl(data_args.train_file)
         if train_data:
@@ -255,16 +268,16 @@ def main():
             print("Loading base model for training...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float16,
-                device_map="auto",  # device_map을 "auto"로 변경
+                torch_dtype=torch.float32,  # FP32로 변경
+                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
                 trust_remote_code=model_args.trust_remote_code,
             )
         else:
             print("Loading model for evaluation/prediction...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float16,
-                device_map="auto",  # device_map을 "auto"로 변경
+                torch_dtype=torch.float32,  # FP32로 변경
+                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
                 trust_remote_code=model_args.trust_remote_code
             )
     except Exception as e:
@@ -324,21 +337,49 @@ def main():
         # 모델과 토크나이저 저장
         trainer.save_model(training_args.output_dir)
         tokenizer.save_pretrained(training_args.output_dir)
-    elif training_args.do_eval:
+
+    # 평가
+    if training_args.do_eval:
         print("\n=== Starting Evaluation ===")
-        metrics = trainer.evaluate()
-        trainer.log_metrics("eval", metrics)
-        trainer.save_metrics("eval", metrics)
-    elif training_args.do_predict:
+        print(f"Validation file: {data_args.validation_file}")
+        print(f"Output directory: {training_args.output_dir}")
+        
+        if valid_dataset is None:
+            print("Error: No validation dataset available")
+        else:
+            print(f"Validation dataset size: {len(valid_dataset)}")
+            try:
+                # 출력 디렉토리 생성
+                os.makedirs(training_args.output_dir, exist_ok=True)
+                
+                metrics = trainer.evaluate()
+                print(f"Evaluation metrics: {metrics}")
+                trainer.log_metrics("eval", metrics)
+                trainer.save_metrics("eval", metrics)
+            except Exception as e:
+                print(f"Error during evaluation: {str(e)}")
+
+    # 예측
+    if training_args.do_predict:
         print("\n=== Starting Prediction ===")
+        print(f"Test file: {data_args.test_file}")
+        print(f"Output directory: {training_args.output_dir}")
+        
         if test_dataset is None:
             print("Error: No test dataset available")
         else:
-            predictions = trainer.predict(test_dataset=test_dataset)
-            metrics = predictions.metrics
-            print(f"Prediction metrics: {metrics}")
-            trainer.log_metrics("predict", metrics)
-            trainer.save_metrics("predict", metrics)
+            print(f"Test dataset size: {len(test_dataset)}")
+            try:
+                # 출력 디렉토리 생성
+                os.makedirs(training_args.output_dir, exist_ok=True)
+                
+                predictions = trainer.predict(test_dataset=test_dataset)
+                metrics = predictions.metrics
+                print(f"Prediction metrics: {metrics}")
+                trainer.log_metrics("predict", metrics)
+                trainer.save_metrics("predict", metrics)
+            except Exception as e:
+                print(f"Error during prediction: {str(e)}")
 
 if __name__ == "__main__":
     main()

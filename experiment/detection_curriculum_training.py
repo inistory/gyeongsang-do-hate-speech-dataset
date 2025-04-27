@@ -37,14 +37,6 @@ class ModelArguments:
 
 @dataclass
 class DataArguments:
-    train_files: Optional[list[str]] = field(
-        default=None,
-        metadata={"help": "List of training data files for curriculum learning"}
-    )
-    curriculum_epochs: Optional[list[int]] = field(
-        default=None,
-        metadata={"help": "Number of epochs for each curriculum stage"}
-    )
     train_file: Optional[str] = field(
         default=None, metadata={"help": "The input training data file (a json file)."}
     )
@@ -165,7 +157,7 @@ class TokenClassificationModel(nn.Module):
 def main():
     # GPU 설정
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # 첫 번째 GPU 사용
+        device = torch.device("cuda:0")
         torch.cuda.set_device(device)
     else:
         device = torch.device("cpu")
@@ -186,20 +178,17 @@ def main():
             model_args.model_name_or_path,
             trust_remote_code=model_args.trust_remote_code,
             padding_side="right",
-            use_fast=True,  # Fast tokenizer 사용
-            local_files_only=False,  # Hugging Face Hub에서 다운로드 허용
-            model_type="polyglot"  # 모델 타입 명시
+            use_fast=True,
+            local_files_only=False,
+            model_type="polyglot"
         )
         print("Tokenizer loaded successfully")
-        print(f"Tokenizer type: {type(tokenizer)}")
         
         if tokenizer.pad_token is None:
             print("Setting pad_token to eos_token")
             tokenizer.pad_token = tokenizer.eos_token
     except Exception as e:
         print(f"Error loading tokenizer: {e}")
-        print(f"Error type: {type(e)}")
-        print(f"Error details: {str(e)}")
         return
 
     # 데이터셋 로드 및 전처리
@@ -209,22 +198,20 @@ def main():
         data = []
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                # 파일 내용의 첫 문자를 확인하여 JSON 배열인지 JSONL인지 판단
                 first_char = f.read(1)
-                f.seek(0)  # 파일 포인터를 다시 처음으로
+                f.seek(0)
                 
-                if first_char == '[':  # JSON 배열 형식
+                if first_char == '[':
                     data = json.load(f)
-                else:  # JSONL 형식
+                else:
                     for line_num, line in enumerate(f, 1):
                         line = line.strip()
-                        if not line:  # 빈 줄 건너뛰기
+                        if not line:
                             continue
                         try:
                             data.append(json.loads(line))
                         except json.JSONDecodeError as e:
                             print(f"Error parsing JSON at line {line_num}: {e}")
-                            print(f"Line content: {line}")
                             continue
         except FileNotFoundError:
             print(f"File not found: {file_path}")
@@ -234,101 +221,17 @@ def main():
             return None
         return data
 
-    # 커리큘럼 학습 로직
-    if data_args.train_files and data_args.curriculum_epochs:
-        print("\n=== Starting Curriculum Learning ===")
-        for stage, (train_file, epochs) in enumerate(zip(data_args.train_files, data_args.curriculum_epochs)):
-            print(f"\nStage {stage + 1}: Training on {train_file} for {epochs} epochs")
-            
-            # 현재 단계의 데이터셋 로드
-            train_data = load_jsonl(train_file)
-            if train_data:
-                train_dataset = Dataset.from_list(train_data)
-                train_dataset = train_dataset.map(
-                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
-                    batched=False
-                )
-                
-                # 모델 설정
-                bnb_config = BitsAndBytesConfig(
-                    load_in_4bit=True,
-                    bnb_4bit_use_double_quant=False,
-                    bnb_4bit_quant_type="nf4",
-                    bnb_4bit_compute_dtype=torch.float16
-                )
+    # 학습 데이터셋 로드
+    if training_args.do_train and data_args.train_file:
+        train_data = load_jsonl(data_args.train_file)
+        if train_data:
+            train_dataset = Dataset.from_list(train_data)
+            train_dataset = train_dataset.map(
+                lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
+                batched=False
+            )
 
-                # base 모델 로드
-                try:
-                    print("Loading base model for training...")
-                    base_model = AutoModel.from_pretrained(
-                        model_args.model_name_or_path,
-                        torch_dtype=torch.float32,  # FP32로 변경
-                        device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
-                        trust_remote_code=model_args.trust_remote_code,
-                    )
-                except Exception as e:
-                    print(f"Error loading base model: {e}")
-                    return
-
-                # LoRA 설정
-                lora_config = LoraConfig(
-                    r=8,
-                    lora_alpha=32,
-                    target_modules=["query_key_value"],  # polyglot 모델의 attention 레이어
-                    lora_dropout=0.1,
-                    bias="none",
-                    task_type="TOKEN_CLS",
-                    inference_mode=False,
-                    init_lora_weights=True  # LoRA 가중치 초기화 추가
-                )
-                lora_model = get_peft_model(base_model, lora_config)
-
-                # 분류 모델 생성
-                model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
-
-                # 트레이너 설정
-                training_args.dataloader_pin_memory = False  # pin_memory 비활성화
-                training_args.report_to = []  # wandb 로깅 비활성화
-                training_args.num_train_epochs = epochs  # 현재 단계의 에폭 수 설정
-
-                trainer = Trainer(
-                    model=model,
-                    args=training_args,
-                    train_dataset=train_dataset,
-                    eval_dataset=valid_dataset if training_args.do_eval else None,
-                    tokenizer=tokenizer,
-                    data_collator=DataCollatorForTokenClassification(tokenizer),
-                    compute_metrics=compute_metrics,
-                )
-
-                # 학습
-                train_result = trainer.train()
-                metrics = train_result.metrics
-                trainer.log_metrics("train", metrics)
-                trainer.save_metrics("train", metrics)
-                trainer.save_state()
-                
-                # 모델과 토크나이저 저장
-                output_dir = os.path.join(training_args.output_dir, f"stage_{stage + 1}")
-                os.makedirs(output_dir, exist_ok=True)
-                trainer.save_model(output_dir)
-                tokenizer.save_pretrained(output_dir)
-                
-                print(f"Stage {stage + 1} completed. Model saved to {output_dir}")
-            else:
-                print(f"Error: Could not load training data from {train_file}")
-                return
-    else:
-        # 기존의 단일 데이터셋 학습 로직
-        if training_args.do_train and data_args.train_file:
-            train_data = load_jsonl(data_args.train_file)
-            if train_data:
-                train_dataset = Dataset.from_list(train_data)
-                train_dataset = train_dataset.map(
-                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
-                    batched=False
-                )
-
+    # 검증 데이터셋 로드
     if training_args.do_eval and data_args.validation_file:
         valid_data = load_jsonl(data_args.validation_file)
         if valid_data:
@@ -338,6 +241,7 @@ def main():
                 batched=False
             )
 
+    # 테스트 데이터셋 로드
     if training_args.do_predict and data_args.test_file:
         test_data = load_jsonl(data_args.test_file)
         if test_data:
@@ -361,16 +265,16 @@ def main():
             print("Loading base model for training...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float32,  # FP32로 변경
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
+                torch_dtype=torch.float32,
+                device_map={"": 0},
                 trust_remote_code=model_args.trust_remote_code,
             )
         else:
             print("Loading model for evaluation/prediction...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float32,  # FP32로 변경
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
+                torch_dtype=torch.float32,
+                device_map={"": 0},
                 trust_remote_code=model_args.trust_remote_code
             )
     except Exception as e:
@@ -381,21 +285,19 @@ def main():
     lora_config = LoraConfig(
         r=8,
         lora_alpha=32,
-        target_modules=["query_key_value"],  # polyglot 모델의 attention 레이어
+        target_modules=["query_key_value"],
         lora_dropout=0.1,
         bias="none",
         task_type="TOKEN_CLS",
         inference_mode=False,
-        init_lora_weights=True  # LoRA 가중치 초기화 추가
+        init_lora_weights=True
     )
     lora_model = get_peft_model(base_model, lora_config)
-
-    # 분류 모델 생성
     model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
 
     # 트레이너 설정
-    training_args.dataloader_pin_memory = False  # pin_memory 비활성화
-    training_args.report_to = []  # wandb 로깅 비활성화
+    training_args.dataloader_pin_memory = False
+    training_args.report_to = []
 
     trainer = Trainer(
         model=model,
@@ -414,7 +316,7 @@ def main():
         trainer.log_metrics("train", metrics)
         trainer.save_metrics("train", metrics)
         trainer.save_state()
-        
+
         # 원본 모델의 config를 가져와서 수정
         original_config = AutoModel.from_pretrained(
             "EleutherAI/polyglot-ko-5.8b",
@@ -434,45 +336,25 @@ def main():
     # 평가
     if training_args.do_eval:
         print("\n=== Starting Evaluation ===")
-        print(f"Validation file: {data_args.validation_file}")
-        print(f"Output directory: {training_args.output_dir}")
-        
         if valid_dataset is None:
             print("Error: No validation dataset available")
         else:
-            print(f"Validation dataset size: {len(valid_dataset)}")
-            try:
-                # 출력 디렉토리 생성
-                os.makedirs(training_args.output_dir, exist_ok=True)
-                
-                metrics = trainer.evaluate()
-                print(f"Evaluation metrics: {metrics}")
-                trainer.log_metrics("eval", metrics)
-                trainer.save_metrics("eval", metrics)
-            except Exception as e:
-                print(f"Error during evaluation: {str(e)}")
+            metrics = trainer.evaluate()
+            print(f"Evaluation metrics: {metrics}")
+            trainer.log_metrics("eval", metrics)
+            trainer.save_metrics("eval", metrics)
 
     # 예측
     if training_args.do_predict:
         print("\n=== Starting Prediction ===")
-        print(f"Test file: {data_args.test_file}")
-        print(f"Output directory: {training_args.output_dir}")
-        
         if test_dataset is None:
             print("Error: No test dataset available")
         else:
-            print(f"Test dataset size: {len(test_dataset)}")
-            try:
-                # 출력 디렉토리 생성
-                os.makedirs(training_args.output_dir, exist_ok=True)
-                
-                predictions = trainer.predict(test_dataset=test_dataset)
-                metrics = predictions.metrics
-                print(f"Prediction metrics: {metrics}")
-                trainer.log_metrics("predict", metrics)
-                trainer.save_metrics("predict", metrics)
-            except Exception as e:
-                print(f"Error during prediction: {str(e)}")
+            predictions = trainer.predict(test_dataset=test_dataset)
+            metrics = predictions.metrics
+            print(f"Prediction metrics: {metrics}")
+            trainer.log_metrics("predict", metrics)
+            trainer.save_metrics("predict", metrics)
 
 if __name__ == "__main__":
     main()
