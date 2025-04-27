@@ -78,25 +78,25 @@ class TrainingArguments(TrainingArguments):
     save_strategy: str = field(default="epoch", metadata={"help": "The strategy to use for saving checkpoints."})
     evaluation_strategy: str = field(default="epoch", metadata={"help": "The strategy to use for evaluating checkpoints."})
 
+
 # 평가 함수
 def compute_metrics(p):
     predictions, labels = p
     predictions = np.argmax(predictions, axis=2)
-    true_labels, true_preds = [], []
+    
+    # 시퀀스 수준 평가
+    exact_matches = 0
+    total_samples = len(predictions)
     for pred, label in zip(predictions, labels):
-        for p_, l_ in zip(pred, label):
-            if l_ != -100:
-                true_preds.append(p_)
-                true_labels.append(l_)
-    precision, recall, f1, _ = precision_recall_fscore_support(true_labels, true_preds, average='binary')
-    acc = accuracy_score(true_labels, true_preds)
+        if np.array_equal(pred[label != -100], label[label != -100]):
+            exact_matches += 1
+    
     return {
-        "accuracy": acc, 
-        "precision": precision, 
-        "recall": recall, 
-        "f1": f1,
-        "eval_loss": p.metrics.get("eval_loss", 0.0)  # validation loss 추가
+        "exact_match_ratio": exact_matches / total_samples,
+        "exact_matches": exact_matches,
+        "total_samples": total_samples
     }
+
 # 전처리 함수
 def tokenize_and_align_labels(example, tokenizer, max_length=128, label_all_tokens=False):
     tokenized = tokenizer(example["dialect"], truncation=True, padding="max_length", max_length=max_length)
@@ -196,8 +196,8 @@ def main():
         training_args.evaluation_strategy = "epoch"
         training_args.save_total_limit = 5
         training_args.load_best_model_at_end = True
-        training_args.metric_for_best_model = "eval_loss"
-        training_args.greater_is_better = False
+        training_args.metric_for_best_model = "exact_match_ratio"
+        training_args.greater_is_better = True
 
     # 평가/예측 시 최적의 모델 사용
     if training_args.do_eval or training_args.do_predict:
