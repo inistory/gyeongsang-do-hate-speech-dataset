@@ -2,9 +2,17 @@ import json
 from collections import defaultdict
 import random
 
-# 1. 데이터 로드
+# 1. 데이터 로드'
+with open("../korean_hatespeech/KOLD/data/gs_kold.json", "r", encoding="utf-8") as f:
+    raw_data = json.load(f)
+
+print(f"전체 데이터 개수: {len(raw_data)}")
+
+
 with open("gs_kold_train.json", "r", encoding="utf-8") as f:
     raw_data = json.load(f)
+
+print(f"gs_kold_train 개수: {len(raw_data)}")
 
 def split_data_by_difficulty(raw_data):
     hate_examples = []
@@ -94,10 +102,21 @@ for level in ["easy", "medium", "hard", "full"]:
     hate_count = sum(1 for item in curriculum[level] if 1 in item['labels'])
     non_hate_count = total_count - hate_count
     
+    # hate 데이터의 통계 계산
+    hate_items = [item for item in curriculum[level] if 1 in item['labels']]
+    hate_counts = [sum(1 for label in item['labels'] if label == 1) for item in hate_items]
+    min_hate = min(hate_counts) if hate_counts else 0
+    avg_hate = sum(hate_counts) / len(hate_counts) if hate_counts else 0
+    max_hate = max(hate_counts) if hate_counts else 0
+    
     print(f"✓ {level} 난이도:")
     print(f"  - 전체 데이터 수: {total_count}")
     print(f"  - Hate 데이터 수: {hate_count}")
     print(f"  - Non-hate 데이터 수: {non_hate_count}")
+    print(f"  - Hate 개수 통계:")
+    print(f"    * 최소: {min_hate}")
+    print(f"    * 평균: {avg_hate:.2f}")
+    print(f"    * 최대: {max_hate}")
     print()
 
 print("✅ 커리큘럼 기반 전처리 및 저장 완료")
