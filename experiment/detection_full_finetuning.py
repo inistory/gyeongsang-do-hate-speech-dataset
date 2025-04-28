@@ -121,14 +121,15 @@ class TokenClassificationModel(nn.Module):
     def __init__(self, base_model, hidden_size, num_labels):
         super().__init__()
         self.base_model = base_model
-        self.dropout = nn.Dropout(0.1)
+        self.dropout = nn.Dropout(0.2)  # 드롭아웃 비율 증가
         self.classifier = nn.Linear(hidden_size, num_labels)
         
         # 모든 모듈을 같은 디바이스로 이동
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.to(device)
-        # classifier를 base_model과 같은 데이터 타입으로 설정
-        self.classifier = self.classifier.to(device, dtype=base_model.dtype)
+        self.base_model = self.base_model.to_empty(device=device)
+        self.dropout = self.dropout.to_empty(device=device)
+        self.classifier = self.classifier.to_empty(device=device)
+        self.classifier = self.classifier.to(dtype=self.base_model.dtype)
 
     def forward(self, input_ids=None, attention_mask=None, labels=None, **kwargs):
         # 입력 텐서들을 현재 디바이스로 이동
@@ -146,21 +147,20 @@ class TokenClassificationModel(nn.Module):
 
         loss = None
         if labels is not None:
-            # 수치적 안정성을 위해 log_softmax 사용
-            log_probs = F.log_softmax(logits, dim=-1)
-            loss_fct = nn.NLLLoss()
+            # CrossEntropyLoss 사용 (더 안정적인 loss 계산)
+            loss_fct = nn.CrossEntropyLoss()
             active_loss = attention_mask.view(-1) == 1
-            active_logits = log_probs.view(-1, self.classifier.out_features)[active_loss]
+            active_logits = logits.view(-1, self.classifier.out_features)[active_loss]
             active_labels = labels.view(-1)[active_loss]
             
             # 손실 계산 전에 유효한 샘플이 있는지 확인
             if active_labels.numel() > 0:
-                # 클래스 가중치 적용 (불균형 데이터셋 고려)
-                class_weights = torch.tensor([1.0, 2.0], device=active_labels.device)  # 1:2 비율로 가중치 설정
-                loss_fct = nn.NLLLoss(weight=class_weights)
+                # 클래스 가중치 조정 (더 균형잡힌 가중치)
+                class_weights = torch.tensor([1.0, 2.0], device=active_labels.device, dtype=active_logits.dtype)
+                loss_fct = nn.CrossEntropyLoss(weight=class_weights, label_smoothing=0.1)  # 라벨 스무딩 추가
                 loss = loss_fct(active_logits, active_labels)
             else:
-                loss = torch.tensor(0.0, device=logits.device, requires_grad=True)
+                loss = torch.tensor(0.0, device=logits.device, dtype=logits.dtype, requires_grad=True)
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
@@ -189,8 +189,10 @@ def main():
 
     # 학습 시 최적의 모델 선택을 위한 설정
     if training_args.do_train:
-        training_args.save_strategy = "epoch"
-        training_args.evaluation_strategy = "epoch"
+        training_args.save_strategy = "steps"
+        training_args.evaluation_strategy = "steps"
+        training_args.save_steps = 100
+        training_args.eval_steps = 100
         training_args.save_total_limit = 5
         training_args.load_best_model_at_end = True
         training_args.metric_for_best_model = "exact_match_ratio"
@@ -221,7 +223,7 @@ def main():
             trust_remote_code=model_args.trust_remote_code,
             padding_side="right",
             use_fast=True,  # Fast tokenizer 사용
-            local_files_only=False,  # Hugging Face Hub에서 다운로드 허용
+            local_files_only=True if model_args.model_name_or_path.startswith("./") else False,  # 로컬 경로일 경우 local_files_only=True
             model_type="polyglot"  # 모델 타입 명시
         )
         print("Tokenizer loaded successfully")
@@ -310,17 +312,23 @@ def main():
             print("Loading base model for training...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float32,  # FP32로 변경
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
+                torch_dtype=torch.bfloat16,  # FP16 대신 bfloat16 사용
+                device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
+                low_cpu_mem_usage=True,
+                offload_folder="offload",
+                offload_state_dict=True
             )
         else:
             print("Loading model for evaluation/prediction...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float32,  # FP32로 변경
-                device_map={"": 0},  # 모든 모듈을 cuda:0에 할당
-                trust_remote_code=model_args.trust_remote_code
+                torch_dtype=torch.bfloat16,  # FP16 대신 bfloat16 사용
+                device_map="auto",
+                trust_remote_code=model_args.trust_remote_code,
+                low_cpu_mem_usage=True,
+                offload_folder="offload",
+                offload_state_dict=True
             )
     except Exception as e:
         print(f"Error loading base model: {e}")
@@ -328,23 +336,31 @@ def main():
 
     # LoRA 설정
     lora_config = LoraConfig(
-        r=8,
-        lora_alpha=32,
-        target_modules=["query_key_value"],  # polyglot 모델의 attention 레이어
-        lora_dropout=0.1,
+        r=16,  # 랭크 증가
+        lora_alpha=64,  # 알파 값 증가
+        target_modules=["query_key_value"],
+        lora_dropout=0.2,  # 드롭아웃 증가
         bias="none",
         task_type="TOKEN_CLS",
         inference_mode=False,
-        init_lora_weights=True  # LoRA 가중치 초기화 추가
+        init_lora_weights=True
     )
     lora_model = get_peft_model(base_model, lora_config)
-
-    # 분류 모델 생성
     model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
 
     # 트레이너 설정
-    training_args.dataloader_pin_memory = False  # pin_memory 비활성화
-    training_args.report_to = []  # wandb 로깅 비활성화
+    training_args.dataloader_pin_memory = False
+    training_args.report_to = []
+    training_args.fp16 = False  # FP16 비활성화
+    training_args.bf16 = True   # bfloat16 활성화
+    training_args.gradient_accumulation_steps = 16  # 그래디언트 누적 스텝 증가
+    training_args.per_device_train_batch_size = 1  # 배치 사이즈 감소
+    training_args.per_device_eval_batch_size = 1  # 배치 사이즈 감소
+    training_args.max_grad_norm = 0.5  # 그래디언트 클리핑 강화
+    training_args.warmup_ratio = 0.2  # 워밍업 비율 증가
+    training_args.weight_decay = 0.05  # 가중치 감쇠 증가
+    training_args.learning_rate = 1e-5  # 학습률 감소
+    training_args.num_train_epochs = 10  # 에폭 수 증가
 
     trainer = Trainer(
         model=model,
