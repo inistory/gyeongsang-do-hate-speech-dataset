@@ -6,7 +6,7 @@ echo "            FULL-FINETUNING         "
 echo "================================================="
 # 모델 리스트 정의
 MODELS=(
-    # "EleutherAI/polyglot-ko-5.8b"
+    "EleutherAI/polyglot-ko-5.8b"
     "beomi/KoAlpaca-Polyglot-12.8B"
     # "nlpai-lab/kullm-3-7b"
 )
