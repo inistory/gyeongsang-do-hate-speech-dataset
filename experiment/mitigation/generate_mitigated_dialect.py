@@ -17,28 +17,69 @@ def load_model_and_tokenizer(model_name):
         model = RobertaForMaskedLM.from_pretrained(model_name).cuda()
         device = torch.device(f"cuda")
     else:
-        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+        # 모델별 최적화 설정
+        if "polyglot" in model_name.lower():
+            # KoAlpaca-Polyglot 모델 설정
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True,
+                load_in_8bit=True  # 8비트 양자화로 메모리 사용량 감소
+            )
+        elif "llama" in model_name.lower():
+            # Llama 모델 설정
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True,
+                load_in_8bit=True
+            )
+        elif "gemma" in model_name.lower():
+            # Gemma 모델 설정
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True
+            )
+        elif "qwen" in model_name.lower():
+            # Qwen 모델 설정
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True,
+                load_in_8bit=True
+            )
+        else:
+            # 기본 설정
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                device_map="auto",
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True
+            )
         
-        # KoAlpaca 모델을 위한 채팅 템플릿 설정
-        if "polyglot" or "gemma"in model_name.lower():
+        # 채팅 템플릿 설정
+        if "polyglot" in model_name.lower() or "gemma" in model_name.lower():
             tokenizer.chat_template = """{% for message in messages %}{% if message['role'] == 'user' %}### Human: {{ message['content'] }}
 
 {% elif message['role'] == 'assistant' %}### Assistant: {{ message['content'] }}
 
 {% endif %}{% endfor %}"""
         
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            device_map="auto",
-            torch_dtype=torch.bfloat16,
-            trust_remote_code=True
-        )
         device = "auto"  # device_map="auto"를 사용하는 경우
-    # else:
-    #     raise ValueError(f"지원하지 않는 모델입니다: {model_name}")
+    
     return model, tokenizer, device
 
-def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialect, offensive_span, model_name, device, use_masked=True, max_retries=3):
+def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialect, offensive_span, model_name, device, use_masked=True, max_retries=5):
     # OUTPUT 카운터 추가
     generate_mitigated_dialect.counter = getattr(generate_mitigated_dialect, 'counter', 0)
     
@@ -48,39 +89,42 @@ def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialec
             messages = [
                 {
                     "role": "user",
-                    "content": """This is a task to mitigate offensive Gyeongsang dialect sentences.
+                    "content": """This is a dialect mitigation task. Please only mitigate the masked parts while keeping the rest of the text unchanged.
 
 Rules:
-1. Response must be in Korean only
-2. Maintain the original context and meaning
-3. Preserve dialect when possible while removing offensive content
-4. Write only the mitigated sentence after [MITIGATED]:
-5. No additional explanations or translations, just the mitigated sentence
+1. Only mitigate the masked parts ([MASK]) and keep the rest of the text unchanged
+2. Preserve the dialect as much as possible
+3. Only mitigate offensive expressions
+4. Maintain the original meaning of the sentence
 
 Examples:
-INPUT: 저놈 머리통을 확 깨뿔라카노
-OUTPUT: [MITIGATED]: 저분한테 한마디 해뿔라카이
+Original text: 저놈 머리통을 확 깨뿔라카노
+Masked text: 저[MASK]을 확 깨뿔라카노
+Mitigated text: [MITIGATED]: 저분 머리를 확 쥐어박고 싶다카이
 
-INPUT: 개같은 새끼
-OUTPUT: [MITIGATED]: 못된 사람아
+Original text: 개같은 새끼
+Masked text: [MASK]
+Mitigated text: [MITIGATED]: 못된 사람
 
-INPUT: 저놈이가 미쳤나
-OUTPUT: [MITIGATED]: 저분이가 정신이 없네
+Original text: 저놈이가 미쳤나
+Masked text: 저[MASK]
+Mitigated text: [MITIGATED]: 저분이가 정신이 없네
 
-INPUT: 씨발놈아
-OUTPUT: [MITIGATED]: 아이고야
+Original text: 씨발놈아
+Masked text: [MASK]
+Mitigated text: [MITIGATED]: 아이고야
 
-INPUT: 죽여뿔라카다
-OUTPUT: [MITIGATED]: 혼내뿔라카다
+Original text: 죽여뿔라카다
+Masked text: [MASK]뿔라카다
+Mitigated text: [MITIGATED]: 혼내뿔라카다
 
 Original text:
 {original_dialect}
 
-Masked sentence (offensive words are masked with [MASK]):
+Masked text:
 {masked_dialect}
 
-Generate a mitigated version in the following format:
-[MITIGATED]: mitigated_sentence"""
+Please write the mitigated version after [MITIGATED]:, only changing the masked parts."""
                 },
                 {
                     "role": "assistant",
@@ -91,37 +135,34 @@ Generate a mitigated version in the following format:
             messages = [
                 {
                     "role": "user",
-                    "content": """This is a task to mitigate offensive Gyeongsang dialect sentences.
+                    "content": """This is a dialect mitigation task. Please only mitigate the offensive parts while keeping the rest of the text unchanged.
 
 Rules:
-1. Response must be in Korean only
-2. Maintain the original context and meaning
-3. Preserve dialect when possible while removing offensive content
-4. Write only the mitigated sentence after [MITIGATED]:
-5. No additional explanations or translations, just the mitigated sentence
+1. Only mitigate offensive expressions
+2. Preserve the dialect as much as possible
+3. Maintain the original meaning of the sentence
+4. Keep the rest of the text unchanged
 
 Examples:
+Original text: 저놈 머리통을 확 깨뿔라카노
+Mitigated text: [MITIGATED]: 저분 머리를 확 쥐어박고 싶다카이
 
-INPUT: 저놈 머리통을 확 깨뿔라카노
-OUTPUT: [MITIGATED]: 저분한테 한마디 해뿔라카이
+Original text: 개같은 새끼
+Mitigated text: [MITIGATED]: 못된 사람
 
-INPUT: 개같은 새끼
-OUTPUT: [MITIGATED]: 못된 사람아
+Original text: 저놈이가 미쳤나
+Mitigated text: [MITIGATED]: 저분이가 정신이 없네
 
-INPUT: 저놈이가 미쳤나
-OUTPUT: [MITIGATED]: 저분이가 정신이 없네
+Original text: 씨발놈아
+Mitigated text: [MITIGATED]: 아이고야
 
-INPUT: 씨발놈아
-OUTPUT: [MITIGATED]: 아이고야
-
-INPUT: 죽여뿔라카다
-OUTPUT: [MITIGATED]: 혼내뿔라카다
+Original text: 죽여뿔라카다
+Mitigated text: [MITIGATED]: 혼내뿔라카다
 
 Original text:
 {original_dialect}
 
-Generate a mitigated version in the following format:
-[MITIGATED]: mitigated_sentence"""
+Please write the mitigated version after [MITIGATED]:, only changing the offensive parts."""
                 },
                 {
                     "role": "assistant",
@@ -142,8 +183,10 @@ Generate a mitigated version in the following format:
             add_generation_prompt=True
         )
 
-        # INPUT 토큰화
-        inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=512)
+        # INPUT 토큰화 및 attention mask 설정
+        inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=256)
+        attention_mask = torch.ones_like(inputs["input_ids"])
+        inputs["attention_mask"] = attention_mask
         
         # 예측
         with torch.no_grad():
@@ -169,84 +212,34 @@ Generate a mitigated version in the following format:
                 # INPUT을 모델의 디바이스로 이동
                 inputs = {k: v.to(model_device) for k, v in inputs.items()}
                 
-                outputs = model.generate(
-                    inputs["input_ids"],
-                    max_length=512,
-                    num_return_sequences=1,
-                    no_repeat_ngram_size=2,
-                    do_sample=True,
-                    top_k=50,
-                    top_p=0.95,
-                    temperature=0.7,
-                    pad_token_id=tokenizer.pad_token_id,
-                    eos_token_id=tokenizer.eos_token_id
-                )
-                generated_text = tokenizer.decode(outputs[0])
+                try:
+                    outputs = model.generate(
+                        inputs["input_ids"],
+                        attention_mask=inputs["attention_mask"],
+                        **generation_config,
+                        pad_token_id=tokenizer.pad_token_id,
+                        eos_token_id=tokenizer.eos_token_id
+                    )
+                    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
+                    
+                    # 디버깅: 생성된 텍스트 출력
+                    print("\n=== Generated Text ===")
+                    print("Original:", original_dialect)
+                    print("Masked:", masked_dialect if use_masked else "N/A")
+                    print("Generated:", generated_text)
+                    print("=====================\n")
+                    
+                    return generated_text
                 
-                # 처음 3번만 OUTPUT
-                if generate_mitigated_dialect.counter < 3:
-                    print(f"\n생성된 원본 텍스트:\n{generated_text}\n")
-                    generate_mitigated_dialect.counter += 1
-        
-        # Extract mitigated sentence
-        try:
-            if model_name == "Qwen/Qwen2.5-14B-Instruct":
-                # Qwen 모델의 OUTPUT에서 응답 추출 개선
-                parts = generated_text.split("assistant")
-                if len(parts) > 1:
-                    generated_text = parts[-1].strip()
-                else:
-                    print("Qwen 모델 응답에서 'assistant' 구분자를 찾을 수 없습니다.")
+                except Exception as e:
+                    print(f"Generation error: {str(e)}")
                     continue
-            
-            # [MITIGATED]: 형식 검색 개선
-            match = re.search(r'\[MITIGATED\]:\s*([^\n]+)', generated_text, re.IGNORECASE)
-            if not match:
-                # 전체 텍스트에서 의미 있는 응답 찾기 시도
-                lines = generated_text.split('\n')
-                for line in lines:
-                    if len(line.strip()) > 10 and re.search('[가-힣]', line):
-                        generated_text = line.strip()
-                        break
-                else:
-                    print(f"유효한 응답을 찾을 수 없습니다. 전체 OUTPUT:\n{generated_text}")
-                    continue
-            else:
-                generated_text = match.group(1).strip()
-            
-            # Remove special characters and quotes
-            generated_text = re.sub(r'["\']', '', generated_text)
-            
-            # Keep only Korean text and basic punctuation
-            generated_text = re.sub(r'[^가-힣\s\.,\?!]', '', generated_text)
-            
-            # Remove leading/trailing whitespace and normalize spaces
-            generated_text = ' '.join(generated_text.split())
-            
-            # Validation checks
-            if not generated_text or len(generated_text) < 5:
-                print(f"Generated text too short or empty. Retrying...")
-                continue
-            
-            if generated_text == original_dialect:
-                print(f"Generated text identical to original. Retrying...")
-                continue
-            
-            if not re.search('[가-힣]', generated_text):
-                print(f"No Korean text found in output. Retrying...")
-                continue
-            
-            return generated_text
-            
-        except Exception as e:
-            print(f"Error during parsing: {str(e)}")
-            continue
         
         print(f"Attempt {attempt + 1}/{max_retries}: Failed to generate sentence, retrying...")
     
-    # Return original sentence if all attempts fail
-    print(f"Exceeded maximum attempts ({max_retries}). Returning original sentence.")
-    return original_dialect
+    # Return None if all attempts fail
+    print(f"Exceeded maximum attempts ({max_retries}). Failed to generate mitigated sentence.")
+    return None
 
 def process_data(input_file, output_dir, model_names, use_masked):
     # Load data
@@ -271,18 +264,15 @@ def process_data(input_file, output_dir, model_names, use_masked):
                 model, tokenizer, original_dialect, item.get('masked_dialect', ''), offensive_span, model_name, device, use_masked
             )
             
-            # Only add to results if mitigated text is different from original and valid
-            if mitigated_dialect and mitigated_dialect != original_dialect:
-                # [MITIGATED]: 이후 부분만 추출
-                if '[MITIGATED]:' in mitigated_dialect:
-                    parts = mitigated_dialect.split('[MITIGATED]:')
-                    mitigated_dialect = parts[-1].strip()  # 마지막 [MITIGATED]: 이후 부분만 가져오기
-                
+            # Add to results without parsing
+            if mitigated_dialect:
                 results.append({
                     'original_dialect': original_dialect,
                     'offensive_span': offensive_span,
                     'mitigated_dialect': mitigated_dialect
                 })
+            else:
+                print(f"Failed to generate mitigated version for: {original_dialect}")
         
         if results:
             # Create output filename
