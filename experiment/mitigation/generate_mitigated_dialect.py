@@ -69,11 +69,7 @@ def load_model_and_tokenizer(model_name):
         
         # 채팅 템플릿 설정
         if "polyglot" in model_name.lower() or "gemma" in model_name.lower():
-            tokenizer.chat_template = """{% for message in messages %}{% if message['role'] == 'user' %}### Human: {{ message['content'] }}
-
-{% elif message['role'] == 'assistant' %}### Assistant: {{ message['content'] }}
-
-{% endif %}{% endfor %}"""
+            tokenizer.chat_template = "{{ messages[0]['content'] }}"
         
         device = "auto"  # device_map="auto"를 사용하는 경우
     
@@ -83,40 +79,23 @@ def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialec
     # OUTPUT 카운터 추가
     generate_mitigated_dialect.counter = getattr(generate_mitigated_dialect, 'counter', 0)
     
-    for attempt in range(max_retries):
-        # Construct prompt
-        if use_masked:
-            messages = [
-                {
-                    "role": "user",
-                    "content": """This is a dialect mitigation task. Please only mitigate the masked parts while keeping the rest of the text unchanged.
+    # Construct prompt
+    if use_masked:
+        messages = [
+            {
+                "role": "user",
+                "content": """This is a dialect mitigation task. Your task is to ONLY modify the parts marked with [MASK] while keeping ALL other parts EXACTLY the same.
 
-Rules:
-1. Only mitigate the masked parts ([MASK]) and keep the rest of the text unchanged
-2. Preserve the dialect as much as possible
-3. Only mitigate offensive expressions
-4. Maintain the original meaning of the sentence
-
-Examples:
-Original text: 저놈 머리통을 확 깨뿔라카노
-Masked text: 저[MASK]을 확 깨뿔라카노
-Mitigated text: [MITIGATED]: 저분 머리를 확 쥐어박고 싶다카이
-
-Original text: 개같은 새끼
-Masked text: [MASK]
-Mitigated text: [MITIGATED]: 못된 사람
-
-Original text: 저놈이가 미쳤나
-Masked text: 저[MASK]
-Mitigated text: [MITIGATED]: 저분이가 정신이 없네
-
-Original text: 씨발놈아
-Masked text: [MASK]
-Mitigated text: [MITIGATED]: 아이고야
-
-Original text: 죽여뿔라카다
-Masked text: [MASK]뿔라카다
-Mitigated text: [MITIGATED]: 혼내뿔라카다
+IMPORTANT RULES:
+1. ONLY modify the parts marked with [MASK]. DO NOT change any other parts of the text.
+2. Keep the Gyeongsang-do dialect style consistent with the original text. Maintain the dialect's unique characteristics like '-노', '-나', '-다이', '-가이', etc.
+3. Only mitigate offensive expressions within the [MASK] parts.
+4. Maintain the original meaning of the sentence.
+5. DO NOT modify any text that is not marked with [MASK].
+6. Output ONLY in Korean. DO NOT include any English or other languages.
+7. DO NOT include any explanations, rules, or additional text in your response.
+8. DO NOT include [MASK] in your output. Replace [MASK] with the mitigated text.
+9. Output ONLY the mitigated text. DO NOT include any explanations about why you made the changes or how you modified it.
 
 Original text:
 {original_dialect}
@@ -124,70 +103,96 @@ Original text:
 Masked text:
 {masked_dialect}
 
-Please write the mitigated version after [MITIGATED]:, only changing the masked parts."""
-                },
-                {
-                    "role": "assistant",
-                    "content": "[MITIGATED]:"
-                }
-            ]
-        else:
-            messages = [
-                {
-                    "role": "user",
-                    "content": """This is a dialect mitigation task. Please only mitigate the offensive parts while keeping the rest of the text unchanged.
+[MITIGATED]:"""
+            }
+        ]
+    else:
+        messages = [
+            {
+                "role": "user",
+                "content": """This is a dialect mitigation task. Your task is to ONLY modify the offensive parts while keeping ALL other parts EXACTLY the same.
 
-Rules:
-1. Only mitigate offensive expressions
-2. Preserve the dialect as much as possible
-3. Maintain the original meaning of the sentence
-4. Keep the rest of the text unchanged
-
-Examples:
-Original text: 저놈 머리통을 확 깨뿔라카노
-Mitigated text: [MITIGATED]: 저분 머리를 확 쥐어박고 싶다카이
-
-Original text: 개같은 새끼
-Mitigated text: [MITIGATED]: 못된 사람
-
-Original text: 저놈이가 미쳤나
-Mitigated text: [MITIGATED]: 저분이가 정신이 없네
-
-Original text: 씨발놈아
-Mitigated text: [MITIGATED]: 아이고야
-
-Original text: 죽여뿔라카다
-Mitigated text: [MITIGATED]: 혼내뿔라카다
+IMPORTANT RULES:
+1. ONLY modify the offensive expressions. DO NOT change any other parts of the text.
+2. Keep the Gyeongsang-do dialect style consistent with the original text. Maintain the dialect's unique characteristics like '-노', '-나', '-다이', '-가이', etc.
+3. Maintain the original meaning of the sentence.
+4. DO NOT modify any text that is not offensive.
+5. Output ONLY in Korean. DO NOT include any English or other languages.
+6. DO NOT include any explanations, rules, or additional text in your response.
+7. DO NOT include [MASK] in your output. Replace [MASK] with the mitigated text.
+8. Output ONLY the mitigated text. DO NOT include any explanations about why you made the changes or how you modified it.
 
 Original text:
 {original_dialect}
 
-Please write the mitigated version after [MITIGATED]:, only changing the offensive parts."""
-                },
-                {
-                    "role": "assistant",
-                    "content": "[MITIGATED]:"
-                }
-            ]
+[MITIGATED]:"""
+            }
+        ]
 
-        # Format the messages with the actual values
-        messages[0]["content"] = messages[0]["content"].format(
-            original_dialect=original_dialect,
-            masked_dialect=masked_dialect if use_masked else ""
-        )
+    # Format the messages with the actual values
+    messages[0]["content"] = messages[0]["content"].format(
+        original_dialect=original_dialect,
+        masked_dialect=masked_dialect if use_masked else ""
+    )
 
-        # 채팅 템플릿 적용
-        prompt = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True
-        )
+    # 채팅 템플릿 적용
+    prompt = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True
+    )
 
-        # INPUT 토큰화 및 attention mask 설정
-        inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=256)
-        attention_mask = torch.ones_like(inputs["input_ids"])
-        inputs["attention_mask"] = attention_mask
-        
+    # 프롬프트 토큰 길이 계산
+    prompt_tokens = tokenizer.encode(prompt, add_special_tokens=True)
+    prompt_length = len(prompt_tokens)
+    
+    # max_length 설정 (프롬프트 토큰 길이 + 생성할 토큰 수)
+    max_length = prompt_length + 100  # 100은 생성할 토큰 수
+    
+    # 모델별 생성 파라미터 설정
+    if "qwen" in model_name.lower():
+        generation_config = {
+            "max_new_tokens": 100,  # 데이터셋의 최대 dialect 길이에 맞춤
+            "max_length": max_length,  # 프롬프트 토큰 길이 + 생성 길이
+            "num_return_sequences": 1,
+            "no_repeat_ngram_size": 2,
+            "do_sample": True,
+            "top_k": 50,
+            "top_p": 0.95,
+            "temperature": 0.7,
+            "repetition_penalty": 1.2
+        }
+    elif "gemma" in model_name.lower():
+        generation_config = {
+            "max_new_tokens": 100,  # 데이터셋의 최대 dialect 길이에 맞춤
+            "max_length": max_length,  # 프롬프트 길이 + 생성 길이
+            "num_return_sequences": 1,
+            "no_repeat_ngram_size": 2,
+            "do_sample": True,
+            "top_k": 50,
+            "top_p": 0.95,
+            "temperature": 0.7,
+            "repetition_penalty": 1.2
+        }
+    else:
+        generation_config = {
+            "max_new_tokens": 100,  # 데이터셋의 최대 dialect 길이에 맞춤
+            "max_length": max_length,  # 프롬프트 길이 + 생성 길이
+            "num_return_sequences": 1,
+            "no_repeat_ngram_size": 2,
+            "do_sample": True,
+            "top_k": 50,
+            "top_p": 0.95,
+            "temperature": 0.7,
+            "repetition_penalty": 1.2
+        }
+
+    # INPUT 토큰화 및 attention mask 설정
+    inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True)
+    attention_mask = torch.ones_like(inputs["input_ids"])
+    inputs["attention_mask"] = attention_mask
+    
+    for attempt in range(max_retries):
         # 예측
         with torch.no_grad():
             if model_name == "FacebookAI/roberta-base":
@@ -220,16 +225,21 @@ Please write the mitigated version after [MITIGATED]:, only changing the offensi
                         pad_token_id=tokenizer.pad_token_id,
                         eos_token_id=tokenizer.eos_token_id
                     )
-                    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
+                    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
                     
-                    # 디버깅: 생성된 텍스트 출력
+                    # 디버깅: 생성된 텍스트 출력 (Examples 섹션 제외)
                     print("\n=== Generated Text ===")
                     print("Original:", original_dialect)
                     print("Masked:", masked_dialect if use_masked else "N/A")
-                    print("Generated:", generated_text)
+                    # [MITIGATED]: 이후의 텍스트만 추출하고 special tokens 제거
+                    mitigated_text = generated_text.split("[MITIGATED]:")[-1].strip()
+                    mitigated_text = re.sub(r'<\|.*?\|>', '', mitigated_text)  # special tokens 제거
+                    mitigated_text = re.sub(r'assistant', '', mitigated_text, flags=re.IGNORECASE)  # assistant 제거
+                    mitigated_text = mitigated_text.strip()
+                    print("Generated:", mitigated_text)
                     print("=====================\n")
                     
-                    return generated_text
+                    return mitigated_text
                 
                 except Exception as e:
                     print(f"Generation error: {str(e)}")
@@ -260,16 +270,16 @@ def process_data(input_file, output_dir, model_names, use_masked):
             offensive_span = item['offensive_span']
             
             # Generate mitigated dialect
-            mitigated_dialect = generate_mitigated_dialect(
+            mitigated_text = generate_mitigated_dialect(
                 model, tokenizer, original_dialect, item.get('masked_dialect', ''), offensive_span, model_name, device, use_masked
             )
             
             # Add to results without parsing
-            if mitigated_dialect:
+            if mitigated_text:
                 results.append({
                     'original_dialect': original_dialect,
                     'offensive_span': offensive_span,
-                    'mitigated_dialect': mitigated_dialect
+                    'mitigated_dialect': mitigated_text.strip()
                 })
             else:
                 print(f"Failed to generate mitigated version for: {original_dialect}")

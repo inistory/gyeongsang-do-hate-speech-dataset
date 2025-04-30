@@ -2,8 +2,8 @@
 
 # 모델 배열 정의
 MODELS=(
-    "beomi/KoAlpaca-Polyglot-5.8B"
     "MLP-KTLim/llama-3-Korean-Bllossom-8B"
+    "beomi/KoAlpaca-Polyglot-5.8B"
     "princeton-nlp/gemma-2-9b-it-SimPO"
     "Qwen/Qwen2.5-14B-Instruct"
 )
