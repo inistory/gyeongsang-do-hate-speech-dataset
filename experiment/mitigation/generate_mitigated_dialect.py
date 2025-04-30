@@ -39,7 +39,7 @@ def load_model_and_tokenizer(model_name):
     return model, tokenizer, device
 
 def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialect, offensive_span, model_name, device, use_masked=True, max_retries=3):
-    # 출력 카운터 추가
+    # OUTPUT 카운터 추가
     generate_mitigated_dialect.counter = getattr(generate_mitigated_dialect, 'counter', 0)
     
     for attempt in range(max_retries):
@@ -58,20 +58,20 @@ Rules:
 5. No additional explanations or translations, just the mitigated sentence
 
 Examples:
-입력: 저놈 머리통을 확 깨뿔라카노
-출력: [MITIGATED]: 저분한테 한마디 해뿔라카이
+INPUT: 저놈 머리통을 확 깨뿔라카노
+OUTPUT: [MITIGATED]: 저분한테 한마디 해뿔라카이
 
-입력: 개같은 새끼
-출력: [MITIGATED]: 못된 사람아
+INPUT: 개같은 새끼
+OUTPUT: [MITIGATED]: 못된 사람아
 
-입력: 저놈이가 미쳤나
-출력: [MITIGATED]: 저분이가 정신이 없네
+INPUT: 저놈이가 미쳤나
+OUTPUT: [MITIGATED]: 저분이가 정신이 없네
 
-입력: 씨발놈아
-출력: [MITIGATED]: 아이고야
+INPUT: 씨발놈아
+OUTPUT: [MITIGATED]: 아이고야
 
-입력: 죽여뿔라카다
-출력: [MITIGATED]: 혼내뿔라카다
+INPUT: 죽여뿔라카다
+OUTPUT: [MITIGATED]: 혼내뿔라카다
 
 Original text:
 {original_dialect}
@@ -101,20 +101,21 @@ Rules:
 5. No additional explanations or translations, just the mitigated sentence
 
 Examples:
-입력: 저놈 머리통을 확 깨뿔라카노
-출력: [MITIGATED]: 저분한테 한마디 해뿔라카이
 
-입력: 개같은 새끼
-출력: [MITIGATED]: 못된 사람아
+INPUT: 저놈 머리통을 확 깨뿔라카노
+OUTPUT: [MITIGATED]: 저분한테 한마디 해뿔라카이
 
-입력: 저놈이가 미쳤나
-출력: [MITIGATED]: 저분이가 정신이 없네
+INPUT: 개같은 새끼
+OUTPUT: [MITIGATED]: 못된 사람아
 
-입력: 씨발놈아
-출력: [MITIGATED]: 아이고야
+INPUT: 저놈이가 미쳤나
+OUTPUT: [MITIGATED]: 저분이가 정신이 없네
 
-입력: 죽여뿔라카다
-출력: [MITIGATED]: 혼내뿔라카다
+INPUT: 씨발놈아
+OUTPUT: [MITIGATED]: 아이고야
+
+INPUT: 죽여뿔라카다
+OUTPUT: [MITIGATED]: 혼내뿔라카다
 
 Original text:
 {original_dialect}
@@ -141,7 +142,7 @@ Generate a mitigated version in the following format:
             add_generation_prompt=True
         )
 
-        # 입력 토큰화
+        # INPUT 토큰화
         inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=512)
         
         # 예측
@@ -165,7 +166,7 @@ Generate a mitigated version in the following format:
                         model_device = param.device
                         break
                 
-                # 입력을 모델의 디바이스로 이동
+                # INPUT을 모델의 디바이스로 이동
                 inputs = {k: v.to(model_device) for k, v in inputs.items()}
                 
                 outputs = model.generate(
@@ -182,7 +183,7 @@ Generate a mitigated version in the following format:
                 )
                 generated_text = tokenizer.decode(outputs[0])
                 
-                # 처음 3번만 출력
+                # 처음 3번만 OUTPUT
                 if generate_mitigated_dialect.counter < 3:
                     print(f"\n생성된 원본 텍스트:\n{generated_text}\n")
                     generate_mitigated_dialect.counter += 1
@@ -190,7 +191,7 @@ Generate a mitigated version in the following format:
         # Extract mitigated sentence
         try:
             if model_name == "Qwen/Qwen2.5-14B-Instruct":
-                # Qwen 모델의 출력에서 응답 추출 개선
+                # Qwen 모델의 OUTPUT에서 응답 추출 개선
                 parts = generated_text.split("assistant")
                 if len(parts) > 1:
                     generated_text = parts[-1].strip()
@@ -208,7 +209,7 @@ Generate a mitigated version in the following format:
                         generated_text = line.strip()
                         break
                 else:
-                    print(f"유효한 응답을 찾을 수 없습니다. 전체 출력:\n{generated_text}")
+                    print(f"유효한 응답을 찾을 수 없습니다. 전체 OUTPUT:\n{generated_text}")
                     continue
             else:
                 generated_text = match.group(1).strip()
@@ -303,7 +304,7 @@ if __name__ == "__main__":
     # 커맨드 라인 인자 파싱
     parser = argparse.ArgumentParser(description='방언 완화 생성 스크립트')
     parser.add_argument('--input_file', type=str, default='./masked_data.json',
-                        help='입력 데이터 파일 경로')
+                        help='INPUT 데이터 파일 경로')
     parser.add_argument('--output_dir', type=str, default='./results',
                         help='결과 저장 디렉토리')
     parser.add_argument('--model_names', type=str, nargs='+',
