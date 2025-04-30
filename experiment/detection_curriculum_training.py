@@ -168,6 +168,77 @@ class TokenClassificationModel(nn.Module):
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
+class CurriculumTrainer(Trainer):
+    def __init__(self, curriculum_datasets=None, curriculum_epochs=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.curriculum_datasets = curriculum_datasets
+        self.curriculum_epochs = curriculum_epochs
+        self.current_stage = 0
+        self.best_metric = None
+        self.best_stage = None
+    
+    def train(self, resume_from_checkpoint=None, trial=None, **kwargs):
+        total_epochs_completed = 0
+        
+        for stage, (dataset, epochs) in enumerate(zip(self.curriculum_datasets, self.curriculum_epochs)):
+            print(f"\n=== Starting Curriculum Stage {stage + 1} ===")
+            print(f"Dataset size: {len(dataset)}, Epochs: {epochs}")
+            
+            # 현재 스테이지의 학습 데이터셋 설정
+            self.train_dataset = dataset
+            
+            # 학습률 조정 (스테이지가 진행될수록 학습률 감소)
+            self.args.learning_rate = self.args.learning_rate * (0.8 ** stage)
+            
+            # 현재 스테이지의 에폭 수 설정
+            self.args.num_train_epochs = epochs
+            
+            # 체크포인트에서 재시작하는 경우를 위한 처리
+            if resume_from_checkpoint and stage < self.current_stage:
+                total_epochs_completed += epochs
+                continue
+            
+            # 학습 실행
+            super().train(resume_from_checkpoint=resume_from_checkpoint if stage == self.current_stage else None,
+                         trial=trial, **kwargs)
+            
+            total_epochs_completed += epochs
+            self.current_stage = stage + 1
+            
+            # 중간 평가 실행
+            if self.eval_dataset is not None:
+                metrics = self.evaluate()
+                self.log_metrics(f"eval_stage_{stage + 1}", metrics)
+                self.save_metrics(f"eval_stage_{stage + 1}", metrics)
+                
+                # 현재 스테이지의 성능이 가장 좋은지 확인
+                current_metric = metrics.get("eval_exact_match_ratio", 0)
+                if self.best_metric is None or current_metric > self.best_metric:
+                    self.best_metric = current_metric
+                    self.best_stage = stage + 1
+                    # 최고 성능 모델 저장
+                    self.save_model(f"{self.args.output_dir}/best_model")
+                    print(f"\n=== New Best Model at Stage {stage + 1} ===")
+                    print(f"Exact Match Ratio: {current_metric:.4f}")
+            
+            # 각 스테이지 모델 저장
+            self.save_model(f"{self.args.output_dir}/stage_{stage + 1}")
+        
+        # 최종 결과 출력
+        print("\n=== Curriculum Learning Complete ===")
+        print(f"Best performing model from Stage {self.best_stage}")
+        print(f"Best Exact Match Ratio: {self.best_metric:.4f}")
+        
+        # 최고 성능 모델을 최종 모델로 복사
+        if self.best_stage is not None:
+            import shutil
+            best_model_path = f"{self.args.output_dir}/best_model"
+            final_model_path = f"{self.args.output_dir}/final_model"
+            shutil.copytree(best_model_path, final_model_path, dirs_exist_ok=True)
+            print(f"Best model copied to: {final_model_path}")
+        
+        return self.state
+
 def main():
     # GPU 설정
     if torch.cuda.is_available():
@@ -202,10 +273,12 @@ def main():
 
     # 평가/예측 시 최적의 모델 사용
     if training_args.do_eval or training_args.do_predict:
-        if os.path.exists(os.path.join(training_args.output_dir, "checkpoint-best")):
-            model_args.model_name_or_path = os.path.join(training_args.output_dir, "checkpoint-best")
+        best_model_path = os.path.join(training_args.output_dir, "final_model")
+        if os.path.exists(best_model_path):
+            print(f"Using best performing model from: {best_model_path}")
+            model_args.model_name_or_path = best_model_path
         else:
-            print("Warning: No checkpoint-best found, using the last checkpoint")
+            print("Warning: No best model found, using the last checkpoint")
 
     # 데이터셋 변수 초기화
     train_dataset = None
@@ -261,6 +334,35 @@ def main():
             print(f"Error reading file {file_path}: {e}")
             return None
         return data
+
+    # 커리큘럼 데이터셋 준비
+    if training_args.do_train and data_args.train_files:
+        print("Loading curriculum training files...")
+        curriculum_datasets = []
+        
+        for file_path in data_args.train_files:
+            print(f"Loading dataset: {file_path}")
+            file_data = load_jsonl(file_path)
+            if file_data:
+                dataset = Dataset.from_list(file_data)
+                dataset = dataset.map(
+                    lambda x: tokenize_and_align_labels(x, tokenizer, data_args.max_seq_length),
+                    batched=False
+                )
+                curriculum_datasets.append(dataset)
+                print(f"Loaded {len(file_data)} examples from {file_path}")
+        
+        if not curriculum_datasets:
+            raise ValueError("No curriculum datasets loaded")
+        
+        # 커리큘럼 에폭 설정
+        curriculum_epochs = data_args.curriculum_epochs or [3] * len(curriculum_datasets)
+        if len(curriculum_epochs) != len(curriculum_datasets):
+            raise ValueError("Number of curriculum epochs must match number of datasets")
+        
+        print("\nCurriculum Learning Setup:")
+        for i, (dataset, epochs) in enumerate(zip(curriculum_datasets, curriculum_epochs)):
+            print(f"Stage {i + 1}: {len(dataset)} examples, {epochs} epochs")
 
     # 학습 데이터셋 로드
     if training_args.do_train:
@@ -328,33 +430,29 @@ def main():
             print("Loading base model for training...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float16,  # FP16 사용
+                torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
-                low_cpu_mem_usage=True,
-                offload_folder="offload",
-                offload_state_dict=True  # 상태 사전 오프로드
+                low_cpu_mem_usage=True
             )
         else:
             print("Loading model for evaluation/prediction...")
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
-                torch_dtype=torch.float16,  # FP16 사용
+                torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
-                low_cpu_mem_usage=True,
-                offload_folder="offload",
-                offload_state_dict=True  # 상태 사전 오프로드
+                low_cpu_mem_usage=True
             )
     except Exception as e:
         print(f"Error loading base model: {e}")
         return
 
-    # LoRA 설정
+    # LoRA 설정 수정
     lora_config = LoraConfig(
-        r=8,
+        r=16,  # 랭크 증가
         lora_alpha=32,
-        target_modules=["query_key_value"],
+        target_modules=["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"],  # 타겟 모듈 확장
         lora_dropout=0.1,
         bias="none",
         task_type="TOKEN_CLS",
@@ -364,28 +462,46 @@ def main():
     lora_model = get_peft_model(base_model, lora_config)
     model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
 
-    # 트레이너 설정
+    # 트레이너 설정 수정
     training_args.dataloader_pin_memory = False
     training_args.report_to = []
-    training_args.fp16 = True  # FP16 학습 활성화
-    training_args.gradient_accumulation_steps = 8  # 그래디언트 누적 스텝 증가
-    training_args.per_device_train_batch_size = 2  # 배치 크기 감소
-    training_args.per_device_eval_batch_size = 2  # 평가 배치 크기 감소
-
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset if training_args.do_train else None,
-        eval_dataset=valid_dataset if training_args.do_eval else None,
-        tokenizer=tokenizer,
-        data_collator=DataCollatorForTokenClassification(tokenizer),
-        compute_metrics=compute_metrics,
-    )
+    training_args.fp16 = True
+    training_args.gradient_accumulation_steps = 4  # 감소
+    training_args.per_device_train_batch_size = 4  # 증가
+    training_args.per_device_eval_batch_size = 4  # 증가
+    training_args.learning_rate = 1e-4  # 학습률 증가
+    training_args.weight_decay = 0.01  # 가중치 감쇠 추가
+    training_args.warmup_ratio = 0.1  # 웜업 추가
+    training_args.max_grad_norm = 1.0  # 그래디언트 클리핑 추가
+    
+    # 커리큘럼 트레이너 초기화
+    if training_args.do_train and data_args.train_files:
+        trainer = CurriculumTrainer(
+            curriculum_datasets=curriculum_datasets,
+            curriculum_epochs=curriculum_epochs,
+            model=model,
+            args=training_args,
+            eval_dataset=valid_dataset if training_args.do_eval else None,
+            tokenizer=tokenizer,
+            data_collator=DataCollatorForTokenClassification(tokenizer),
+            compute_metrics=compute_metrics,
+        )
+    else:
+        trainer = Trainer(
+            model=model,
+            args=training_args,
+            train_dataset=train_dataset if training_args.do_train else None,
+            eval_dataset=valid_dataset if training_args.do_eval else None,
+            tokenizer=tokenizer,
+            data_collator=DataCollatorForTokenClassification(tokenizer),
+            compute_metrics=compute_metrics,
+        )
 
     # 학습
     if training_args.do_train:
         train_result = trainer.train()
-        metrics = train_result.metrics
+        # Get metrics from the trainer's state
+        metrics = trainer.state.log_history[-1] if trainer.state.log_history else {}
         trainer.log_metrics("train", metrics)
         trainer.save_metrics("train", metrics)
         trainer.save_state()
