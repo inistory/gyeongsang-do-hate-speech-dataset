@@ -18,6 +18,15 @@ def load_model_and_tokenizer(model_name):
         device = torch.device(f"cuda")
     else:
         tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+        
+        # KoAlpaca 모델을 위한 채팅 템플릿 설정
+        if "polyglot" or "gemma"in model_name.lower():
+            tokenizer.chat_template = """{% for message in messages %}{% if message['role'] == 'user' %}### Human: {{ message['content'] }}
+
+{% elif message['role'] == 'assistant' %}### Assistant: {{ message['content'] }}
+
+{% endif %}{% endfor %}"""
+        
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
             device_map="auto",
@@ -39,23 +48,39 @@ def generate_mitigated_dialect(model, tokenizer, original_dialect, masked_dialec
             messages = [
                 {
                     "role": "user",
-                    "content": """Here are examples of converting offensive Gyeongsang dialect sentences. Always respond in Korean:
+                    "content": """This is a task to mitigate offensive Gyeongsang dialect sentences.
 
-저놈 머리통을 확 깨뿔라카노 -> [MITIGATED]: 저분한테 한마디 해뿔라카이
-개같은 새끼 -> [MITIGATED]: 못된 사람아
-저놈이가 미쳤나 -> [MITIGATED]: 저분이가 정신이 없네
-씨발놈아 -> [MITIGATED]: 아이고야
-죽여뿔라카다 -> [MITIGATED]: 혼내뿔라카다
+Rules:
+1. Response must be in Korean only
+2. Maintain the original context and meaning
+3. Preserve dialect when possible while removing offensive content
+4. Write only the mitigated sentence after [MITIGATED]:
+5. No additional explanations or translations, just the mitigated sentence
 
-Original sentence:
+Examples:
+입력: 저놈 머리통을 확 깨뿔라카노
+출력: [MITIGATED]: 저분한테 한마디 해뿔라카이
+
+입력: 개같은 새끼
+출력: [MITIGATED]: 못된 사람아
+
+입력: 저놈이가 미쳤나
+출력: [MITIGATED]: 저분이가 정신이 없네
+
+입력: 씨발놈아
+출력: [MITIGATED]: 아이고야
+
+입력: 죽여뿔라카다
+출력: [MITIGATED]: 혼내뿔라카다
+
+Original text:
 {original_dialect}
 
 Masked sentence (offensive words are masked with [MASK]):
 {masked_dialect}
 
-Use the masked sentence to identify offensive parts and generate a less offensive version in Korean.
-Only provide the mitigated sentence using the format:
-[MITIGATED]: (mitigated sentence)"""
+Generate a mitigated version in the following format:
+[MITIGATED]: mitigated_sentence"""
                 },
                 {
                     "role": "assistant",
@@ -66,19 +91,36 @@ Only provide the mitigated sentence using the format:
             messages = [
                 {
                     "role": "user",
-                    "content": """Here are examples of converting offensive Gyeongsang dialect sentences. Always respond in Korean:
+                    "content": """This is a task to mitigate offensive Gyeongsang dialect sentences.
 
-저놈 머리통을 확 깨뿔라카노 -> [MITIGATED]: 저분한테 한마디 해뿔라카이
-개같은 새끼 -> [MITIGATED]: 못된 사람아
-저놈이가 미쳤나 -> [MITIGATED]: 저분이가 정신이 없네
-씨발놈아 -> [MITIGATED]: 아이고야
-죽여뿔라카다 -> [MITIGATED]: 혼내뿔라카다
+Rules:
+1. Response must be in Korean only
+2. Maintain the original context and meaning
+3. Preserve dialect when possible while removing offensive content
+4. Write only the mitigated sentence after [MITIGATED]:
+5. No additional explanations or translations, just the mitigated sentence
 
-Convert this sentence (respond in Korean only):
+Examples:
+입력: 저놈 머리통을 확 깨뿔라카노
+출력: [MITIGATED]: 저분한테 한마디 해뿔라카이
+
+입력: 개같은 새끼
+출력: [MITIGATED]: 못된 사람아
+
+입력: 저놈이가 미쳤나
+출력: [MITIGATED]: 저분이가 정신이 없네
+
+입력: 씨발놈아
+출력: [MITIGATED]: 아이고야
+
+입력: 죽여뿔라카다
+출력: [MITIGATED]: 혼내뿔라카다
+
+Original text:
 {original_dialect}
 
-Only provide the mitigated sentence in Korean using the format:
-[MITIGATED]: (mitigated sentence)"""
+Generate a mitigated version in the following format:
+[MITIGATED]: mitigated_sentence"""
                 },
                 {
                     "role": "assistant",
@@ -232,7 +274,8 @@ def process_data(input_file, output_dir, model_names, use_masked):
             if mitigated_dialect and mitigated_dialect != original_dialect:
                 # [MITIGATED]: 이후 부분만 추출
                 if '[MITIGATED]:' in mitigated_dialect:
-                    mitigated_dialect = mitigated_dialect.split('[MITIGATED]:')[1].strip()
+                    parts = mitigated_dialect.split('[MITIGATED]:')
+                    mitigated_dialect = parts[-1].strip()  # 마지막 [MITIGATED]: 이후 부분만 가져오기
                 
                 results.append({
                     'original_dialect': original_dialect,
