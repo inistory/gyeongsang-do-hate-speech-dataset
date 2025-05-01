@@ -220,4 +220,3 @@ dependencies:
       - tzdata==2025.2
       - wandb==0.15.3
       - yarl==1.20.0
-prefix: /home/jungin/anaconda3/envs/gs
