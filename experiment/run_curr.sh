@@ -19,7 +19,7 @@ for MODEL in "${MODELS[@]}"; do
     echo "================================================="
     
     # 학습
-    CUDA_VISIBLE_DEVICES=1 python detection_curriculum_training.py \
+    CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
         --model_name_or_path "$MODEL" \
         --train_files "./detection_easy.jsonl" "./detection_medium.jsonl" "./detection_hard.jsonl" \
         --validation_file "./gs_kold_valid.json" \
@@ -55,7 +55,7 @@ for MODEL in "${MODELS[@]}"; do
     echo "================================================="
     echo "            Predicting with $MODEL_NAME           "
     echo "================================================="
-    CUDA_VISIBLE_DEVICES=1 python detection_curriculum_training.py \
+    CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
         --model_name_or_path "./output_curriculum_${MODEL_NAME}" \
         --test_file "./gs_kold_test.json" \
         --do_predict \

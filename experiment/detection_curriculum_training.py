@@ -126,6 +126,7 @@ class TokenClassificationModel(nn.Module):
         self.base_model = base_model
         self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(hidden_size, num_labels)
+        self.config = base_model.config  # base_model의 config를 복사
         
         # 모든 모듈을 같은 디바이스로 이동
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -152,7 +153,6 @@ class TokenClassificationModel(nn.Module):
         if labels is not None:
             # 수치적 안정성을 위해 log_softmax 사용
             log_probs = F.log_softmax(logits, dim=-1)
-            loss_fct = nn.NLLLoss()
             active_loss = attention_mask.view(-1) == 1
             active_logits = log_probs.view(-1, self.classifier.out_features)[active_loss]
             active_labels = labels.view(-1)[active_loss]
@@ -161,10 +161,15 @@ class TokenClassificationModel(nn.Module):
             if active_labels.numel() > 0:
                 # 클래스 가중치 적용 (불균형 데이터셋 고려)
                 class_weights = torch.tensor([1.0, 2.0], device=active_labels.device, dtype=active_logits.dtype)
-                loss_fct = nn.NLLLoss(weight=class_weights)
+                loss_fct = nn.NLLLoss(weight=class_weights, reduction='mean')
                 loss = loss_fct(active_logits, active_labels)
+                
+                # 손실이 너무 작은 경우 최소값 설정
+                if loss.item() < 1e-6:
+                    loss = torch.tensor(1e-6, device=loss.device, dtype=loss.dtype, requires_grad=True)
             else:
-                loss = torch.tensor(0.0, device=logits.device, dtype=logits.dtype, requires_grad=True)
+                # 유효한 샘플이 없는 경우에도 0이 아닌 작은 loss 반환
+                loss = torch.tensor(1e-6, device=logits.device, dtype=logits.dtype, requires_grad=True)
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
@@ -174,15 +179,19 @@ class CurriculumTrainer(Trainer):
         self.curriculum_datasets = curriculum_datasets
         self.curriculum_epochs = curriculum_epochs
         self.current_stage = 0
-        self.best_metric = None
-        self.best_stage = None
+        self.stage_metrics = []  # 각 스테이지의 메트릭 저장
+        self.last_stage = None  # 마지막 스테이지 번호 저장
     
     def train(self, resume_from_checkpoint=None, trial=None, **kwargs):
         total_epochs_completed = 0
         
         for stage, (dataset, epochs) in enumerate(zip(self.curriculum_datasets, self.curriculum_epochs)):
-            print(f"\n=== Starting Curriculum Stage {stage + 1} ===")
-            print(f"Dataset size: {len(dataset)}, Epochs: {epochs}")
+            print(f"\n{'='*50}")
+            print(f"Starting Curriculum Stage {stage + 1}/{len(self.curriculum_datasets)}")
+            print(f"Dataset size: {len(dataset)}")
+            print(f"Epochs: {epochs}")
+            print(f"Current learning rate: {self.args.learning_rate}")
+            print(f"{'='*50}\n")
             
             # 현재 스테이지의 학습 데이터셋 설정
             self.train_dataset = dataset
@@ -204,6 +213,7 @@ class CurriculumTrainer(Trainer):
             
             total_epochs_completed += epochs
             self.current_stage = stage + 1
+            self.last_stage = stage + 1  # 마지막 스테이지 업데이트
             
             # 중간 평가 실행
             if self.eval_dataset is not None:
@@ -211,31 +221,49 @@ class CurriculumTrainer(Trainer):
                 self.log_metrics(f"eval_stage_{stage + 1}", metrics)
                 self.save_metrics(f"eval_stage_{stage + 1}", metrics)
                 
-                # 현재 스테이지의 성능이 가장 좋은지 확인
-                current_metric = metrics.get("eval_exact_match_ratio", 0)
-                if self.best_metric is None or current_metric > self.best_metric:
-                    self.best_metric = current_metric
-                    self.best_stage = stage + 1
-                    # 최고 성능 모델 저장
-                    self.save_model(f"{self.args.output_dir}/best_model")
-                    print(f"\n=== New Best Model at Stage {stage + 1} ===")
-                    print(f"Exact Match Ratio: {current_metric:.4f}")
+                # 스테이지 메트릭 저장
+                self.stage_metrics.append({
+                    'stage': stage + 1,
+                    'exact_match_ratio': metrics.get("eval_exact_match_ratio", 0),
+                    'loss': metrics.get('eval_loss', float('nan')),
+                    'learning_rate': self.args.learning_rate
+                })
             
             # 각 스테이지 모델 저장
             self.save_model(f"{self.args.output_dir}/stage_{stage + 1}")
+            
+            # 스테이지 완료 요약
+            print(f"\n{'='*50}")
+            print(f"Completed Stage {stage + 1}")
+            print(f"Total epochs completed: {total_epochs_completed}")
+            print(f"Current stage metrics:")
+            print(f"  Exact Match Ratio: {metrics.get('eval_exact_match_ratio', 0):.4f}")
+            print(f"  Loss: {metrics.get('eval_loss', float('nan')):.4f}")
+            print(f"{'='*50}\n")
         
         # 최종 결과 출력
-        print("\n=== Curriculum Learning Complete ===")
-        print(f"Best performing model from Stage {self.best_stage}")
-        print(f"Best Exact Match Ratio: {self.best_metric:.4f}")
+        print("\n" + "="*50)
+        print("Curriculum Learning Complete")
+        print("="*50)
+        print(f"Using model from final stage: {self.last_stage}")
         
-        # 최고 성능 모델을 최종 모델로 복사
-        if self.best_stage is not None:
+        # 스테이지별 성능 요약
+        print("\nStage-wise Performance Summary:")
+        print("-"*50)
+        for metric in self.stage_metrics:
+            print(f"Stage {metric['stage']}:")
+            print(f"  Exact Match Ratio: {metric['exact_match_ratio']:.4f}")
+            print(f"  Loss: {metric['loss']:.4f}")
+            print(f"  Learning Rate: {metric['learning_rate']:.2e}")
+            print("-"*50)
+        
+        # 마지막 스테이지의 모델을 최종 모델로 복사
+        if self.last_stage is not None:
             import shutil
-            best_model_path = f"{self.args.output_dir}/best_model"
+            last_model_path = f"{self.args.output_dir}/stage_{self.last_stage}"
             final_model_path = f"{self.args.output_dir}/final_model"
-            shutil.copytree(best_model_path, final_model_path, dirs_exist_ok=True)
-            print(f"Best model copied to: {final_model_path}")
+            shutil.copytree(last_model_path, final_model_path, dirs_exist_ok=True)
+            print(f"\nFinal stage model copied to: {final_model_path}")
         
         return self.state
 
@@ -244,6 +272,9 @@ def main():
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
         torch.cuda.set_device(device)
+        # 메모리 관리 설정
+        torch.cuda.empty_cache()
+        os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     else:
         device = torch.device("cpu")
     print(f"Using device: {device}")
@@ -271,14 +302,14 @@ def main():
         training_args.metric_for_best_model = "exact_match_ratio"
         training_args.greater_is_better = True
 
-    # 평가/예측 시 최적의 모델 사용
+    # 평가/예측 시 마지막 스테이지의 모델 사용
     if training_args.do_eval or training_args.do_predict:
-        best_model_path = os.path.join(training_args.output_dir, "final_model")
-        if os.path.exists(best_model_path):
-            print(f"Using best performing model from: {best_model_path}")
-            model_args.model_name_or_path = best_model_path
+        final_model_path = os.path.join(training_args.output_dir, "final_model")
+        if os.path.exists(final_model_path):
+            print(f"Using model from final curriculum stage: {final_model_path}")
+            model_args.model_name_or_path = final_model_path
         else:
-            print("Warning: No best model found, using the last checkpoint")
+            print("Warning: No final model found, using the last checkpoint")
 
     # 데이터셋 변수 초기화
     train_dataset = None
@@ -419,7 +450,7 @@ def main():
     # 모델 설정
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
-        bnb_4bit_use_double_quant=False,
+        bnb_4bit_use_double_quant=True,  # 메모리 사용량 최적화
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.float16
     )
@@ -433,8 +464,12 @@ def main():
                 torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
-                low_cpu_mem_usage=True
+                low_cpu_mem_usage=True,
+                quantization_config=bnb_config
             )
+            # 모델 타입 설정
+            base_model.config.model_type = "polyglot"
+            base_model.config.save_pretrained(training_args.output_dir)
         else:
             print("Loading model for evaluation/prediction...")
             base_model = AutoModel.from_pretrained(
@@ -442,7 +477,8 @@ def main():
                 torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
-                low_cpu_mem_usage=True
+                low_cpu_mem_usage=True,
+                quantization_config=bnb_config
             )
     except Exception as e:
         print(f"Error loading base model: {e}")
@@ -450,9 +486,9 @@ def main():
 
     # LoRA 설정 수정
     lora_config = LoraConfig(
-        r=16,  # 랭크 증가
-        lora_alpha=32,
-        target_modules=["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"],  # 타겟 모듈 확장
+        r=8,  # 랭크 감소
+        lora_alpha=16,
+        target_modules=["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"],
         lora_dropout=0.1,
         bias="none",
         task_type="TOKEN_CLS",
@@ -465,14 +501,17 @@ def main():
     # 트레이너 설정 수정
     training_args.dataloader_pin_memory = False
     training_args.report_to = []
-    training_args.fp16 = True
-    training_args.gradient_accumulation_steps = 4  # 감소
-    training_args.per_device_train_batch_size = 4  # 증가
-    training_args.per_device_eval_batch_size = 4  # 증가
-    training_args.learning_rate = 1e-4  # 학습률 증가
-    training_args.weight_decay = 0.01  # 가중치 감쇠 추가
-    training_args.warmup_ratio = 0.1  # 웜업 추가
-    training_args.max_grad_norm = 1.0  # 그래디언트 클리핑 추가
+    training_args.fp16 = False
+    training_args.bf16 = True
+    training_args.gradient_accumulation_steps = 8  # 그래디언트 누적 스텝 증가
+    training_args.per_device_train_batch_size = 2  # 배치 사이즈 감소
+    training_args.per_device_eval_batch_size = 2  # 배치 사이즈 감소
+    training_args.max_grad_norm = 1.0
+    training_args.warmup_ratio = 0.1
+    training_args.weight_decay = 0.01
+    training_args.learning_rate = 5e-5
+    training_args.num_train_epochs = 5
+    training_args.gradient_checkpointing = True  # 메모리 사용량 최적화
     
     # 커리큘럼 트레이너 초기화
     if training_args.do_train and data_args.train_files:
@@ -500,27 +539,24 @@ def main():
     # 학습
     if training_args.do_train:
         train_result = trainer.train()
-        # Get metrics from the trainer's state
         metrics = trainer.state.log_history[-1] if trainer.state.log_history else {}
         trainer.log_metrics("train", metrics)
         trainer.save_metrics("train", metrics)
         trainer.save_state()
 
-        # 원본 모델의 config를 가져와서 수정
-        original_config = AutoModel.from_pretrained(
-            "EleutherAI/polyglot-ko-5.8b",
-            trust_remote_code=True
-        ).config
+        # 모델과 토크나이저 저장
+        print("\nSaving final model...")
+        final_model_path = os.path.join(training_args.output_dir, "final_model")
+        os.makedirs(final_model_path, exist_ok=True)
         
-        # config 수정
-        original_config.model_type = "polyglot"
-        
-        # config 저장
-        original_config.save_pretrained(training_args.output_dir)
+        # 모델 config 저장
+        model.config.model_type = "polyglot"
+        model.config.save_pretrained(final_model_path)
         
         # 모델과 토크나이저 저장
-        trainer.save_model(training_args.output_dir)
-        tokenizer.save_pretrained(training_args.output_dir)
+        trainer.save_model(final_model_path)
+        tokenizer.save_pretrained(final_model_path)
+        print(f"Model saved to: {final_model_path}")
 
     # 평가
     if training_args.do_eval:
@@ -544,6 +580,18 @@ def main():
             print(f"Prediction metrics: {metrics}")
             trainer.log_metrics("predict", metrics)
             trainer.save_metrics("predict", metrics)
+
+    # 평가/예측 시 마지막 스테이지의 모델 사용
+    if training_args.do_eval or training_args.do_predict:
+        final_model_path = os.path.join(training_args.output_dir, "final_model")
+        if os.path.exists(final_model_path):
+            print(f"Using model from final curriculum stage: {final_model_path}")
+            model_args.model_name_or_path = final_model_path
+        else:
+            print("Warning: No final model found, using the last checkpoint")
+            # 체크포인트에서 모델 타입 설정
+            if hasattr(model, 'config'):
+                model.config.model_type = "polyglot"
 
 if __name__ == "__main__":
     main()
