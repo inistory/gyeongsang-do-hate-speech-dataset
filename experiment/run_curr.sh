@@ -3,10 +3,8 @@ mkdir offload
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 # 모델 리스트 정의
 MODELS=(
-    
-    # "nlpai-lab/kullm-3-7b"
-    "beomi/KoAlpaca-Polyglot-12.8B"
     "EleutherAI/polyglot-ko-5.8b"
+    "nlpai-lab/kullm-polyglot-12.8b-v2"
 )
 
 # 각 모델에 대해 실험 실행
@@ -26,7 +24,7 @@ for MODEL in "${MODELS[@]}"; do
         --test_file "./gs_kold_test.json" \
         --do_train True \
         --output_dir "./output_curriculum_${MODEL_NAME}" \
-        --curriculum_epochs 5 5 5 \
+        --curriculum_epochs 1 1 1 \
         --per_device_train_batch_size 8 \
         --per_device_eval_batch_size 8 \
         --learning_rate 1e-4 \
@@ -41,7 +39,7 @@ for MODEL in "${MODELS[@]}"; do
     echo "================================================="
     echo "            Evaluating $MODEL_NAME           "
     echo "================================================="
-    CUDA_VISIBLE_DEVICES=1 python detection_curriculum_training.py \
+    CUDA_VISIBLE_DEVICES=0 python detection_curriculum_training.py \
         --model_name_or_path "./output_curriculum_${MODEL_NAME}" \
         --validation_file "./gs_kold_valid.json" \
         --test_file "./gs_kold_test.json" \

@@ -135,6 +135,20 @@ class TokenClassificationModel(nn.Module):
         self.classifier = self.classifier.to_empty(device=device)
         self.classifier = self.classifier.to(dtype=self.base_model.dtype)
 
+    def gradient_checkpointing_enable(self, **kwargs):
+        """Enable gradient checkpointing for memory efficiency."""
+        if hasattr(self.base_model, "gradient_checkpointing_enable"):
+            self.base_model.gradient_checkpointing_enable(**kwargs)
+        else:
+            print("Warning: Base model does not support gradient checkpointing")
+
+    def gradient_checkpointing_disable(self):
+        """Disable gradient checkpointing."""
+        if hasattr(self.base_model, "gradient_checkpointing_disable"):
+            self.base_model.gradient_checkpointing_disable()
+        else:
+            print("Warning: Base model does not support gradient checkpointing")
+
     def forward(self, input_ids=None, attention_mask=None, labels=None, **kwargs):
         # 입력 텐서들을 현재 디바이스로 이동
         if input_ids is not None:
@@ -161,15 +175,19 @@ class TokenClassificationModel(nn.Module):
             if active_labels.numel() > 0:
                 # 클래스 가중치 적용 (불균형 데이터셋 고려)
                 class_weights = torch.tensor([1.0, 2.0], device=active_labels.device, dtype=active_logits.dtype)
-                loss_fct = nn.NLLLoss(weight=class_weights, reduction='mean')
-                loss = loss_fct(active_logits, active_labels)
+                loss_fct = nn.CrossEntropyLoss(weight=class_weights, reduction='mean')
+                loss = loss_fct(logits.view(-1, self.classifier.out_features)[active_loss], active_labels)
                 
-                # 손실이 너무 작은 경우 최소값 설정
-                if loss.item() < 1e-6:
-                    loss = torch.tensor(1e-6, device=loss.device, dtype=loss.dtype, requires_grad=True)
+                # 손실이 너무 작거나 큰 경우 클리핑
+                loss = torch.clamp(loss, min=1e-6, max=100.0)
+                
+                # NaN 체크 및 처리
+                if torch.isnan(loss):
+                    print("Warning: NaN loss detected, using fallback loss")
+                    loss = torch.tensor(1.0, device=loss.device, dtype=loss.dtype, requires_grad=True)
             else:
-                # 유효한 샘플이 없는 경우에도 0이 아닌 작은 loss 반환
-                loss = torch.tensor(1e-6, device=logits.device, dtype=logits.dtype, requires_grad=True)
+                # 유효한 샘플이 없는 경우 기본 손실값 사용
+                loss = torch.tensor(1.0, device=logits.device, dtype=logits.dtype, requires_grad=True)
 
         return {"loss": loss, "logits": logits} if loss is not None else {"logits": logits}
 
@@ -190,14 +208,19 @@ class CurriculumTrainer(Trainer):
             print(f"Starting Curriculum Stage {stage + 1}/{len(self.curriculum_datasets)}")
             print(f"Dataset size: {len(dataset)}")
             print(f"Epochs: {epochs}")
-            print(f"Current learning rate: {self.args.learning_rate}")
-            print(f"{'='*50}\n")
             
             # 현재 스테이지의 학습 데이터셋 설정
             self.train_dataset = dataset
             
-            # 학습률 조정 (스테이지가 진행될수록 학습률 감소)
-            self.args.learning_rate = self.args.learning_rate * (0.8 ** stage)
+            # 학습률 조정 (스테이지가 진행될수록 학습률 감소, 더 점진적으로)
+            if stage > 0:
+                decay_factor = 0.9 ** stage  # 0.8에서 0.9로 변경하여 더 점진적인 감소
+                new_lr = self.args.learning_rate * decay_factor
+                print(f"Adjusting learning rate: {self.args.learning_rate:.2e} -> {new_lr:.2e}")
+                self.args.learning_rate = new_lr
+            
+            print(f"Current learning rate: {self.args.learning_rate}")
+            print(f"{'='*50}\n")
             
             # 현재 스테이지의 에폭 수 설정
             self.args.num_train_epochs = epochs
@@ -286,12 +309,13 @@ def main():
     model_name = model_args.model_name_or_path.split('/')[-1]
     
     # 출력 디렉토리 수정
+    base_output_dir = f"./output_curriculum_{model_name}"
     if training_args.do_train:
-        training_args.output_dir = f"./output_curriculum_{model_name}"
+        training_args.output_dir = base_output_dir
     elif training_args.do_eval:
-        training_args.output_dir = f"./output_curriculum_{model_name}_eval"
+        training_args.output_dir = f"{base_output_dir}_eval"
     elif training_args.do_predict:
-        training_args.output_dir = f"./output_curriculum_{model_name}_predict"
+        training_args.output_dir = f"{base_output_dir}_predict"
 
     # 학습 시 최적의 모델 선택을 위한 설정
     if training_args.do_train:
@@ -302,14 +326,48 @@ def main():
         training_args.metric_for_best_model = "exact_match_ratio"
         training_args.greater_is_better = True
 
-    # 평가/예측 시 마지막 스테이지의 모델 사용
+    # 평가/예측 시 모델 경로 설정
     if training_args.do_eval or training_args.do_predict:
-        final_model_path = os.path.join(training_args.output_dir, "final_model")
-        if os.path.exists(final_model_path):
-            print(f"Using model from final curriculum stage: {final_model_path}")
-            model_args.model_name_or_path = final_model_path
+        # 원본 모델 경로 저장 (Hugging Face 모델 경로)
+        original_model_path = model_args.base_model_name_or_path
+        
+        # 체크포인트 디렉토리 찾기
+        checkpoint_dir = training_args.output_dir
+        if os.path.exists(checkpoint_dir):
+            # trainer_state.json 파일 찾기
+            state_file = os.path.join(checkpoint_dir, "trainer_state.json")
+            if os.path.exists(state_file):
+                try:
+                    import json
+                    with open(state_file, 'r', encoding='utf-8') as f:
+                        state_data = json.load(f)
+                    
+                    # eval_loss가 있는 체크포인트 찾기
+                    best_checkpoint = None
+                    best_loss = float('inf')
+                    
+                    for checkpoint in state_data.get("checkpoints", []):
+                        if "eval_loss" in checkpoint:
+                            if checkpoint["eval_loss"] < best_loss:
+                                best_loss = checkpoint["eval_loss"]
+                                best_checkpoint = checkpoint.get("path")
+                    
+                    if best_checkpoint and os.path.exists(best_checkpoint):
+                        print(f"Found best checkpoint with eval_loss {best_loss:.4f} at: {best_checkpoint}")
+                        model_args.model_name_or_path = best_checkpoint
+                    else:
+                        print(f"Warning: No valid checkpoint found in {checkpoint_dir}, using original model: {original_model_path}")
+                        model_args.model_name_or_path = original_model_path
+                except Exception as e:
+                    print(f"Error reading trainer state: {e}")
+                    print(f"Using original model: {original_model_path}")
+                    model_args.model_name_or_path = original_model_path
+            else:
+                print(f"Warning: No trainer_state.json found at {state_file}, using original model: {original_model_path}")
+                model_args.model_name_or_path = original_model_path
         else:
-            print("Warning: No final model found, using the last checkpoint")
+            print(f"Warning: No checkpoint directory found at {checkpoint_dir}, using original model: {original_model_path}")
+            model_args.model_name_or_path = original_model_path
 
     # 데이터셋 변수 초기화
     train_dataset = None
@@ -319,8 +377,10 @@ def main():
     # 토크나이저 로드
     try:
         print(f"Loading tokenizer from: {model_args.model_name_or_path}")
+        # 평가/예측 시 원본 모델 경로를 사용하는 경우 Hugging Face 모델 경로 사용
+        tokenizer_path = model_args.base_model_name_or_path if model_args.model_name_or_path == original_model_path else model_args.model_name_or_path
         tokenizer = AutoTokenizer.from_pretrained(
-            model_args.model_name_or_path,
+            tokenizer_path,
             trust_remote_code=model_args.trust_remote_code,
             padding_side="right",
             use_fast=True,
@@ -450,9 +510,22 @@ def main():
     # 모델 설정
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
-        bnb_4bit_use_double_quant=True,  # 메모리 사용량 최적화
+        bnb_4bit_use_double_quant=True,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.float16
+    )
+
+    # LoRA 설정 수정
+    lora_config = LoraConfig(
+        r=8,
+        lora_alpha=16,
+        target_modules=["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"],
+        lora_dropout=0.1,
+        bias="none",
+        task_type="TOKEN_CLS",
+        inference_mode=not training_args.do_train,
+        init_lora_weights=True,
+        modules_to_save=None
     )
 
     # base 모델 로드
@@ -465,52 +538,73 @@ def main():
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
                 low_cpu_mem_usage=True,
-                quantization_config=bnb_config
+                quantization_config=bnb_config,
+                use_cache=False,
+                offload_folder="offload",
+                offload_state_dict=True
             )
             # 모델 타입 설정
             base_model.config.model_type = "polyglot"
             base_model.config.save_pretrained(training_args.output_dir)
         else:
-            print("Loading model for evaluation/prediction...")
+            print(f"Loading model for evaluation/prediction from: {model_args.model_name_or_path}")
+            # 평가/예측 시에는 원본 모델 설정 사용
             base_model = AutoModel.from_pretrained(
                 model_args.model_name_or_path,
                 torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=model_args.trust_remote_code,
                 low_cpu_mem_usage=True,
-                quantization_config=bnb_config
+                quantization_config=bnb_config if "final_model" in model_args.model_name_or_path else None,
+                use_cache=False,
+                offload_folder="offload",
+                offload_state_dict=True
             )
+            print(f"Model loaded successfully from: {model_args.model_name_or_path}")
     except Exception as e:
         print(f"Error loading base model: {e}")
         return
 
-    # LoRA 설정 수정
-    lora_config = LoraConfig(
-        r=8,  # 랭크 감소
-        lora_alpha=16,
-        target_modules=["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"],
-        lora_dropout=0.1,
-        bias="none",
-        task_type="TOKEN_CLS",
-        inference_mode=False,
-        init_lora_weights=True
-    )
-    lora_model = get_peft_model(base_model, lora_config)
+    # LoRA 모델 생성
+    if "final_model" in model_args.model_name_or_path:
+        print("Loading LoRA model from final model path")
+        try:
+            lora_model = get_peft_model(base_model, lora_config)
+            
+            # LoRA 가중치 로드
+            adapter_path = os.path.join(model_args.model_name_or_path, "adapter_model.bin")
+            if os.path.exists(adapter_path):
+                try:
+                    lora_model.load_state_dict(torch.load(adapter_path), strict=False)
+                    print("Successfully loaded LoRA weights")
+                except Exception as e:
+                    print(f"Warning: Error loading LoRA weights: {e}")
+                    print("Initializing new LoRA weights")
+            else:
+                print(f"Warning: No adapter model found at {adapter_path}, initializing new LoRA weights")
+        except Exception as e:
+            print(f"Error loading LoRA model: {e}")
+            print("Initializing new LoRA model instead")
+            lora_model = get_peft_model(base_model, lora_config)
+    else:
+        print("Creating new LoRA model")
+        lora_model = get_peft_model(base_model, lora_config)
+
+    # 모델 설정 수정
     model = TokenClassificationModel(lora_model, hidden_size=lora_model.config.hidden_size, num_labels=2)
+    
+    # 메모리 최적화 설정
+    if training_args.do_train:
+        model.gradient_checkpointing_enable()
+        torch.cuda.empty_cache()
+        if hasattr(model, "enable_input_require_grads"):
+            model.enable_input_require_grads()
 
     # 트레이너 설정 수정
     training_args.dataloader_pin_memory = False
     training_args.report_to = []
     training_args.fp16 = False
     training_args.bf16 = True
-    training_args.gradient_accumulation_steps = 8  # 그래디언트 누적 스텝 증가
-    training_args.per_device_train_batch_size = 2  # 배치 사이즈 감소
-    training_args.per_device_eval_batch_size = 2  # 배치 사이즈 감소
-    training_args.max_grad_norm = 1.0
-    training_args.warmup_ratio = 0.1
-    training_args.weight_decay = 0.01
-    training_args.learning_rate = 5e-5
-    training_args.num_train_epochs = 5
     training_args.gradient_checkpointing = True  # 메모리 사용량 최적화
     
     # 커리큘럼 트레이너 초기화
@@ -553,6 +647,9 @@ def main():
         model.config.model_type = "polyglot"
         model.config.save_pretrained(final_model_path)
         
+        # LoRA 가중치 저장
+        torch.save(lora_model.state_dict(), os.path.join(final_model_path, "adapter_model.bin"))
+        
         # 모델과 토크나이저 저장
         trainer.save_model(final_model_path)
         tokenizer.save_pretrained(final_model_path)
@@ -580,18 +677,6 @@ def main():
             print(f"Prediction metrics: {metrics}")
             trainer.log_metrics("predict", metrics)
             trainer.save_metrics("predict", metrics)
-
-    # 평가/예측 시 마지막 스테이지의 모델 사용
-    if training_args.do_eval or training_args.do_predict:
-        final_model_path = os.path.join(training_args.output_dir, "final_model")
-        if os.path.exists(final_model_path):
-            print(f"Using model from final curriculum stage: {final_model_path}")
-            model_args.model_name_or_path = final_model_path
-        else:
-            print("Warning: No final model found, using the last checkpoint")
-            # 체크포인트에서 모델 타입 설정
-            if hasattr(model, 'config'):
-                model.config.model_type = "polyglot"
 
 if __name__ == "__main__":
     main()
